@@ -1,0 +1,318 @@
+{
+  "performance_testing_strategy": {
+    "version": "2.0",
+    "created": "2026-05-11",
+    "project": "Sara3 Serenity BDD",
+    "objective": "Medir PERFORMANCE DE LA APLICACIÓN Sara3 (frontend response times) durante ejecución paralela escalable",
+    "flexibility": "N máquinas × M scenarios (variable según necesidad)",
+    "examples": [
+      "2 máquinas × 4 tests = 8 paralelos",
+      "5 máquinas × 5 tests = 25 paralelos", 
+      "10 máquinas × 4 tests = 40 paralelos",
+      "N máquinas × M tests = N×M paralelos"
+    ],
+    "focus": "APLICACIÓN Sara3, NO máquina de test",
+    
+    "measurement_layers": {
+      
+      "LAYER_1_Browser_Frontend": {
+        "description": "Métricas de renderizado y performance del navegador Chrome",
+        "tools": [
+          "Chrome DevTools Protocol (CDP)",
+          "Serenity PageObject performance hooks"
+        ],
+        "metrics": [
+          {
+            "metric": "First Contentful Paint (FCP)",
+            "description": "Tiempo hasta primer contenido visible",
+            "target": "< 2 segundos",
+            "measurement_point": "Cada navegación a nueva página"
+          },
+          {
+            "metric": "Largest Contentful Paint (LCP)",
+            "description": "Tiempo hasta elemento más grande visible",
+            "target": "< 2.5 segundos",
+            "measurement_point": "Cada página de formulario"
+          },
+          {
+            "metric": "Cumulative Layout Shift (CLS)",
+            "description": "Estabilidad visual durante carga",
+            "target": "< 0.1",
+            "measurement_point": "Durante relleno de formulario"
+          },
+          {
+            "metric": "Time to Interactive (TTI)",
+            "description": "Tiempo hasta que página es interactiva",
+            "target": "< 3.5 segundos",
+            "measurement_point": "Después de navegar a Agent"
+          },
+          {
+            "metric": "JavaScript Execution Time",
+            "description": "Tiempo ejecutando JavaScript",
+            "target": "< 1 segundo por acción",
+            "measurement_point": "Clicks, cambios de dropdown, etc."
+          },
+          {
+            "metric": "DOM Size",
+            "description": "Cantidad de elementos en página",
+            "target": "< 5000 elementos",
+            "measurement_point": "Inicial + después de cada paso"
+          }
+        ],
+        "implementation": {
+          "library": "Serenity WebDriver Hook + CDP",
+          "code_example": "PerformanceMonitor.captureMemory('after_login')",
+          "frequency": "Cada step del test"
+        }
+      },
+
+      "LAYER_2_Step_Performance": {
+        "description": "Tiempo de ejecución de cada step del BDD",
+        "tools": [
+          "Serenity Task/Action timing",
+          "PerformanceMonitor (custom)"
+        ],
+        "critical_steps": [
+          {
+            "step": "Login a Sara3",
+            "expected_time_ms": "1500-2500",
+            "why_measure": "Autenticación + carga de dashboard",
+            "bottleneck_suspect": "Backend API response time"
+          },
+          {
+            "step": "Navigate to Agent Section",
+            "expected_time_ms": "800-1500",
+            "why_measure": "Transición de UI + estado",
+            "bottleneck_suspect": "React re-render o navegación"
+          },
+          {
+            "step": "Fill Form - Basic Data",
+            "expected_time_ms": "2000-3500",
+            "why_measure": "Validación en tiempo real + autocomplete",
+            "bottleneck_suspect": "API calls para autocomplete"
+          },
+          {
+            "step": "Department/Municipality Selection",
+            "expected_time_ms": "1000-2000",
+            "why_measure": "Dropdown rendering + data loading",
+            "bottleneck_suspect": "Data binding performance"
+          },
+          {
+            "step": "Select Provider",
+            "expected_time_ms": "1200-2200",
+            "why_measure": "Búsqueda y selección",
+            "bottleneck_suspect": "Network latency"
+          },
+          {
+            "step": "Perform State Transition",
+            "expected_time_ms": "1800-3000",
+            "why_measure": "Backend processing crítico",
+            "bottleneck_suspect": "Database transaction time"
+          },
+          {
+            "step": "Navegación a Caso (después transición)",
+            "expected_time_ms": "1000-2000",
+            "why_measure": "Renderizado de nueva pantalla",
+            "bottleneck_suspect": "Data hydration del caso"
+          }
+        ],
+        "measurement_method": {
+          "implementation": "try-with-resources StepTimer",
+          "example": "try (new PerformanceMonitor.StepTimer(monitor, 'Fill Form')) { actor.attemptsTo(...); }"
+        }
+      },
+
+      "LAYER_3_Report_Generation": {
+        "description": "Performance de generación de reports después de tests",
+        "phases": [
+          {
+            "phase": "Serenity HTML Generation",
+            "expected_time_s": "40-50s para 40 tests",
+            "per_test_ms": "1000-1250ms",
+            "factors": "Screenshots, JSON parsing, HTML template rendering"
+          },
+          {
+            "phase": "JUnit XML Parsing",
+            "expected_time_s": "3-5s",
+            "factors": "XML parsing de 40 archivos de test"
+          },
+          {
+            "phase": "Excel Report Generation",
+            "expected_time_s": "15-20s",
+            "factors": "COM Interop con Excel, formateo, charts"
+          },
+          {
+            "phase": "Performance Dashboard",
+            "expected_time_s": "10-15s",
+            "factors": "Agregación de datos, cálculos estadísticos"
+          },
+          {
+            "phase": "Total End-to-End",
+            "expected_time_s": "75-90s",
+            "factors": "Todo lo anterior en secuencia"
+          }
+        ],
+        "measurement_points": [
+          "Timestamp al inicio de cada fase",
+          "Tamaño de archivos generados",
+          "Memoria consumida durante generación",
+          "CPU utilizado"
+        ]
+      },
+
+      "LAYER_4_API_Performance": {
+        "description": "Response times de endpoints de Sara3 bajo carga",
+        "critical_endpoints": [
+          {
+            "endpoint": "POST /cases/add",
+            "description": "Crear nuevo caso (Caso Express)",
+            "baseline_ms": 1200,
+            "under_load_ms": 2100,
+            "target_degradation": "< 80%"
+          },
+          {
+            "endpoint": "POST /state/transition",
+            "description": "Cambio de estado del caso",
+            "baseline_ms": 3500,
+            "under_load_ms": 5800,
+            "target_degradation": "< 70%"
+          },
+          {
+            "endpoint": "GET /providers/search",
+            "description": "Búsqueda de proveedores",
+            "baseline_ms": 850,
+            "under_load_ms": 1200,
+            "target_degradation": "< 45%"
+          },
+          {
+            "endpoint": "GET /departments",
+            "description": "Cargar departamentos",
+            "baseline_ms": 450,
+            "under_load_ms": 550,
+            "target_degradation": "< 25%"
+          },
+          {
+            "endpoint": "GET /municipalities",
+            "description": "Cargar municipios",
+            "baseline_ms": 480,
+            "under_load_ms": 600,
+            "target_degradation": "< 30%"
+          }
+        ],
+        "measurement_method": "Chrome DevTools Protocol API timing",
+        "collection_point": "ApplicationPerformanceMonitor.captureNetworkTiming()"
+      },
+
+      "LAYER_5_App_Load_Degradation": {
+        "description": "Cómo degrada la performance de la app bajo carga paralela (N×M usuarios)",
+        "measurement": "Comparar response times con 1 usuario vs N×M usuarios paralelos",
+        "formula": "Scalability Index = (baseline_response / load_response) × 100%",
+        "degradation_targets": [
+          {
+            "metric": "FCP (First Contentful Paint)",
+            "baseline_1user": "1.8s",
+            "under_load": "Depende de N×M",
+            "max_degradation": "< 20%"
+          },
+          {
+            "metric": "LCP (Largest Contentful Paint)",
+            "baseline_1user": "2.3s",
+            "under_load": "Depende de N×M",
+            "max_degradation": "< 25%"
+          },
+          {
+            "metric": "Form Submission",
+            "baseline_1user": "4.2s",
+            "under_load": "Depende de N×M",
+            "max_degradation": "< 55%"
+          },
+          {
+            "metric": "State Transition (slowest endpoint)",
+            "baseline_1user": "3.5s",
+            "under_load": "Depende de N×M",
+            "max_degradation": "< 70%"
+          }
+        ],
+        "success_criteria": "Scalability Index >= 50% (app mantiene al menos 50% velocidad bajo parallelismo)",
+        "implementation": "Comparar baseline.csv (1 user) con load_test.csv (N×M paralelos) generados por ApplicationPerformanceMonitor"
+      }
+    },
+
+    "workflow_execution": {
+      "pre_testing": [
+        "Sincronizar relojes de 10 máquinas (NTP)",
+        "Limpiar targets y reports en todas máquinas",
+        "Verificar conectividad a servidores Sara3 desde todas máquinas",
+        "Documentar configuración de hardware de cada máquina (CPU, RAM, Network)"
+      ],
+      
+      "during_testing": [
+        "PerformanceMonitor en cada test captura: steps timing + memory snapshots",
+        "Cada máquina genera: target/performance_logs/{testName}_{timestamp}.csv",
+        "Parallelamente: Windows Performance Monitor registra CPU, Memory, Disk I/O"
+      ],
+
+      "post_testing": [
+        "Copiar target/performance_logs/* de las 10 máquinas a ubicación central",
+        "Ejecutar: script/generate_performance_report.ps1 -machineLogsPath '\\\\central\\performance_logs'",
+        "Output: target/reports/performance_report_yyyyMMdd_HHmmss.xlsx",
+        "Analizar: Identificar cuellos de botella"
+      ]
+    },
+
+    "expected_outputs": [
+      {
+        "file": "target/performance_logs/{testName}_{timestamp}.csv",
+        "origin": "Cada máquina/test",
+        "content": "Step timings, memory snapshots, CPU cores"
+      },
+      {
+        "file": "target/reports/performance_report_{timestamp}.xlsx",
+        "origin": "Agregación central",
+        "sheets": [
+          "Performance Summary - Agregación de 10 máquinas",
+          "Steps Analysis - Promedio/Min/Max de cada step",
+          "Report Generation - Tiempo de generación",
+          "Recommendations - Hallazgos y mejoras sugeridas"
+        ]
+      }
+    ],
+
+    "analysis_points": {
+      "bottleneck_identification": [
+        "¿Qué endpoint es el más lento en la app? (POST /state/transition es típicamente el cuello de botella)",
+        "¿Cómo escala la app con carga? (Degradation: 1 user vs 40 users)",
+        "¿Cómo afecta el volumen de requests paralelos a la app? (Connection pooling, DB capacity)"
+      ],
+      
+      "frontend_specific": [
+        "LCP aumenta significativamente bajo carga? → Frontend rendering bottleneck",
+        "Pero solo en ciertos pasos? → Específico de esa pantalla / componente",
+        "FCP normal pero LCP alto? → Problema con data loading, no rendering"
+      ],
+
+      "api_response_times": [
+        "¿Endpoints responden consistentemente bajo carga?",
+        "¿Hay alguno que degradue más del 100% (se duplica tiempo)?",
+        "¿Error rate aumenta bajo carga? (502/503 errors)"
+      ],
+
+      "scalability_assessment": [
+        "Scalability Index = 50% o más? → App escala bien",
+        "Scalability Index = 30-50%? → Problemas con concurrencia",
+        "Scalability Index < 30%? → Critical - app no soporta carga"
+      ]
+    },
+
+    "success_criteria": {
+      "app_responsiveness": "Todos endpoints responden en tiempo esperado bajo carga paralela variable",
+      "web_vitals": "LCP < 3s, FCP < 2.5s incluso bajo N×M parallel tests",
+      "scalability": "Scalability Index >= 50% (app mantiene al menos 50% velocidad bajo carga)",
+      "consistency": "Degradation variance < 30% entre endpoints similares",
+      "error_rate": "< 0.5% error rate bajo carga (502/503/504 errors)"
+    }
+  }
+}
+
+
+

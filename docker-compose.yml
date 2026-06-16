@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  # ============================================================
+  # SARA3 - Batch Tests 8 Paralelo
+  # ============================================================
+  sara3-batch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sara3:latest
+    container_name: sara3-batch-tests
+    
+    # Variables de entorno
+    environment:
+      DISPLAY: ""
+      QT_QPA_PLATFORM: "offscreen"
+      JAVA_OPTS: "-Xmx2048m -Xms512m"
+      CHROME_BIN: "/usr/bin/chromium-browser"
+      maxParallelForks: "8"
+    
+    # Volúmenes
+    volumes:
+      # Montar reporte generado en el host
+      - ./target/reports:/app/target/reports
+      - ./target/site:/app/target/site
+      - ./logs:/app/logs
+    
+    # Recursos
+    resources:
+      limits:
+        cpus: '2'
+        memory: 4G
+      reservations:
+        cpus: '1'
+        memory: 2G
+    
+    # Restarts
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      max_attempts: 3
+      window: 120s
+    
+    # Logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Comando
+    command: ./batch_test_8p.sh
+
+  # ============================================================
+  # SARA3 - Menú Interactivo (para desarrollo)
+  # ============================================================
+  sara3-interactive:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sara3:latest
+    container_name: sara3-interactive
+    
+    environment:
+      DISPLAY: ""
+      QT_QPA_PLATFORM: "offscreen"
+      JAVA_OPTS: "-Xmx2048m -Xms512m"
+      CHROME_BIN: "/usr/bin/chromium-browser"
+    
+    volumes:
+      - ./target/reports:/app/target/reports
+      - ./target/site:/app/target/site
+      - ./logs:/app/logs
+    
+    resources:
+      limits:
+        cpus: '2'
+        memory: 4G
+      reservations:
+        cpus: '1'
+        memory: 2G
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Menú interactivo
+    stdin_open: true
+    tty: true
+    command: ./run_tests.sh
+
+  # ============================================================
+  # SARA3 - Test Individual (para debugging)
+  # ============================================================
+  sara3-single:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sara3:latest
+    container_name: sara3-single-test
+    
+    environment:
+      DISPLAY: ""
+      QT_QPA_PLATFORM: "offscreen"
+      JAVA_OPTS: "-Xmx2048m -Xms512m"
+      CHROME_BIN: "/usr/bin/chromium-browser"
+      TEST_NUM: "01"  # Cambiar número de test
+    
+    volumes:
+      - ./target/reports:/app/target/reports
+      - ./target/site:/app/target/site
+      - ./logs:/app/logs
+    
+    resources:
+      limits:
+        cpus: '1'
+        memory: 2G
+      reservations:
+        cpus: '0.5'
+        memory: 1G
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Ejecutar test individual
+    command: bash -c "./gradlew test --tests 'com.sara.automation.runners.CasesRunner$${TEST_NUM}'"
+
+networks:
+  default:
+    name: sara3-network
+    driver: bridge
+
+# Volúmenes nombrados para reportes
+volumes:
+  sara3-reports:
+    driver: local
+  sara3-logs:
+    driver: local

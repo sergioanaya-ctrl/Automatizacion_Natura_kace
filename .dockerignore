@@ -1,0 +1,79 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings
+
+# Build
+build/
+target/
+dist/
+*.jar
+*.war
+*.zip
+*.tar.gz
+
+# Reports (se copian al volumen)
+reports/
+html-report/
+.serenity/
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (si aplica)
+node_modules/
+package-lock.json
+
+# Python (si aplica)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Gradle
+gradlew.bat
+
+
+# Temporal
+*.tmp
+*.swp
+*.swo
+*~
+.tmp/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+Jenkinsfile
+
+# Docker (evitar recursión)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentación grande
+docs/
+README.md
+LICENSE
+
+# Historiales
+history/
+.last_*
+
+# Scripts de setup (no son necesarios en la imagen final compilada)
+
+script/setup.ps1
+
+

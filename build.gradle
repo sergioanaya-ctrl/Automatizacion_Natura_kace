@@ -1,0 +1,120 @@
+version '1.0-SNAPSHOT'
+repositories {
+    mavenCentral()
+
+}
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {url"https://plugins.gradle.org/m2/"}
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.4.2")
+        classpath("net.serenity-bdd:serenity-single-page-report:2.4.34")
+        classpath("net.serenity-bdd:serenity-json-summary-report:2.4.34")
+    }
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+apply plugin: 'application'
+
+// ========================================================
+// CONFIGURACION DE JAVA
+// ========================================================
+// El proyecto funciona con JDK 8, 11, 17, 21+
+// Usa la versión de Java disponible en tu sistema
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+ext {
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '3.4.1'
+    junitVersion = '4.13.2'
+    logbackVersion = '1.3.10'
+    LombokVersion = '1.18.34'
+}
+
+dependencies {
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+            "org.projectlombok:lombok:${LombokVersion}",
+            "net.serenity-bdd:serenity-junit:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-single-page-report:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+            "junit:junit:${junitVersion}"
+    implementation "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}"
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+    compileOnly "org.projectlombok:lombok:${LombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${LombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${LombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${LombokVersion}"
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.5'
+}
+test {
+    testLogging.showStandardStreams = true
+    
+    // CONFIGURACION PARA EJECUCION PARALELA
+    // maxParallelForks: numero de JVM paralelas (tests que se ejecutan simultaneamente)
+    // Cada fork = 1 navegador Chrome ejecutandose en paralelo
+    // NOTA: Este valor se lee desde gradle.properties (edita gradle.properties para cambiar)
+    maxParallelForks = (project.hasProperty('maxParallelForks') ? project.maxParallelForks.toInteger() : 2)
+    
+    // Memoria por fork (cada navegador Chrome necesita ~1GB)
+    maxHeapSize = '2048m'
+    minHeapSize = '512m'
+    
+    // Reutilizar fork para todos los tests (mas eficiente)
+    forkEvery = 0
+    
+    // TIMEOUT PARA EVITAR CUELGUES INFINITOS
+    // 10 minutos por test (600 segundos)
+    timeout = java.time.Duration.ofHours(10)
+    
+    // Pasar propiedades del sistema EXCEPTO java.home y classpath del daemon
+    // (pasar java.home causaria que los workers busquen currency.data en el JDK del daemon)
+    def excludedSysProps = ['java.home', 'java.class.path', 'sun.boot.class.path', 'java.ext.dirs'] as Set
+    System.getProperties().each { k, v ->
+        if (!(k as String in excludedSysProps)) {
+            systemProperty k as String, v as String
+        }
+    }
+    
+    // Listener para monitorear tests que se cuelgan
+    testLogging {
+        showStandardStreams = true
+        events "started", "passed", "failed", "skipped"
+        exceptionFormat "full"
+    }
+    
+    // Log de inicio y fin de ejecucion
+    doFirst {
+        println "========================================="
+        println "CONFIGURACION EJECUCION PARALELA"
+        println "========================================="
+        println "Max Parallel Forks (navegadores): ${maxParallelForks}"
+        println "Available Processors: ${Runtime.runtime.availableProcessors()}"
+        println "Heap Size por Fork: ${maxHeapSize}"
+        println "Timeout por test: 2 horas"
+        println "Para cambiar: edita gradle.properties"
+        println "Inicio: " + new Date()
+        println "========================================="
+    }
+    
+    doLast {
+        println "========================================="
+        println "EJECUCION COMPLETADA"
+        println "Fin: " + new Date()
+        println "========================================="
+    }
+}
+serenity {
+    reports = ["single-page-html"]
+}
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate)

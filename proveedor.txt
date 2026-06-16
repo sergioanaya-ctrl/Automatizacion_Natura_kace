@@ -1,0 +1,2966 @@
+<div id="render-container"><div id="render-formio"><div ref="component" class="formio-component formio-component-form  formio-component-label-hidden" id="exrya44">
+  
+  
+
+
+
+<div novalidate="" ref="webform" class="formio-form"><div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent  formio-component-label-hidden" id="evcf20f">
+  
+  <style ref="evcf20f">.my-editgrid-closed table { <br>  table-layout: fixed !important; <br>  width: 100% !important; <br>  border-collapse: collapse !important; <br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap-closed {<br>  overflow: hidden !important;<br>  text-overflow: ellipsis !important;<br>  white-space: nowrap !important;<br>  padding: 8px !important;<br>  vertical-align: top !important; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap-closed {<br>  width: 70% !important; <br>  white-space: normal !important; <br>  overflow-wrap: break-word !important; <br>  word-break: break-all !important; <br>  padding: 8px !important;<br>  vertical-align: top !important; <br>}<br><br>.custom-panel-padding .card-body {<br>    padding: 1rem 4rem !important;<br>}<br><br>@media (max-width: 768px) {<br>    .custom-panel-padding .card-body {<br>        padding: 1rem !important;<br>    }<br>}<br><br>/* 1. Le damos una altura mínima fija a la tarjeta de ambos componentes */<br>.panel-ajustado .card {<br>    min-height: 20rem !important; /* <-- Cambia este número para igualarlos a tu gusto */<br>    height: auto !important; /* Permite que crezca si el contenido se excede */<br>}<br><br>/* 2. Seguimos anulando el alto forzado de 500px que trae Estados por defecto */<br>.panel-ajustado .overflow-auto {<br>    height: auto !important;<br>    max-height: none !important;<br>}<br><br>/* 3. Ajustamos el espacio interno abajo para que no quede hueco */<br>.panel-ajustado .card-body {<br>    padding-bottom: 1.5rem !important;<br>    flex: none !important;<br>}<br><br>/* 4. Quitamos el margen del último elemento para evitar empujes invisibles */<br>.panel-ajustado .form-group:last-child,<br>.panel-ajustado .text-center:last-child {<br>    margin-bottom: 0 !important;<br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-captureToken  formio-component-label-hidden" id="eybcx89">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eybcx89-captureToken" id="eybcx89-captureToken" value="" lang="en" class="form-control" type="hidden" name="data[captureToken]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-auth formio-component-auth  formio-component-label-hidden" id="eea7w21">
+  
+  
+
+
+
+<div id="auth-eea7w21"></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace-c55d385e9ce64ffdb57bdc0a8f6f8ae6 formio-component-kaceC55D385E9Ce64Ffdb57Bdc0A8F6F8Ae6  formio-component-label-hidden" id="e2w3msi">
+  
+  
+
+
+
+<div id="kace-c55d385e9ce64ffdb57bdc0a8f6f8ae6-e2w3msi"><div class=""><button type="button" class="kace-drawer-toggle-button kace-drawer-toggle-button--hidden" title="Estados" aria-label="Estados">Estados</button><nav class="kace-drawer-overlay  kace-drawer-overlay--hidden"><div class="kace-drawer-header-actions"><button type="button" class="kace-drawer-close-button">×</button></div><div class="kace-drawer-body"><div class="kace-drawer-title-states"><p class="kace-drawer-inside-title">Estados</p><button type="button" class="kace-btn-open-modal">+</button></div><div class="kace-drawer-table-container"><div class="kace-table-wrapper"><table class="table table-striped table-hover "><thead><tr><th scope="col">Fecha</th><th scope="col">Estado</th><th scope="col">Grupo</th><th scope="col">Actualizado Por</th><th scope="col">Gestión</th><th scope="col">Responsable</th></tr></thead><tbody><tr><td colspan="6" class="text-center text-muted">Sin datos para mostrar</td></tr></tbody></table></div></div></div></nav></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace-8605364010b345b5b6dffda3f79533aa formio-component-kace8605364010B345B5B6Dffda3F79533Aa  formio-component-label-hidden" id="e4whpwp">
+  
+  
+
+
+
+<div id="kace-8605364010b345b5b6dffda3f79533aa-e4whpwp"><div class=""><button type="button" class="kace-timer-toggle-button" title="Abrir Timer" aria-label="Timer"><span class="kace-timer-toggle-text">Timer</span></button></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="row formio-component formio-component-columns formio-component-columns  formio-component-label-hidden" id="ecznaay">
+  
+  
+
+
+
+
+<div ref="column-ecznaay" class="col-md-6
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-classification_id formio-component-classificationId panel-ajustado formio-component-label-hidden" id="e6c7olh">
+  
+  
+
+
+
+<div id="classification_id-e6c7olh"><div class="card shadow-sm "><div class="card-body p-4"><h1 class="h3 font-weight-bold mb-2">Clasificaciones</h1><p class="text-muted mb-4">Seleccione un nivel de clasificación para ver los estados disponibles.</p><div class="overflow-auto classifications-levels" style="min-height: 3rem;"><div><div class="form-group classifications-dropdown-wrap"><label class="font-weight-medium">Nivel 1</label><div class="form-control classifications-dropdown-control classifications-dropdown-control--disabled">Asistencia</div></div></div></div></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-ecznaay" class="col-md-6
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_states formio-component-kaceStates panel-ajustado" id="eahbzzn">
+  
+  
+  <label id="l-eahbzzn-kaceStates" for="eahbzzn-kaceStates" class="col-form-label" ref="label" style="display: none;">
+  States
+  
+  
+</label>
+
+
+
+
+
+<div id="kace_states-eahbzzn"><div class="card shadow-sm "><div class="card-body p-4"><h1 class="h3 font-weight-bold mb-2">Estados</h1><p class="text-muted mb-4">Seleccione un nivel de clasificación para ver los estados disponibles</p><div class="overflow-auto states__content"><div class="text-center mb-4"><h2 class="h5 font-weight-bold mb-3">Estado actual</h2><button type="button" class="btn btn-success" disabled="">Abierto</button></div><div class="text-center"><h2 class="h5 font-weight-bold mb-3">Estados disponibles</h2><div class="d-flex flex-wrap justify-content-center"><button type="button" class="btn mr-2 mb-2 btn-outline-secondary">Incompleto</button><button type="button" class="btn mr-2 mb-2 btn-outline-secondary">Cancelado</button><button type="button" class="btn mr-2 mb-2 btn-outline-secondary">Programado</button><button type="button" class="btn mr-2 mb-2 btn-outline-secondary">Rechazado</button></div></div></div></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_aux_cases_schema formio-component-kaceAuxCasesSchema  formio-component-label-hidden formio-modified" id="epfkw59">
+  
+  
+
+
+
+<div id="kace_aux_cases_schema-epfkw59"><div class=""><div class="card shadow-sm "><div class="card-body p-4"><h1 class="h3 font-weight-bold mb-2">Creación/Edición de Casos</h1><div class="overflow-auto schema-card"><div><div ref="component" class="formio-component formio-component-form  formio-component-label-hidden" id="edsb6p">
+  
+  
+
+
+
+<div novalidate="" ref="webform" class="formio-form"><div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-globalScripts  formio-component-label-hidden" id="e61i1a">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e61i1a-globalScripts" id="e61i1a-globalScripts" value="" lang="en" class="form-control" type="hidden" name="data[globalScripts]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-contador_desprogramados  formio-component-label-hidden" id="er65r7f">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-er65r7f-contador_desprogramados" id="er65r7f-contador_desprogramados" value="" lang="en" class="form-control" type="hidden" name="data[contador_desprogramados]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-contador_reprogramaciones_general  formio-component-label-hidden" id="encbvva">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-encbvva-contador_reprogramaciones_general" id="encbvva-contador_reprogramaciones_general" value="" lang="en" class="form-control" type="hidden" name="data[contador_reprogramaciones_general]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-khtml formio-component-htmlbreadcrum  formio-component-label-hidden" id="elivp4n">
+  
+  
+
+
+
+<div ref="react-elivp4n"><div><style> 
+  
+  .migaDiv {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.migaItem {
+  padding: 8px 16px;
+  margin-right: 5px;
+  border: 1px solid #007bff;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  color: #007bff;
+  font-weight: bold;
+  text-transform: capitalize; /* Convertir el texto a mayúscula en la primera letra de cada palabra */
+}
+
+.migaItem:last-child {
+  margin-right: 0; /* Eliminar el margen derecho del último elemento */
+}
+
+.migaTriangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8.7px; /* Cambiar el orden de los bordes */
+  border-color: transparent transparent transparent #007bff;
+  margin-right: 5px;
+}
+
+</style>
+
+</div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_hidden formio-component-permisos_auxiliar  formio-component-label-hidden" id="e9uudih">
+  
+  
+
+
+
+<div id="kace_hidden-e9uudih"></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-khtml formio-component-textoContingencia  formio-component-label-hidden" id="ecdbplf">
+  
+  
+
+
+
+<div ref="react-ecdbplf"><div><h3 id="textContingency" style="color: red; display: none;">Contingencia Activa</h3><h5></h5></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="formio-component formio-component-tabs formio-component-tabs1" id="eio78jm">
+  
+  <div class="card">
+  <div class="card-header">
+    <ul role="tablist" class="nav nav-tabs card-header-tabs">
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item active">
+        <a ref="tabLink-tabs1" href="#general" class="nav-link active">
+          General
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#gestionDeProveedores" class="nav-link">
+          Gestión de proveedores
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#escalamientosSura" class="nav-link">
+          Escalamientos sura
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#novedades" class="nav-link">
+          Novedades
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#agenda" class="nav-link">
+          Agenda
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#contactosPhone" class="nav-link">
+          Contactos phone
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item" style="display: none;">
+        <a ref="tabLink-tabs1" href="#monitoreoProveedor" class="nav-link">
+          Monitoreo proveedor
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item" style="display: none;">
+        <a ref="tabLink-tabs1" href="#reprogramacionDeCitas" class="nav-link">
+          Reprogramación de citas
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#finalizacion" class="nav-link">
+          Finalización
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item">
+        <a ref="tabLink-tabs1" href="#documentacionCnm" class="nav-link">
+          Documentación CNM
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item" style="display: none;">
+        <a ref="tabLink-tabs1" href="#tareasDeMonitoreo" class="nav-link">
+          Tareas de monitoreo
+        </a>
+      </li>
+      
+      <li ref="tabLi-tabs1" role="tab" class="nav-item" style="display: none;">
+        <a ref="tabLink-tabs1" href="#cierreExpediente" class="nav-link">
+          Cierre expediente
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+  
+  <div ref="tab-tabs1" style="display: block" class="card-body tab-pane active" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog5  formio-component-label-hidden" id="elma0ot">
+  
+  
+
+
+
+<div id="kace_event_log-elma0ot"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="formio-component formio-component-panel formio-component-habilitar_edicion_del_caso_panel" id="eoq0dnq">
+  
+  <div class="mb-2 card border">
+  
+  <div ref="header" aria-controls="eoq0dnq-habilitar_edicion_del_caso_panel" aria-expanded="true" role="button" tabindex="0" class="card-header bg-default">
+    <span class="mb-0 card-title">
+      
+        <i data-title="Collapse Panel" class="formio-collapse-icon fa fa-minus-square-o text-muted"></i>
+      
+      
+       Habilitar datos generales del caso
+      
+      
+    </span>
+  </div>
+  
+  
+  <div id="eoq0dnq-habilitar_edicion_del_caso_panel" ref="nested-habilitar_edicion_del_caso_panel" class="card-body">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_custom_submit formio-component-habilitar_edicion_del_caso  form-group" id="excyy2i">
+  
+  
+
+
+
+<button lang="en" class="btn btn-primary btn-sm btn-block" type="button" name="data[habilitar_edicion_del_caso]" ref="button">
+<span class="fa fa-check"></span>&nbsp;
+Habilitar Formulario
+
+
+</button>
+<div ref="buttonMessageContainer">
+  <span ref="buttonMessage" class="help-block"></span>
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="row formio-component formio-component-columns formio-component-columns  formio-component-label-hidden" id="ed3q99">
+  
+  
+
+
+
+
+<div ref="column-ed3q99" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-numero_expediente  required" id="e0v3kex7">
+  
+  
+  <label id="l-e0v3kex7-numero_expediente" for="e0v3kex7-numero_expediente" class="col-form-label  field-required" ref="label">
+  Número expediente
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-e0v3kex7-numero_expediente" id="e0v3kex7-numero_expediente" value="202605070380242" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[numero_expediente]" ref="input" aria-invalid="false" data-paste-logic-applied="true">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-nombre_solicitante  required" id="e9zveg">
+  
+  
+  <label id="l-e9zveg-nombre_solicitante" for="e9zveg-nombre_solicitante" class="col-form-label  field-required" ref="label">
+  Nombre solicitante
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-e9zveg-nombre_solicitante" id="e9zveg-nombre_solicitante" value="Solicitante SVVFFT" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[nombre_solicitante]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-textfield formio-component-telefono_2" id="el2f1eo">
+  
+  
+  <label id="l-el2f1eo-telefono_2" for="el2f1eo-telefono_2" class="col-form-label" ref="label">
+  Teléfono 2
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-el2f1eo-telefono_2" id="el2f1eo-telefono_2" value="3587767124" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[telefono_2]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-departamento_solicita  required" id="eheuhss">
+  
+  
+  <label id="l-eheuhss-departamento_solicita" for="eheuhss-departamento_solicita" class="col-form-label  field-required" ref="label">
+  Departamento solicita
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-eheuhss"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">ANTIOQUIA<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-departamento_destino" id="e9t690q">
+  
+  
+  <label id="l-e9t690q-departamento_destino" for="e9t690q-departamento_destino" class="col-form-label" ref="label">
+  Departamento de destino
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e9t690q-departamento_destino" id="e9t690q-departamento_destino" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[departamento_destino]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-direccion_del_destino" id="e1524g6">
+  
+  
+  <label id="l-e1524g6-direccion_del_destino" for="e1524g6-direccion_del_destino" class="col-form-label" ref="label">
+  Dirección del destino
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e1524g6-direccion_del_destino" id="e1524g6-direccion_del_destino" value="Carrera 23 #96-38" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[direccion_del_destino]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-codigo_de_seguridad" id="efay16">
+  
+  
+  <label id="l-efay16-codigo_de_seguridad" for="efay16-codigo_de_seguridad" class="col-form-label" ref="label">
+  Código de seguridad
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-efay16-codigo_de_seguridad" id="efay16-codigo_de_seguridad" value="0380242" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[codigo_de_seguridad]" ref="input">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-ubicacion_servicio  required" id="eqb9dz">
+  
+  
+  <label id="l-eqb9dz-ubicacion_servicio" for="eqb9dz-ubicacion_servicio" class="col-form-label  field-required" ref="label">
+  Ubicación servicio
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-eqb9dz-ubicacion_servicio" id="eqb9dz-ubicacion_servicio" value="produccion" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[ubicacion_servicio]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-id_app_movil" id="eqji69">
+  
+  
+  <label id="l-eqji69-id_app_movil" for="eqji69-id_app_movil" class="col-form-label" ref="label">
+  Id app móvil
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eqji69-id_app_movil" id="eqji69-id_app_movil" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[id_app_movil]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-ed3q99" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_calendar formio-component-fecha_y_hora_de_cita" id="eft40o4">
+  
+  
+  <label id="l-eft40o4-fecha_y_hora_de_cita" for="eft40o4-fecha_y_hora_de_cita" class="col-form-label" ref="label">
+  Fecha y hora de cita
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+<div class="input-group">
+  
+  
+  
+    <input aria-required="false" aria-labelledby="l-eft40o4-fecha_y_hora_de_cita" id="eft40o4-fecha_y_hora_de_cita" value="" lang="en" class="form-control flatpickr-input" type="hidden" name="data[fecha_y_hora_de_cita]" ref="input" aria-invalid="false"><input class="form-control form-control input" placeholder="" tabindex="0" type="text">
+    
+
+
+
+
+  <div ref="suffix" class="input-group-append">
+    <span class="input-group-text">
+      
+        <i style="" class="fa fa-calendar" ref="icon"></i>
+      
+    </span>
+  </div>
+
+
+  </div>
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-cedula_del_solicitante  required" id="eab6oqh">
+  
+  
+  <label id="l-eab6oqh-cedula_del_solicitante" for="eab6oqh-cedula_del_solicitante" class="col-form-label  field-required" ref="label">
+  Cédula del solicitante
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-eab6oqh-cedula_del_solicitante" id="eab6oqh-cedula_del_solicitante" value="3410281654" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[cedula_del_solicitante]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-placa  required" id="exl9hr7">
+  
+  
+  <label id="l-exl9hr7-placa" for="exl9hr7-placa" class="col-form-label  field-required" ref="label">
+  Placa
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-exl9hr7-placa" id="exl9hr7-placa" value="IGN119" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[placa]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-municipio_solicita  required" id="emmz41">
+  
+  
+  <label id="l-emmz41-municipio_solicita" for="emmz41-municipio_solicita" class="col-form-label  field-required" ref="label">
+  Municipio solicita
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-emmz41"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">MEDELLIN<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-municipio_destino" id="e33dhdn">
+  
+  
+  <label id="l-e33dhdn-municipio_destino" for="e33dhdn-municipio_destino" class="col-form-label" ref="label">
+  Municipio de destino
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e33dhdn-municipio_destino" id="e33dhdn-municipio_destino" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[municipio_destino]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-detalle_direccion_destino" id="ewv1fg6">
+  
+  
+  <label id="l-ewv1fg6-detalle_direccion_destino" for="ewv1fg6-detalle_direccion_destino" class="col-form-label" ref="label">
+  Detalle dirección destino
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ewv1fg6-detalle_direccion_destino" id="ewv1fg6-detalle_direccion_destino" value="Referencia CHITV 031" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[detalle_direccion_destino]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-marca_vehiculo" id="e96xv4b">
+  
+  
+  <label id="l-e96xv4b-marca_vehiculo" for="e96xv4b-marca_vehiculo" class="col-form-label" ref="label">
+  Marca vehículo
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e96xv4b-marca_vehiculo" id="e96xv4b-marca_vehiculo" value="Marca DHGV" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[marca_vehiculo]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-servicios_especiales" id="erhpljx">
+  
+  
+  <label id="l-erhpljx-servicios_especiales" for="erhpljx-servicios_especiales" class="col-form-label" ref="label">
+  Servicios especiales
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-erhpljx"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">NO<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-tipo_de_cliente" id="e4otjwp">
+  
+  
+  <label id="l-e4otjwp-tipo_de_cliente" for="e4otjwp-tipo_de_cliente" class="col-form-label" ref="label">
+  Tipo de cliente
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-e4otjwp"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">Elige una opción<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-nombre_tecnico" id="en33fxs">
+  
+  
+  <label id="l-en33fxs-nombre_tecnico" for="en33fxs-nombre_tecnico" class="col-form-label" ref="label">
+  Nombre tecnico
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-en33fxs-nombre_tecnico" id="en33fxs-nombre_tecnico" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[nombre_tecnico]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-ed3q99" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-datetime formio-component-fecha_y_hora_de_solicitud  required" id="effhg3">
+  
+  
+  <label id="l-effhg3-fecha_y_hora_de_solicitud" for="effhg3-fecha_y_hora_de_solicitud" class="col-form-label  field-required" ref="label">
+  Fecha y hora de solicitud
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+<div class="input-group">
+  
+  
+  
+    <input aria-required="true" aria-labelledby="l-effhg3-fecha_y_hora_de_solicitud" id="effhg3-fecha_y_hora_de_solicitud" value="2026-05-07T11:37:32" lang="en" class="form-control flatpickr-input" type="hidden" name="data[fecha_y_hora_de_solicitud]" ref="input" aria-invalid="false"><input class="form-control form-control input" placeholder="" tabindex="0" type="text">
+    
+
+
+
+<span ref="liveRegion" class="sr-only" id="effhg3-liveRegion" aria-live="assertive"></span>
+
+
+  <div ref="suffix" class="input-group-append">
+    <span class="input-group-text">
+      
+        <i style="" class="fa fa-calendar" ref="icon"></i>
+      
+    </span>
+  </div>
+
+
+  </div>
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-textfield formio-component-telefono_1  required" id="ex2bcs">
+  
+  
+  <label id="l-ex2bcs-telefono_1" for="ex2bcs-telefono_1" class="col-form-label  field-required" ref="label">
+  Teléfono 1
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-ex2bcs-telefono_1" id="ex2bcs-telefono_1" value="3342508340" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[telefono_1]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="" id="ecrzksb">
+  
+  <div class="card card-body bg-light mb-3">
+  <div ref="nested-fechaCreacionCaso">
+    <div ref="component" class="formio-component formio-component-content formio-component-content" id="e10uvwo">
+  
+  <div ref="html" class="formio-component-htmlelement"><p><strong>Fecha y hora de creación: </strong>2026-05-07 11:38 am</p></div>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+</div>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-direccion_servicio  required" id="eq9o1i9">
+  
+  
+  <label id="l-eq9o1i9-direccion_servicio" for="eq9o1i9-direccion_servicio" class="col-form-label  field-required" ref="label">
+  Dirección servicio
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-eq9o1i9-direccion_servicio" id="eq9o1i9-direccion_servicio" value="Calle 13 #96-48" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[direccion_servicio]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-detalle_direccion_servicio  required" id="ec9kpuuv">
+  
+  
+  <label id="l-ec9kpuuv-detalle_direccion_servicio" for="ec9kpuuv-detalle_direccion_servicio" class="col-form-label  field-required" ref="label">
+  Detalle dirección servicio
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-ec9kpuuv-detalle_direccion_servicio" id="ec9kpuuv-detalle_direccion_servicio" value="Apto 24, Torre B" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[detalle_direccion_servicio]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-categoria" id="ee70tkd">
+  
+  
+  <label id="l-ee70tkd-categoria" for="ee70tkd-categoria" class="col-form-label" ref="label">
+  Categoría
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-ee70tkd"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">Elige una opción<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-clase_vehiculo" id="ed7gt3">
+  
+  
+  <label id="l-ed7gt3-clase_vehiculo" for="ed7gt3-clase_vehiculo" class="col-form-label" ref="label">
+  Clase vehículo
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ed7gt3-clase_vehiculo" id="ed7gt3-clase_vehiculo" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[clase_vehiculo]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-creado_desde" id="ekh5q3o">
+  
+  
+  <label id="l-ekh5q3o-creado_desde" for="ekh5q3o-creado_desde" class="col-form-label" ref="label">
+  Creado desde
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ekh5q3o-creado_desde" id="ekh5q3o-creado_desde" value="CREACIÓN MANUAL" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[creado_desde]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-tipo_servicio" id="eixfvx">
+  
+  
+  <label id="l-eixfvx-tipo_servicio" for="eixfvx-tipo_servicio" class="col-form-label" ref="label">
+  Tipo Servicio
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eixfvx-tipo_servicio" id="eixfvx-tipo_servicio" value="NO APLICA" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[tipo_servicio]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-telefono_tecnico" id="eifze5">
+  
+  
+  <label id="l-eifze5-telefono_tecnico" for="eifze5-telefono_tecnico" class="col-form-label" ref="label">
+  Telefono tecnico
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eifze5-telefono_tecnico" id="eifze5-telefono_tecnico" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[telefono_tecnico]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="formio-component formio-component-panel formio-component-asignacion" id="eqe8j9g">
+  
+  <div class="mb-2 card border">
+  
+  <div ref="header" aria-controls="eqe8j9g-asignacion" aria-expanded="true" role="button" class="card-header bg-default">
+    <span class="mb-0 card-title">
+      
+      
+      Asignación
+      
+      
+    </span>
+  </div>
+  
+  
+  <div id="eqe8j9g-asignacion" ref="nested-asignacion" class="card-body">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-container formio-component-asignacion_asistencia_movilidad  formio-component-label-hidden" id="e6c8hhq">
+  
+  
+
+
+
+<div ref="nested-asignacion_asistencia_movilidad">
+  <div ref="component" class="row formio-component formio-component-columns formio-component-column1  formio-component-label-hidden" id="e3br53b">
+  
+  
+
+
+
+
+<div ref="column-e3br53b" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-gestor_de_coordinacion  required" id="eumpu6">
+  
+  
+  <label id="l-eumpu6-gestor_de_coordinacion" for="eumpu6-gestor_de_coordinacion" class="col-form-label  field-required" ref="label">
+  Gestor de coordinación
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-eumpu6"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">NO<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-clase" id="ezxn4n">
+  
+  
+  <label id="l-ezxn4n-clase" for="ezxn4n-clase" class="col-form-label" ref="label">
+  Clase
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ezxn4n-clase" id="ezxn4n-clase" value="COORDINACION TRADICIONAL" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[asignacion_asistencia_movilidad][clase]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-proveedor" id="egts9kl">
+  
+  
+  <label id="l-egts9kl-proveedor" for="egts9kl-proveedor" class="col-form-label" ref="label">
+  Proveedor
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-egts9kl-proveedor" id="egts9kl-proveedor" value="" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[asignacion_asistencia_movilidad][proveedor]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-e3br53b" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-linea  required" id="ef1mmig">
+  
+  
+  <label id="l-ef1mmig-linea" for="ef1mmig-linea" class="col-form-label  field-required" ref="label">
+  Línea
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-ef1mmig"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">AUTOS<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-estado_del_expediente" id="efyz9ao">
+  
+  
+  <label id="l-efyz9ao-estado_del_expediente" for="efyz9ao-estado_del_expediente" class="col-form-label" ref="label">
+  Estado del expediente
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-efyz9ao-estado_del_expediente" id="efyz9ao-estado_del_expediente" value="PENDIENTE" spellcheck="true" disabled="disabled" lang="en" class="form-control" type="text" name="data[asignacion_asistencia_movilidad][estado_del_expediente]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-e3br53b" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-custom-select formio-component-servicio  required" id="et5p1mg">
+  
+  
+  <label id="l-et5p1mg-servicio" for="et5p1mg-servicio" class="col-form-label  field-required" ref="label">
+  Servicio
+  
+  
+</label>
+
+
+
+
+
+<div id="custom-select-et5p1mg"><div class="custom-dropdown kace-component--disabled"><div class="custom-dropdown-control">PASO DE GASOLINA<span class="arrow">▾</span></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-familia_de_servicio" id="el6y4q">
+  
+  
+  <label id="l-el6y4q-familia_de_servicio" for="el6y4q-familia_de_servicio" class="col-form-label" ref="label">
+  Famila de servicio
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-el6y4q-familia_de_servicio" id="el6y4q-familia_de_servicio" value="" spellcheck="false" disabled="disabled" lang="en" class="form-control" type="text" name="data[asignacion_asistencia_movilidad][familia_de_servicio]" ref="input">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace-d7726f06de2e45c3908377d10d9613df formio-component-descripcion  required formio-component-label-hidden" id="eud4ptq">
+  
+  
+
+
+  <label class="field-required control-label--hidden"></label>
+
+
+<div id="kace-d7726f06de2e45c3908377d10d9613df-eud4ptq"><div class="form-group kace-component--disabled"><div class="d-flex align-items-center gap-2 mb-2"><button type="button" class="mic-button mr-2 " aria-pressed="false" title="Iniciar grabación" disabled=""><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic" aria-hidden="true"><path d="M12 19v3"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><rect x="9" y="2" width="6" height="13" rx="3"></rect></svg></button><small class="text-muted ms-2"></small></div><textarea class="form-control" rows="6" placeholder="" maxlength="1024" disabled="">OBS-202605070380242</textarea><small class="text-muted d-block mt-1">19 / 1024</small></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog  formio-component-label-hidden" id="ephatym">
+  
+  
+
+
+
+<div id="kace_event_log-ephatym"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent5  formio-component-label-hidden" id="et1m636">
+  
+  <style ref="et1m636">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 40%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-gestion_proveedor_asistencia_movilidad my-editgrid formio-component-label-hidden" id="e2yqj6">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        <tr>
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Nombre
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Respuesta de proveedor
+      </td>
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Fecha y hora monitoreo en sitio
+      </td>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Fecha y hora monitoreo destino
+      </td>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+    <td class="editgrid-table-column">Acciones</td>
+  
+</tr>
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-gestion_proveedor_asistencia_movilidad-addRow" class="btn btn-primary">
+  <i class="fa fa-plus"></i>
+  Crear
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-datamap formio-component-gestion_proveedor_asistencia_movilidad_detail  formio-component-label-hidden formio-hidden" id="eephq6t">
+  
+</div>
+
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-params_rescheduling  formio-component-label-hidden" id="ebzf2fc">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ebzf2fc-params_rescheduling" id="ebzf2fc-params_rescheduling" value="" lang="en" class="form-control" type="hidden" name="data[params_rescheduling]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog1  formio-component-label-hidden" id="eenckf">
+  
+  
+
+
+
+<div id="kace_event_log-eenckf"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent4  formio-component-label-hidden" id="eipnbto">
+  
+  <style ref="eipnbto">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 40%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-escalamiento_sura_asistencia_movilidad my-editgrid formio-component-label-hidden" id="ehk7vk">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        <tr>
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Tipo de gestión
+      </td>
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Tipo de respuesta
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Genera queja
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Radicado de la queja
+      </td>
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Creado por
+      </td>
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Fecha de creación
+      </td>
+    
+  
+    
+  
+    
+  
+  
+    <td class="editgrid-table-column">Acciones</td>
+  
+</tr>
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-escalamiento_sura_asistencia_movilidad-addRow" class="btn btn-primary">
+  <i class="fa fa-plus"></i>
+  Crear
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog4  formio-component-label-hidden" id="eowmk9">
+  
+  
+
+
+
+<div id="kace_event_log-eowmk9"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent3  formio-component-label-hidden" id="e5otyst">
+  
+  <style ref="e5otyst">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 40%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-novedades_asistencia_movilidad my-editgrid formio-component-label-hidden" id="e87gn1f">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        <tr>
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Quien reporta la novedad
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Causa de la novedad
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Se Genero Queja
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Radicado de la queja
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Creado por
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Fecha de creación
+      </td>
+    
+  
+    
+  
+    
+  
+    
+  
+  
+    <td class="editgrid-table-column">Acciones</td>
+  
+</tr>
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-novedades_asistencia_movilidad-addRow" class="btn btn-primary">
+  <i class="fa fa-plus"></i>
+  Crear
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-checkbox formio-component-genera_pago_al_proveedor  formio-hidden" id="e7a0tfy">
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_schema formio-component-cierre_de_expediente  formio-component-label-hidden formio-hidden" id="ebvvi">
+  
+</div>
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog6  formio-component-label-hidden" id="ec4dknj">
+  
+  
+
+
+
+<div id="kace_event_log-ec4dknj"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-logicGcMakeCall  formio-component-label-hidden" id="esbk7r">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-esbk7r-logicGcMakeCall" id="esbk7r-logicGcMakeCall" value="" lang="en" class="form-control" type="hidden" name="data[logicGcMakeCall]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-agenda_asistencia_movilidad  formio-component-label-hidden" id="e90lscy">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        <tr>
+  
+    
+      <td class="editgrid-table-column">Grupo</td>
+    
+  
+    
+      <td class="editgrid-table-column">Creado por</td>
+    
+  
+    
+      <td class="editgrid-table-column">Tipo de contacto</td>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column">Prefijo</td>
+    
+  
+    
+      <td class="editgrid-table-column">Número a llamar</td>
+    
+  
+    
+  
+    
+  
+</tr>
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-agenda_asistencia_movilidad-addRow" class="btn btn-primary" data-api-hook="true">
+  <i class="fa fa-plus"></i>
+  Nueva agenda
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-contactos_phone_asistencia_movilidad  formio-component-label-hidden" id="eav5m1q">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        
+      <tr>
+        
+          
+            <td class="editgrid-table-column">Connid</td>
+          
+        
+          
+            <td class="editgrid-table-column">Tipo de Llamada</td>
+          
+        
+          
+            <td class="editgrid-table-column">Fecha y hora inicio de llamada</td>
+          
+        
+          
+            <td class="editgrid-table-column">Duración</td>
+          
+        
+          
+            <td class="editgrid-table-column">Usuario Fénix</td>
+          
+        
+          
+            <td class="editgrid-table-column">Persona de Contacto</td>
+          
+        
+          
+            <td class="editgrid-table-column">Teléfono</td>
+          
+        
+          
+            <td class="editgrid-table-column">Fecha y hora fin de la llamada</td>
+          
+        
+          
+            <td class="editgrid-table-column">Estado del Servicio</td>
+          
+        
+          
+            <td class="editgrid-table-column">Date Created</td>
+          
+        
+          
+        
+          
+        
+      </tr>
+    
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog8  formio-component-label-hidden" id="eiplt4w">
+  
+  
+
+
+
+<div id="kace_event_log-eiplt4w"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent2  formio-component-label-hidden" id="ebfnyfn">
+  
+  <style ref="ebfnyfn">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 45%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_hidden formio-component-monitoreo_proveedor_hidden  formio-component-label-hidden" id="e90cd2c">
+  
+  
+
+
+
+<div id="kace_hidden-e90cd2c"></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-monitoreo_proveedor_asistencia_movilidad my-editgrid, custom-margin-top formio-component-label-hidden" id="elzoqni">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        <tr>
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Monitoreo con
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Momento del servicio
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Respuesta a monitoreo
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Se generó queja
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Radicado de la queja
+      </td>
+    
+  
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Fecha modificación
+      </td>
+    
+  
+    
+  
+    
+  
+    
+  
+  
+    <td class="editgrid-table-column fixed-col-nowrap">Acciones</td>
+  
+</tr>
+    
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog7  formio-component-label-hidden" id="etv1me12d">
+  
+  
+
+
+
+<div id="kace_event_log-etv1me12d"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent1  formio-component-label-hidden" id="e0sz7j">
+  
+  <style ref="e0sz7j">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 40%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Oculta el botón nativo del EditGrid */<br>[ref="editgrid-reprogramacion_de_citas_asistencia_movilidad-addRow"] {<br>  display: none !important;<br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-reprogramacion_de_citas_asistencia_movilidad my-editgrid formio-component-label-hidden" id="em97g8y">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        
+      <tr>
+        
+          
+            <td class="editgrid-table-column">Motivo</td>
+          
+        
+          
+            <td class="editgrid-table-column">Fecha y hora nueva cita</td>
+          
+        
+          
+        
+          
+        
+          
+            <td class="editgrid-table-column">¿Quién solicita?</td>
+          
+        
+          
+            <td class="editgrid-table-column">Número de citas</td>
+          
+        
+          
+            <td class="editgrid-table-column">Fecha modificación</td>
+          
+        
+          
+        
+          
+            <td class="editgrid-table-column">Asesor</td>
+          
+        
+          
+        
+        
+          <td class="editgrid-table-column">Acciones</td>
+        
+      </tr>
+    
+    
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-reprogramacion_de_citas_asistencia_movilidad-addRow" class="btn btn-primary">
+  <i class="fa fa-plus"></i>
+  Crear
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div ref="component" class="formio-component formio-component-button formio-component-btnCrearReprogramacion  form-group" id="e3g9jee">
+  
+  
+
+
+
+<button lang="en" class="btn btn-primary btn-md" type="button" name="data" ref="button">
+<span class="fa fa-plus"></span>&nbsp;
+Crear
+
+
+</button>
+<div ref="buttonMessageContainer">
+  <span ref="buttonMessage" class="help-block"></span>
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog3  formio-component-label-hidden" id="e0ccv4m">
+  
+  
+
+
+
+<div id="kace_event_log-e0ccv4m"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-styleComponent  formio-component-label-hidden" id="evgw5cm">
+  
+  <style ref="evgw5cm">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 50%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-finalizacion_asistencia_movilidad my-editgrid formio-component-label-hidden" id="ejozx6c">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        
+      <tr>
+        
+          
+            <td class="editgrid-table-column">Finalizado con</td>
+          
+        
+          
+            <td class="editgrid-table-column">Tipo de respuesta</td>
+          
+        
+          
+            <td class="editgrid-table-column">Observación</td>
+          
+        
+          
+            <td class="editgrid-table-column">Fecha modificación</td>
+          
+        
+          
+        
+          
+        
+          
+        
+        
+          <td class="editgrid-table-column">Acciones</td>
+        
+      </tr>
+    
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-finalizacion_asistencia_movilidad-addRow" class="btn btn-primary">
+  <i class="fa fa-plus"></i>
+  Crear
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_event_log formio-component-kaceEventLog2  formio-component-label-hidden" id="etuq3u">
+  
+  
+
+
+
+<div id="kace_event_log-etuq3u"><div class="kace-event-log "><button type="button" class="kace-event-log-trigger" aria-label="Historial de eventos"><i class="fa fa-history" aria-hidden="true"></i></button><aside class="kace-event-log-sheet kace-event-log-sheet--hidden" aria-hidden="true"><div class="kace-event-log-sheet-header"><h2 class="kace-event-log-sheet-title">Historial</h2><button type="button" class="kace-event-log-sheet-close" aria-label="Cerrar">×</button></div><div class="kace-event-log-sheet-body"><div class="kace-event-log-empty">No hay eventos para mostrar.</div></div></aside></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-styleComponent formio-component-style_component  formio-component-label-hidden" id="ej8jtr">
+  
+  <style ref="ej8jtr">.my-editgrid table { <br>  table-layout: fixed; <br>  width: 100%; <br>  border-collapse: collapse; /* Opcional: para bordes más limpios */<br>}<br><br>/* Estilos para las columnas de una sola línea */<br>.fixed-col-nowrap {<br>  overflow: hidden;<br>  text-overflow: ellipsis;<br>  white-space: nowrap;<br>  padding: 8px;<br>  vertical-align: top; <br>}<br><br>/* Estilos para la columna de OBSERVACIÓN (multilínea completa) */<br>.fixed-col-wrap {<br>  width: 40%; <br>  white-space: normal; /* Permite el salto de línea */<br>  overflow-wrap: break-word; <br>  word-break: break-all; <br>  padding: 8px;<br>  vertical-align: top; <br>}</style>
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-editgrid formio-component-documentacion_cnm_asistencia_movilidad my-editgrid formio-component-label-hidden" id="e0gev7g">
+  
+  
+
+
+
+<div class="editgrid-table-container">
+  <div class="table-responsive">
+    <table class="table">
+      
+      <thead class="editgrid-table-head">
+        <tr>
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Persona de gestión
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Radicado de la queja
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Genera queja
+      </td>
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-wrap">
+        Observación
+      </td>
+    
+  
+    
+  
+    
+      <td class="editgrid-table-column fixed-col-nowrap">
+        Fecha modificación
+      </td>
+    
+  
+    
+  
+    
+  
+  
+    <td class="editgrid-table-column">Acciones</td>
+  
+</tr>
+
+
+      </thead>
+      
+      <tbody class="editgrid-table-body">
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+<button ref="editgrid-documentacion_cnm_asistencia_movilidad-addRow" class="btn btn-primary">
+  <i class="fa fa-plus"></i>
+  Crear
+</button>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_subcases formio-component-kaceSubcases  formio-component-label-hidden" id="eps4tbj">
+  
+  
+
+
+
+<div id="kace_subcases-eps4tbj"><div class=""><div class="kace-subcases-edit-root"><div class="text-right"><button type="button" class="btn btn-primary"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Crear Tarea</button></div><div class="mt-3"><div class="card  "><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><div class="d-flex align-items-center gap-3"><div class="d-flex align-items-center gap-2"><span class="text-muted small">Items por página:</span><select class="form-select form-select-sm" style="width: auto;"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select></div><span class="text-muted small">0 - 0 de 0</span></div><div class="d-flex gap-1"><button class="btn btn-sm btn-outline-secondary" disabled="" title="Primera página"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button><button class="btn btn-sm btn-outline-secondary" disabled="" title="Página anterior"><i class="fa fa-angle-left" aria-hidden="true"></i></button><span class="btn btn-sm btn-outline-secondary" style="cursor: default;">1 / 1</span><button class="btn btn-sm btn-outline-secondary" disabled="" title="Página siguiente"><i class="fa fa-angle-right" aria-hidden="true"></i></button><button class="btn btn-sm btn-outline-secondary" disabled="" title="Última página"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div></div><div class="data-table__scroll-wrap table-responsive"><table class="table table-hover table-sm data-table__table data-table__table--compact"><thead class="table-light"><tr><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Tipo de tarea</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Asignado a</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Estado</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Fecha actualización</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th style="width: 120px;">Acciones</th></tr></thead><tbody><tr><td colspan="5" class="text-center text-muted py-4">No hay subcasos disponibles</td></tr></tbody></table></div></div></div></div></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+  <div ref="tab-tabs1" style="display: none" class="card-body tab-pane" role="tabpanel">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-kace_subcases formio-component-kaceSubcases1  formio-component-label-hidden" id="e1sb4wa">
+  
+  
+
+
+
+<div id="kace_subcases-e1sb4wa"><div class=""><div class="kace-subcases-edit-root"><div class="text-right"><button type="button" class="btn btn-primary"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Crear Cierre de expediente</button></div><div class="mt-3"><div class="card  "><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><div class="d-flex align-items-center gap-3"><div class="d-flex align-items-center gap-2"><span class="text-muted small">Items por página:</span><select class="form-select form-select-sm" style="width: auto;"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select></div><span class="text-muted small">0 - 0 de 0</span></div><div class="d-flex gap-1"><button class="btn btn-sm btn-outline-secondary" disabled="" title="Primera página"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button><button class="btn btn-sm btn-outline-secondary" disabled="" title="Página anterior"><i class="fa fa-angle-left" aria-hidden="true"></i></button><span class="btn btn-sm btn-outline-secondary" style="cursor: default;">1 / 1</span><button class="btn btn-sm btn-outline-secondary" disabled="" title="Página siguiente"><i class="fa fa-angle-right" aria-hidden="true"></i></button><button class="btn btn-sm btn-outline-secondary" disabled="" title="Última página"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div></div><div class="data-table__scroll-wrap table-responsive"><table class="table table-hover table-sm data-table__table data-table__table--compact"><thead class="table-light"><tr><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Clasificación</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Estado del cierre</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Asignado a</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th class="data-table__th--resizable" style="text-align: left; cursor: default;"><div class="d-flex align-items-center gap-2">Fecha de ultima modificación</div><span class="data-table__col-resize-handle" role="separator" aria-orientation="vertical" aria-label="Arrastrar para ancho; doble clic para ajustar al contenido" title="Arrastrar para cambiar ancho. Doble clic: ajustar al contenido" tabindex="0"></span></th><th style="width: 120px;">Acciones</th></tr></thead><tbody><tr><td colspan="5" class="text-center text-muted py-4">No hay subcasos disponibles</td></tr></tbody></table></div></div></div></div></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+</div></div></div></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_description formio-component-kaceDescription  formio-component-label-hidden formio-hidden" id="eg74vbv">
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_attachment formio-component-kaceAttachment  formio-component-label-hidden" id="emh50ta">
+  
+  
+
+
+
+<div id="kace_attachment-emh50ta"></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_custom_submit formio-component-kaceCustomSubmit1  form-group" id="e3bhm6i">
+  
+  
+
+
+
+<button lang="en" class="btn btn-info btn-md kace-floating-submit" type="submit" name="data[kaceCustomSubmit1]" ref="button">
+
+Guardar
+
+
+</button>
+<div ref="buttonMessageContainer">
+  <span ref="buttonMessage" class="help-block"></span>
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+</div></div>
