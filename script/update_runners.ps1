@@ -10,7 +10,7 @@ for ($i = 3; $i -le 50; $i++) {
         $content = @"
 package com.sara.automation.runners;
 
-import com.sara.automation.utils.RunnerContext;
+import utils.com.natura.automation.RunnerContext;
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 import org.junit.runner.RunWith;

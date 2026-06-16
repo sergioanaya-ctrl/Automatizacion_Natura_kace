@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: sara3:latest
-    container_name: sara3-batch-tests
+    container_name: Natura-batch-tests
     
     # Variables de entorno
     environment:

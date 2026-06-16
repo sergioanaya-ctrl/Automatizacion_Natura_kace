@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# SARA3 - AUTOMATED 8-PARALLEL BATCH TEST EXECUTOR
+# Natura - AUTOMATED 8-PARALLEL BATCH TEST EXECUTOR
 # Ejecuta 8 tests en paralelo y genera reportes CSV
 # Diseñado para tareas programadas (cron/scheduler)
 # ============================================================
