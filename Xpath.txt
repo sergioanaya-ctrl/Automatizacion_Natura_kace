@@ -1,0 +1,1314 @@
+<div id="render-container"><div id="render-formio"><div ref="component" class="formio-component formio-component-form  formio-component-label-hidden" id="e0t9yol">
+  
+  
+
+
+
+<div novalidate="" ref="webform" class="formio-form"><div ref="component" class="form-group formio-component formio-component-fieldset formio-component-hiddenSet" id="ee28ec7">
+  
+  <fieldset>
+  
+  
+  <div ref="nested-hiddenSet" class="fieldset-body">
+    <div ref="component" class="form-group has-feedback formio-component formio-component-auth formio-component-auth  formio-component-label-hidden" id="egajtaqd">
+  
+  
+
+
+
+<div id="auth-egajtaqd"></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-events  formio-component-label-hidden" id="eujt3u">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eujt3u-events" id="eujt3u-events" value="" lang="en" class="form-control" type="hidden" name="data[events]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-client  formio-component-label-hidden" id="ex0h134">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ex0h134-client" id="ex0h134-client" value="" lang="en" class="form-control" type="hidden" name="data[client]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-hidden formio-component-aux_client  formio-component-label-hidden" id="eyvsm3i">
+  
+  
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eyvsm3i-aux_client" id="eyvsm3i-aux_client" value="" lang="en" class="form-control" type="hidden" name="data[aux_client]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<style ref="html" class="formio-component-htmlelement">undefined
+.test {
+  display: none !important;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0rem !important;
+}
+
+.swal2-checkbox {
+  display: none !important;
+}
+
+.boton-flotante {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  width: 140px;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+:root {
+  --primary: #06b6d4;
+  --primary-soft: #e0f2fe;
+  --bg: #f5f7fb;
+}
+
+body {
+  background: var(--bg);
+  padding: 1rem;
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.row [class^="col-md-"] {
+  margin-bottom: 0.25rem;
+}
+
+/* Inputs y labels compactos */
+.formio-component-kace_schema > label {
+	font-size: 1rem;
+	font-weight: 700 !important;
+}
+
+label {
+  display: unset !important;
+}
+
+.col-form-label,
+.font-weight-medium {
+  margin-bottom: 0.1rem;
+  font-size: 0.8rem;
+  padding-bottom: 0.1rem;
+}
+
+.form-control,
+.os-dropdown-control {
+  border-radius: 6px !important;
+  border-color: #d1d5db;
+  padding: 0.25rem 0.5rem;
+  height: 32px;
+  font-size: 0.9rem;
+}
+
+.form-control:focus,
+.os-dropdown-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.3);
+}
+
+/* Botones */
+button {
+  margin: 0.1rem;
+}
+
+button.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+}</style>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_hidden formio-component-loadClientData  formio-component-label-hidden" id="emmml7n">
+  
+  
+
+
+
+<div id="kace_hidden-emmml7n"></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+</fieldset>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-button formio-component-nuevoCliente1 text-right boton-flotante formio-hidden form-group" id="e38jytk">
+  
+</div>
+<div ref="component" class="formio-component formio-component-tabs formio-component-tabs" id="e12oxad">
+  
+  <div class="card">
+  <div class="card-header">
+    <ul role="tablist" class="nav nav-tabs card-header-tabs">
+      
+      <li ref="tabLi-tabs" role="tab" class="nav-item active">
+        <a ref="tabLink-tabs" href="#datosConsultoraCo" class="nav-link active">
+          Información Básica
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+  
+  <div ref="tab-tabs" style="display: block" class="card-body tab-pane active" role="tabpanel">
+    <div ref="component" class="row formio-component formio-component-columns formio-component-columns7  formio-component-label-hidden" id="e8vbrmu">
+  
+  
+
+
+
+
+<div ref="column-e8vbrmu" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_select formio-component-tipo_documento  required formio-modified" id="eflvhv">
+  
+  
+  <label id="l-eflvhv-tipo_documento" for="eflvhv-tipo_documento" class="col-form-label  field-required" ref="label">
+  Tipo Documento
+  
+  
+</label>
+
+
+
+
+
+<div class="choices form-group formio-choices" data-type="select-one" dir="ltr" tabindex="-1" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false"><div class="form-control ui fluid selection dropdown" tabindex="0" aria-invalid="false"><select aria-required="true" id="eflvhv-tipo_documento" lang="en" class="form-control choices__input" type="text" name="data[tipo_documento]" ref="selectContainer" dir="ltr" hidden="" tabindex="-1" data-choice="active"><option value="Cod Consul Col">&lt;span&gt;Cod Consul Col&lt;/span&gt;</option></select><div class="choices__list choices__list--single"><div class="choices__item choices__item--selectable" data-item="" data-id="2" data-value="Cod Consul Col" data-custom-properties="null" aria-selected="true" data-deletable=""><span>Cod Consul Col</span><button type="button" class="choices__button" aria-label="Remove item: 'Cod Consul Col'" data-button="">Remove item</button></div></div></div><div class="choices__list choices__list--dropdown" aria-expanded="false"><input type="text" class="choices__input choices__input--cloned" autocomplete="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" aria-label="false" placeholder="Type to search" aria-activedescendant="choices--eflvhv-tipo_documento-item-choice-1"><div class="choices__list" role="listbox"><div id="choices--eflvhv-tipo_documento-item-choice-1" class="choices__item choices__item--choice choices__item--selectable is-highlighted" role="option" data-choice="" data-id="1" data-value="CC" data-select-text="" data-choice-selectable="" aria-selected="true"><span>CC</span></div><div id="choices--eflvhv-tipo_documento-item-choice-2" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="2" data-value="CE" data-select-text="" data-choice-selectable=""><span>CE</span></div><div id="choices--eflvhv-tipo_documento-item-choice-3" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="3" data-value="Cod Consul" data-select-text="" data-choice-selectable=""><span>Cod Consul</span></div><div id="choices--eflvhv-tipo_documento-item-choice-4" class="choices__item choices__item--choice is-selected choices__item--selectable" role="option" data-choice="" data-id="4" data-value="Cod Consul Col" data-select-text="" data-choice-selectable=""><span>Cod Consul Col</span></div><div id="choices--eflvhv-tipo_documento-item-choice-5" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="5" data-value="Cod Consul UR" data-select-text="" data-choice-selectable=""><span>Cod Consul UR</span></div><div id="choices--eflvhv-tipo_documento-item-choice-6" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="6" data-value="NIT" data-select-text="" data-choice-selectable=""><span>NIT</span></div><div id="choices--eflvhv-tipo_documento-item-choice-7" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="7" data-value="PPT" data-select-text="" data-choice-selectable=""><span>PPT</span></div></div></div></div>
+<input aria-label="autocomplete" tabindex="-1" ref="autocompleteInput" class="formio-select-autocomplete-input" type="text">
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-e8vbrmu" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-documento  required" id="e1d7bu">
+  
+  
+  <label id="l-e1d7bu-documento" for="e1d7bu-documento" class="col-form-label  field-required" ref="label">
+  Código Consultor
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-e1d7bu-documento" id="e1d7bu-documento" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[documento]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-e8vbrmu" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-campos_extra1" id="eeszf3d">
+  
+  
+  <label id="l-eeszf3d-campos_extra1" for="eeszf3d-campos_extra1" class="col-form-label" ref="label">
+  Número Identificación
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eeszf3d-campos_extra1" id="eeszf3d-campos_extra1" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[campos_extra1]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="row formio-component formio-component-columns formio-component-columns8  formio-component-label-hidden" id="eau82rc">
+  
+  
+
+
+
+
+<div ref="column-eau82rc" class="col-md-8
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-nombres  required" id="etf2nwk">
+  
+  
+  <label id="l-etf2nwk-nombres" for="etf2nwk-nombres" class="col-form-label  field-required" ref="label">
+  Nombres
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-etf2nwk-nombres" id="etf2nwk-nombres" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[nombres]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-eau82rc" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-telefono  required" id="elp7iwon">
+  
+  
+  <label id="l-elp7iwon-telefono" for="elp7iwon-telefono" class="col-form-label  field-required" ref="label">
+  Celular
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-elp7iwon-telefono" id="elp7iwon-telefono" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[telefono]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="row formio-component formio-component-columns formio-component-columns  formio-component-label-hidden" id="ewzzseq">
+  
+  
+
+
+
+
+<div ref="column-ewzzseq" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-email  required" id="e7mksy">
+  
+  
+  <label id="l-e7mksy-email" for="e7mksy-email" class="col-form-label  field-required" ref="label">
+  Correo
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="true" aria-labelledby="l-e7mksy-email" id="e7mksy-email" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[email]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-gerencia" id="eu4yd53">
+  
+  
+  <label id="l-eu4yd53-gerencia" for="eu4yd53-gerencia" class="col-form-label" ref="label">
+  Gerencia
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eu4yd53-gerencia" id="eu4yd53-gerencia" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[gerencia]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-limite_credito_total" id="e23dnca">
+  
+  
+  <label id="l-e23dnca-limite_credito_total" for="e23dnca-limite_credito_total" class="col-form-label" ref="label">
+  Limite Crédito Total
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e23dnca-limite_credito_total" id="e23dnca-limite_credito_total" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[limite_credito_total]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_select formio-component-perfil" id="e9exv6o">
+  
+  
+  <label id="l-e9exv6o-perfil" for="e9exv6o-perfil" class="col-form-label" ref="label">
+  Perfil
+  
+  
+</label>
+
+
+
+
+
+<div class="choices form-group formio-choices" data-type="select-one" dir="ltr" tabindex="-1" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false"><div class="form-control ui fluid selection dropdown" tabindex="0" aria-invalid="false"><select aria-required="false" id="e9exv6o-perfil" lang="en" class="form-control choices__input" type="text" name="data[perfil]" ref="selectContainer" dir="ltr" hidden="" tabindex="-1" data-choice="active"></select><div class="choices__list choices__list--single"></div></div><div class="choices__list choices__list--dropdown" aria-expanded="false"><input type="text" class="choices__input choices__input--cloned" autocomplete="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" aria-label="false" placeholder="Type to search"><div class="choices__list" role="listbox"><div id="choices--e9exv6o-perfil-item-choice-1" class="choices__item choices__item--choice choices__item--selectable is-highlighted" role="option" data-choice="" data-id="1" data-value="CB" data-select-text="" data-choice-selectable="" aria-selected="true"><span>CB</span></div><div id="choices--e9exv6o-perfil-item-choice-2" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="2" data-value="LN" data-select-text="" data-choice-selectable=""><span>LN</span></div><div id="choices--e9exv6o-perfil-item-choice-3" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="3" data-value="GV" data-select-text="" data-choice-selectable=""><span>GV</span></div><div id="choices--e9exv6o-perfil-item-choice-4" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="4" data-value="GN" data-select-text="" data-choice-selectable=""><span>GN</span></div><div id="choices--e9exv6o-perfil-item-choice-5" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="5" data-value="CF" data-select-text="" data-choice-selectable=""><span>CF</span></div><div id="choices--e9exv6o-perfil-item-choice-6" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="6" data-value="CBD" data-select-text="" data-choice-selectable=""><span>CBD</span></div></div></div></div>
+<input aria-label="autocomplete" tabindex="-1" ref="autocompleteInput" class="formio-select-autocomplete-input" type="text">
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-puntos_actuales" id="eekqx6m">
+  
+  
+  <label id="l-eekqx6m-puntos_actuales" for="eekqx6m-puntos_actuales" class="col-form-label" ref="label">
+  Puntos Actuales
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-eekqx6m-puntos_actuales" id="eekqx6m-puntos_actuales" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[puntos_actuales]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-ciclo_ultimo_pedido" id="efadpao">
+  
+  
+  <label id="l-efadpao-ciclo_ultimo_pedido" for="efadpao-ciclo_ultimo_pedido" class="col-form-label" ref="label">
+  Ciclo Último Pedido
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-efadpao-ciclo_ultimo_pedido" id="efadpao-ciclo_ultimo_pedido" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[ciclo_ultimo_pedido]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-nombre_lider" id="epmkwhl">
+  
+  
+  <label id="l-epmkwhl-nombre_lider" for="epmkwhl-nombre_lider" class="col-form-label" ref="label">
+  Nombre Lider
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-epmkwhl-nombre_lider" id="epmkwhl-nombre_lider" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[nombre_lider]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-ewzzseq" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_calendar formio-component-fecha_nacimiento" id="eobyjb">
+  
+  
+  <label id="l-eobyjb-fecha_nacimiento" for="eobyjb-fecha_nacimiento" class="col-form-label" ref="label">
+  Fecha Nacimiento
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+<div class="input-group">
+  
+  
+  
+    <input aria-required="false" aria-labelledby="l-eobyjb-fecha_nacimiento" id="eobyjb-fecha_nacimiento" value="" placeholder="DD/MM/YYYY" lang="en" class="form-control flatpickr-input" type="hidden" name="data[fecha_nacimiento]" ref="input" aria-invalid="false"><input class="form-control form-control input" placeholder="DD/MM/YYYY" tabindex="0" type="text" aria-invalid="false">
+    
+
+
+
+
+  <div ref="suffix" class="input-group-append">
+    <span class="input-group-text">
+      
+        <i style="" class="fa fa-calendar" ref="icon"></i>
+      
+    </span>
+  </div>
+
+
+  </div>
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-email_alterno" id="ef5u8wr">
+  
+  
+  <label id="l-ef5u8wr-email_alterno" for="ef5u8wr-email_alterno" class="col-form-label" ref="label">
+  Correo Gerente
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ef5u8wr-email_alterno" id="ef5u8wr-email_alterno" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[email_alterno]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-limite_credito_utilizado" id="e0ue5n">
+  
+  
+  <label id="l-e0ue5n-limite_credito_utilizado" for="e0ue5n-limite_credito_utilizado" class="col-form-label" ref="label">
+  Limite Crédito Utilizado
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e0ue5n-limite_credito_utilizado" id="e0ue5n-limite_credito_utilizado" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[limite_credito_utilizado]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-camino_crecimiento" id="e0kn1s">
+  
+  
+  <label id="l-e0kn1s-camino_crecimiento" for="e0kn1s-camino_crecimiento" class="col-form-label" ref="label">
+  Camino de Crecimiento
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e0kn1s-camino_crecimiento" id="e0kn1s-camino_crecimiento" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[camino_crecimiento]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-puntos_subir_nivel" id="efcjzcyh">
+  
+  
+  <label id="l-efcjzcyh-puntos_subir_nivel" for="efcjzcyh-puntos_subir_nivel" class="col-form-label" ref="label">
+  Puntos Subir Nivel
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-efcjzcyh-puntos_subir_nivel" id="efcjzcyh-puntos_subir_nivel" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[puntos_subir_nivel]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-numero_ultimo_pedido" id="ejwiiig">
+  
+  
+  <label id="l-ejwiiig-numero_ultimo_pedido" for="ejwiiig-numero_ultimo_pedido" class="col-form-label" ref="label">
+  Número Último Pedido
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ejwiiig-numero_ultimo_pedido" id="ejwiiig-numero_ultimo_pedido" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[numero_ultimo_pedido]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-telefono_lider" id="ec8vc2">
+  
+  
+  <label id="l-ec8vc2-telefono_lider" for="ec8vc2-telefono_lider" class="col-form-label" ref="label">
+  Teléfono Lider
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ec8vc2-telefono_lider" id="ec8vc2-telefono_lider" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[telefono_lider]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-ewzzseq" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-direccion_entrega" id="e3wphc6">
+  
+  
+  <label id="l-e3wphc6-direccion_entrega" for="e3wphc6-direccion_entrega" class="col-form-label" ref="label">
+  Dirección Entrega
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e3wphc6-direccion_entrega" id="e3wphc6-direccion_entrega" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[direccion_entrega]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-sector" id="emzk1c8">
+  
+  
+  <label id="l-emzk1c8-sector" for="emzk1c8-sector" class="col-form-label" ref="label">
+  Sector
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-emzk1c8-sector" id="emzk1c8-sector" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[sector]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-credito_disponible" id="er6ul5k">
+  
+  
+  <label id="l-er6ul5k-credito_disponible" for="er6ul5k-credito_disponible" class="col-form-label" ref="label">
+  Crédito Disponible
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-er6ul5k-credito_disponible" id="er6ul5k-credito_disponible" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[credito_disponible]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-credito_pendiente_usar" id="enwl7xp">
+  
+  
+  <label id="l-enwl7xp-credito_pendiente_usar" for="enwl7xp-credito_pendiente_usar" class="col-form-label" ref="label">
+  Crédito Pendiente Usar
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-enwl7xp-credito_pendiente_usar" id="enwl7xp-credito_pendiente_usar" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[credito_pendiente_usar]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-siguiente_nivel" id="e4l0w78">
+  
+  
+  <label id="l-e4l0w78-siguiente_nivel" for="e4l0w78-siguiente_nivel" class="col-form-label" ref="label">
+  Siguiente Nivel
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e4l0w78-siguiente_nivel" id="e4l0w78-siguiente_nivel" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[siguiente_nivel]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-estado_ultimo_pedido" id="e86a6g">
+  
+  
+  <label id="l-e86a6g-estado_ultimo_pedido" for="e86a6g-estado_ultimo_pedido" class="col-form-label" ref="label">
+  Estado Último Pedido
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-e86a6g-estado_ultimo_pedido" id="e86a6g-estado_ultimo_pedido" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[estado_ultimo_pedido]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="form-group has-feedback formio-component formio-component-kace_text_field formio-component-codigo_grupo" id="ei2a7n">
+  
+  
+  <label id="l-ei2a7n-codigo_grupo" for="ei2a7n-codigo_grupo" class="col-form-label" ref="label">
+  Código Grupo
+  
+  
+</label>
+
+
+
+
+
+<div ref="element">
+          
+  
+  
+    <input aria-required="false" aria-labelledby="l-ei2a7n-codigo_grupo" id="ei2a7n-codigo_grupo" value="" spellcheck="true" lang="en" class="form-control" type="text" name="data[codigo_grupo]" ref="input" aria-invalid="false">
+    
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+<div ref="component" class="row formio-component formio-component-columns formio-component-columns2  formio-component-label-hidden" id="e8rq2be">
+  
+  
+
+
+
+
+<div ref="column-e8rq2be" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-button formio-component-simu text-center formio-hidden form-group" id="eoaum0c">
+  
+</div>
+
+
+</div>
+
+<div ref="column-e8rq2be" class="col-md-2
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-button formio-component-crearActualizarCliente text-center form-group" id="en6kbo">
+  
+  
+
+
+
+<button lang="en" class="btn btn-info btn-md text-center" type="button" name="data[crearActualizarCliente]" ref="button">
+<span class="fa fa-save"></span>&nbsp;
+Crear Cliente
+
+
+</button>
+<div ref="buttonMessageContainer">
+  <span ref="buttonMessage" class="help-block"></span>
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+</div>
+
+<div ref="column-e8rq2be" class="col-md-2
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  <div ref="component" class="form-group has-feedback formio-component formio-component-button formio-component-nuevoCliente text-center formio-hidden form-group" id="ewpvq6i">
+  
+</div>
+
+
+</div>
+
+<div ref="column-e8rq2be" class="col-md-4
+    col-md-offset-0
+    col-md-push-0
+    col-md-pull-0">
+  
+
+</div>
+
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+
+</div>
+
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>
+</div></div>

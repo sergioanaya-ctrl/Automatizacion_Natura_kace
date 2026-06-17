@@ -42,13 +42,13 @@ public class GoToAgentPage implements Task {
             return len != null && !len.toString().equals("0");
         });
 
-        // 3) Esperar a que aparezca algún elemento de menú o navegación
+        // 3) Esperar a que el iframe del formulario esté presente (lo que se usa a continuación).
+        //    Antes se esperaba 60s por un menú que no existe en esta pantalla.
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.cssSelector("[role='menuitem'], [role='navigation'], .menu-item, nav, .sidebar")));
-            System.out.println("[GoToAgentPage] Menú visible OK");
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form_onescript_iframe")));
+            System.out.println("[GoToAgentPage] Iframe del formulario presente OK");
         } catch (Exception e) {
-            System.out.println("[GoToAgentPage] No se encontró menú con selectores estándar — continuando");
+            System.out.println("[GoToAgentPage] Iframe no detectado aún — continuando (lo reintenta EjecutarCrearCliente)");
         }
     }
 }
