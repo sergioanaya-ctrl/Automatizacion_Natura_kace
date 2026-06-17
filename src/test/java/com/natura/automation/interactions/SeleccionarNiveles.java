@@ -51,6 +51,14 @@ public class SeleccionarNiveles implements Interaction {
     //   "CAPTACION DE PEDIDOS", "DESPACHO Y ENTREGA DE PEDIDO", "ENTRENAMIENTO Y HERRAMIENTAS",
     //   "IMPRODUCTIVO", "PAGO DE PEDIDO", "RITUALES Y EVENTOS", "SERVICIO POST-VENTA"
 
+    // Opciones (en cualquier nivel) que NO se deben seleccionar porque abren formularios extra
+    // obligatorios aún no soportados (Datos NC, Datos Transportadora, etc.). Se comparan
+    // case-insensitive contra el texto de la opción. Agregar aquí las que el reporte muestre como fallidas.
+    private static final List<String> OPCIONES_EXCLUIDAS = Arrays.asList(
+            "DESPACHO Y ENTREGA DE PEDIDO"   // -> RECLAMO/RECLAMO TRANSPORTE abre "Datos NC" / "Datos Transportadora"
+            // , "OTRA OPCION QUE FALLE"
+    );
+
     public static Performable aleatorios() {
         return instrumented(SeleccionarNiveles.class);
     }
@@ -85,10 +93,13 @@ public class SeleccionarNiveles implements Interaction {
         }
     }
 
-    /** Valores preferidos por nivel (vacío = cualquier opción al azar). */
+    /**
+     * Valores preferidos por nivel (vacío = cualquier opción al azar).
+     * Actualmente TODOS los niveles eligen al azar (N3 a N6) para variar las ramas y probar
+     * la máquina de estados con distintas clasificaciones.
+     * Para acotar de nuevo a ramas confirmadas, devolver NIVEL3_CONFIRMADOS / NIVEL4_PREFERIDO.
+     */
     private List<String> preferidosDe(int nivel) {
-        if (nivel == 3) return NIVEL3_CONFIRMADOS;
-        if (nivel == 4) return NIVEL4_PREFERIDO;
         return Collections.emptyList();
     }
 
@@ -124,10 +135,20 @@ public class SeleccionarNiveles implements Interaction {
                     .collect(Collectors.toList());
             if (items.isEmpty()) return false;
 
-            // Filtrar a los preferidos si hay alguno presente.
-            List<WebElement> candidatos = items;
+            // Excluir opciones que abren formularios extra no soportados (lista negra).
+            List<WebElement> base = items.stream()
+                    .filter(it -> OPCIONES_EXCLUIDAS.stream()
+                            .noneMatch(ex -> it.getText().trim().equalsIgnoreCase(ex)))
+                    .collect(Collectors.toList());
+            if (base.isEmpty()) {
+                System.err.println("  [Niveles] Nivel " + nivel + ": todas las opciones están excluidas — se elige igualmente.");
+                base = items;
+            }
+
+            // Filtrar a los preferidos si hay alguno presente (sobre las opciones no excluidas).
+            List<WebElement> candidatos = base;
             if (!preferidos.isEmpty()) {
-                List<WebElement> filtrados = items.stream()
+                List<WebElement> filtrados = base.stream()
                         .filter(it -> preferidos.stream().anyMatch(p -> it.getText().trim().equalsIgnoreCase(p)))
                         .collect(Collectors.toList());
                 if (!filtrados.isEmpty()) {

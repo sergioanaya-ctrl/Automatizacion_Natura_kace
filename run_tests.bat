@@ -212,7 +212,7 @@ if %runner% LSS 10 (
 )
 
 powershell -Command "(Get-Content gradle.properties) -replace '^maxParallelForks=.*', 'maxParallelForks=1' | Set-Content gradle.properties"
-call .\gradlew.bat test --tests "com.sara.automation.runners.CasesRunner%runner_formatted%"
+call .\gradlew.bat test --tests "com.natura.automation.runners.ClienteRunner%runner_formatted%"
 echo.
 echo [INFO] Ejecucion completada del runner individual.
 echo.
@@ -327,9 +327,9 @@ for /l %%i in (1,1,50) do (
         powershell -Command "(Get-Content gradle.properties) -replace '^maxParallelForks=.*', 'maxParallelForks=1' | Set-Content gradle.properties"
         echo.
         echo [INFO] Ejecutando SCENARIO %batch_num% SIN PARALELO...
-        echo [INFO] Usando runner: CasesRunner%batch_num_formatted%
+        echo [INFO] Usando runner: ClienteRunner%batch_num_formatted%
         echo.
-        call .\gradlew.bat test --tests "com.sara.automation.runners.CasesRunner%batch_num_formatted%" -Dgeb.env=chrome
+        call .\gradlew.bat test --tests "com.natura.automation.runners.ClienteRunner%batch_num_formatted%" -Dgeb.env=chrome
         echo.
         echo [INFO] Ejecucion completada del scenario %batch_num%
         echo.

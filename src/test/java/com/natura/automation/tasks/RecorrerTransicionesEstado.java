@@ -34,9 +34,12 @@ public class RecorrerTransicionesEstado implements Task {
     private static final By ESTADOS_DISPONIBLES = By.cssSelector(
             ".formio-component-kaceStates .states__content button.btn-outline-secondary");
 
-    // Estados que finalizan el flujo: se eligen solo cuando no hay otra opción.
+    // Orden de prioridad: si aparecen disponibles, se eligen en este orden.
+    // EN GESTION lleva a SOLUCIONADO; SOLUCIONADO es el estado final.
+    private static final List<String> PRIORITARIOS = Arrays.asList("EN GESTION", "SOLUCIONADO");
+    // Estados que finalizan el flujo.
     private static final List<String> TERMINALES = Arrays.asList("SOLUCIONADO");
-    private static final int MAX_TRANSICIONES = 8; // tope de seguridad
+    private static final int MAX_TRANSICIONES = 10; // tope de seguridad
 
     public static Performable hastaFinalizar() {
         return instrumented(RecorrerTransicionesEstado.class);
@@ -46,6 +49,7 @@ public class RecorrerTransicionesEstado implements Task {
     @Step("Recorrer las transiciones de estado del caso hasta finalizar")
     public <T extends Actor> void performAs(T actor) {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
+        java.util.Set<String> visitados = new java.util.HashSet<>();
 
         for (int i = 1; i <= MAX_TRANSICIONES; i++) {
             entrarIframe(driver);
@@ -60,22 +64,63 @@ public class RecorrerTransicionesEstado implements Task {
                 return;
             }
 
-            // Preferir un estado NO terminal; usar el terminal solo si es el único.
-            WebElement elegido = disponibles.stream()
-                    .filter(b -> TERMINALES.stream().noneMatch(t -> b.getText().trim().equalsIgnoreCase(t)))
-                    .findFirst()
-                    .orElse(disponibles.get(0));
+            System.out.println("[Estados] Disponibles: " + disponibles.stream()
+                    .map(b -> b.getText().trim()).collect(Collectors.toList()));
+
+            WebElement elegido = elegirEstado(disponibles, visitados);
+            if (elegido == null) {
+                System.err.println("[Estados] Solo quedan estados ya visitados " + visitados +
+                        " — se detiene para evitar el bucle ESCALADO BO <-> ESCALADO NATURA.");
+                driver.switchTo().defaultContent();
+                return;
+            }
 
             String estado = elegido.getText().trim();
+            visitados.add(estado.toLowerCase());
             scrollToCenter(driver, elegido);
             clickRobusto(driver, elegido);
             System.out.println("[Estados] Transición " + i + " -> " + estado);
 
             driver.switchTo().defaultContent();
             actor.attemptsTo(GuardarCaso.ahora()); // clic en Guardar + espera de recarga
+
+            if (esTerminal(estado)) {
+                System.out.println("[Estados] Estado final '" + estado + "' alcanzado — flujo de estados finalizado.");
+                return;
+            }
         }
         System.err.println("[Estados] Se alcanzó el tope de " + MAX_TRANSICIONES + " transiciones — revisar el flujo.");
         driver.switchTo().defaultContent();
+    }
+
+    /**
+     * Elige el siguiente estado:
+     *   1) el prioritario de mayor orden disponible (EN GESTION, luego SOLUCIONADO);
+     *   2) si no hay prioritarios, el primer disponible NO visitado y NO terminal (avanza sin volver atrás);
+     *   3) si no, el primer disponible NO visitado;
+     *   4) si todos están visitados, devuelve null (evita oscilar entre ESCALADO BO/NATURA).
+     */
+    private WebElement elegirEstado(List<WebElement> disponibles, java.util.Set<String> visitados) {
+        for (String prioritario : PRIORITARIOS) {
+            for (WebElement b : disponibles) {
+                if (b.getText().trim().equalsIgnoreCase(prioritario)) {
+                    return b;
+                }
+            }
+        }
+        WebElement noVisitadoNoTerminal = disponibles.stream()
+                .filter(b -> !visitados.contains(b.getText().trim().toLowerCase()))
+                .filter(b -> !esTerminal(b.getText().trim()))
+                .findFirst().orElse(null);
+        if (noVisitadoNoTerminal != null) return noVisitadoNoTerminal;
+
+        return disponibles.stream()
+                .filter(b -> !visitados.contains(b.getText().trim().toLowerCase()))
+                .findFirst().orElse(null);
+    }
+
+    private boolean esTerminal(String estado) {
+        return TERMINALES.stream().anyMatch(t -> t.equalsIgnoreCase(estado));
     }
 
     private void entrarIframe(WebDriver driver) {
