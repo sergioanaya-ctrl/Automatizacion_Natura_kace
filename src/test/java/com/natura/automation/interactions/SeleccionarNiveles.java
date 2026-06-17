@@ -54,10 +54,10 @@ public class SeleccionarNiveles implements Interaction {
     // Opciones (en cualquier nivel) que NO se deben seleccionar porque abren formularios extra
     // obligatorios aún no soportados (Datos NC, Datos Transportadora, etc.). Se comparan
     // case-insensitive contra el texto de la opción. Agregar aquí las que el reporte muestre como fallidas.
-    private static final List<String> OPCIONES_EXCLUIDAS = Arrays.asList(
-            "DESPACHO Y ENTREGA DE PEDIDO"   // -> RECLAMO/RECLAMO TRANSPORTE abre "Datos NC" / "Datos Transportadora"
-            // , "OTRA OPCION QUE FALLE"
-    );
+    // Ya no se excluyen ramas: el formulario "Datos NC" se llena condicionalmente
+    // (ver LlenarFormularioNC). Si algún otro formulario extra bloqueara el guardado,
+    // se puede volver a agregar aquí su opción de nivel.
+    private static final List<String> OPCIONES_EXCLUIDAS = java.util.Collections.emptyList();
 
     public static Performable aleatorios() {
         return instrumented(SeleccionarNiveles.class);

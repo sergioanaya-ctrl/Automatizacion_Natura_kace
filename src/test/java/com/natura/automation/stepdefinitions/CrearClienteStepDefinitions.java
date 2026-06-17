@@ -4,6 +4,7 @@ import com.natura.automation.tasks.EjecutarCrearCaso;
 import com.natura.automation.tasks.EjecutarCrearCliente;
 import com.natura.automation.tasks.EjecutarDescripcionCaso;
 import com.natura.automation.tasks.EjecutarNiveles;
+import com.natura.automation.tasks.LlenarFormularioNC;
 import com.natura.automation.tasks.RecorrerTransicionesEstado;
 import com.natura.automation.tasks.ValidarCasoGuardado;
 import com.natura.automation.tasks.ValidarClienteCreado;
@@ -50,6 +51,11 @@ public class CrearClienteStepDefinitions {
     @Cuando("diligencia la descripcion del caso")
     public void diligenciaLaDescripcionDelCaso() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarDescripcionCaso.diligenciar());
+    }
+
+    @Cuando("diligencia el formulario NC si aplica")
+    public void diligenciaElFormularioNcSiAplica() {
+        OnStage.theActorInTheSpotlight().attemptsTo(LlenarFormularioNC.siAplica());
     }
 
     @Cuando("recorre las transiciones de estado del caso")

@@ -11,6 +11,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -25,6 +26,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -39,6 +41,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -53,6 +56,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -67,6 +71,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -81,6 +86,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -95,6 +101,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -109,6 +116,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -123,6 +131,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -137,6 +146,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -151,6 +161,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -165,6 +176,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -179,6 +191,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -193,6 +206,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -207,6 +221,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -221,6 +236,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -235,6 +251,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -249,6 +266,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -263,6 +281,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
 
@@ -277,5 +296,6 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia el formulario NC si aplica
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
