@@ -9,6 +9,7 @@ Feature: Creacion de Clientes en Natura
     And diligencia el formulario crear cliente con datos aleatorios
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
+    And selecciona los niveles de clasificacion
 
   @cliente2
   Scenario: Crear Cliente 02 - Datos Aleatorios

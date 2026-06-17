@@ -1,0 +1,14 @@
+<div ref="component" class="form-group has-feedback formio-component formio-component-classification_id formio-component-classificationId  formio-component-label-hidden" id="en91ch9">
+  
+  
+
+
+
+<div id="classification_id-en91ch9"><div class="card shadow-sm "><div class="card-body p-4"><h1 class="h3 font-weight-bold mb-2">Clasificaciones</h1><p class="text-muted mb-4">Seleccione un nivel de clasificación para ver los estados disponibles.</p><div class="overflow-auto classifications-levels" style="min-height: 3rem;"><div><div class="form-group classifications-dropdown-wrap"><label class="font-weight-medium">Nivel 1</label><div class="form-control classifications-dropdown-control classifications-dropdown-control--disabled">COLOMBIA</div></div><div><div class="form-group classifications-dropdown-wrap"><label class="font-weight-medium">Nivel 2</label><div class="form-control classifications-dropdown-control classifications-dropdown-control--disabled">CEN</div></div><div><div class="form-group classifications-dropdown-wrap"><label class="font-weight-medium">Nivel 3</label><div class="form-control classifications-dropdown-control" role="button" tabindex="0" aria-expanded="false" aria-haspopup="listbox"><span class="classifications-dropdown-control-label text-muted">Elige una opción</span><span class="classifications-dropdown-arrow" aria-hidden="true">▾</span></div></div></div></div></div></div></div></div></div>
+
+
+
+
+  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  
+</div>

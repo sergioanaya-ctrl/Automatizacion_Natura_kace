@@ -2,6 +2,7 @@ package com.natura.automation.stepdefinitions;
 
 import com.natura.automation.tasks.EjecutarCrearCaso;
 import com.natura.automation.tasks.EjecutarCrearCliente;
+import com.natura.automation.tasks.EjecutarNiveles;
 import com.natura.automation.tasks.ValidarClienteCreado;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.es.Cuando;
@@ -36,5 +37,10 @@ public class CrearClienteStepDefinitions {
     @Cuando("crea un nuevo caso")
     public void creaUnNuevoCaso() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarCrearCaso.nuevo());
+    }
+
+    @Cuando("selecciona los niveles de clasificacion")
+    public void seleccionaLosNivelesDeClasificacion() {
+        OnStage.theActorInTheSpotlight().attemptsTo(EjecutarNiveles.diligenciar());
     }
 }

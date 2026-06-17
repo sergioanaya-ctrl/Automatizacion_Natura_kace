@@ -25,7 +25,7 @@ public class FillCrearClienteForm implements Interaction {
 
     private static final Random RANDOM = new Random();
 
-    private static final String[] TIPOS_DOC  = {"CC", "CE", "Cod Consul", "Cod Consul Col", "Cod Consul UR", "NIT", "PPT"};
+    private static final String[] TIPOS_DOC  = {"CC"};
     private static final String[] PERFILES    = {"CB", "LN", "GV", "GN", "CF", "CBD"};
     private static final String[] NIVELES     = {"BRONCE", "PLATA", "ORO", "DIAMANTE", "ESMERALDA"};
     private static final String[] SECTORES    = {"SUR", "NORTE", "CENTRO", "ORIENTE", "OCCIDENTE"};
