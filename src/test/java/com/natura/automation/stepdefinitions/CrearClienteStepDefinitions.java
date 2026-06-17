@@ -2,7 +2,10 @@ package com.natura.automation.stepdefinitions;
 
 import com.natura.automation.tasks.EjecutarCrearCaso;
 import com.natura.automation.tasks.EjecutarCrearCliente;
+import com.natura.automation.tasks.EjecutarDescripcionCaso;
 import com.natura.automation.tasks.EjecutarNiveles;
+import com.natura.automation.tasks.RecorrerTransicionesEstado;
+import com.natura.automation.tasks.ValidarCasoGuardado;
 import com.natura.automation.tasks.ValidarClienteCreado;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.es.Cuando;
@@ -42,5 +45,20 @@ public class CrearClienteStepDefinitions {
     @Cuando("selecciona los niveles de clasificacion")
     public void seleccionaLosNivelesDeClasificacion() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarNiveles.diligenciar());
+    }
+
+    @Cuando("diligencia la descripcion del caso")
+    public void diligenciaLaDescripcionDelCaso() {
+        OnStage.theActorInTheSpotlight().attemptsTo(EjecutarDescripcionCaso.diligenciar());
+    }
+
+    @Cuando("recorre las transiciones de estado del caso")
+    public void recorreLasTransicionesDeEstadoDelCaso() {
+        OnStage.theActorInTheSpotlight().attemptsTo(RecorrerTransicionesEstado.hastaFinalizar());
+    }
+
+    @Entonces("se valida que el caso fue guardado correctamente")
+    public void seValidaQueElCasoFueGuardadoCorrectamente() {
+        OnStage.theActorInTheSpotlight().attemptsTo(ValidarCasoGuardado.ahora());
     }
 }
