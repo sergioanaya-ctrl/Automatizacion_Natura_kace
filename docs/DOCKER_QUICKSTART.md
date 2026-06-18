@@ -50,7 +50,7 @@ docker run -it --rm -v $(pwd)/reports:/app/target/reports sara3:latest ./run_tes
 ### **Test Individual**
 ```bash
 docker run --rm -v $(pwd)/reports:/app/target/reports sara3:latest \
-  bash -c "./gradlew test --tests 'com.sara.automation.runners.CasesRunner01'"
+  bash -c "./gradlew test --tests 'com.natura.automation.runners.CasesRunner01'"
 ```
 
 ### **Con Docker Compose**

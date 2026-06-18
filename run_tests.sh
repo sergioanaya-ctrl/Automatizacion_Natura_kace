@@ -152,7 +152,7 @@ run_one_runner() {
     sed -i "s/^maxParallelForks=.*/maxParallelForks=1/" gradle.properties
     
     echo -e "${BLUE}Ejecutando runner: CasesRunner$RUNNER_FORMATTED${NC}"
-    ./gradlew test --tests "com.sara.automation.runners.CasesRunner$RUNNER_FORMATTED"
+    ./gradlew test --tests "com.natura.automation.runners.CasesRunner$RUNNER_FORMATTED"
     
     echo ""
     echo -e "${GREEN}[INFO] Ejecucion completada del runner individual${NC}"
@@ -175,7 +175,7 @@ run_one_no_parallel() {
     sed -i "s/^maxParallelForks=.*/maxParallelForks=1/" gradle.properties
     
     echo -e "${BLUE}Ejecutando SCENARIO $BATCH_NUM SIN PARALELO...${NC}"
-    ./gradlew test --tests "com.sara.automation.runners.CasesRunner$BATCH_NUM_FORMATTED" -Dgeb.env=chrome
+    ./gradlew test --tests "com.natura.automation.runners.CasesRunner$BATCH_NUM_FORMATTED" -Dgeb.env=chrome
     
     echo ""
     echo -e "${GREEN}[INFO] Ejecucion completada del scenario $BATCH_NUM${NC}"

@@ -3,7 +3,7 @@ REM ============================================================================
 REM SCRIPT PARA EJECUTAR AUTOMATIZACIÓN SARA3 EN WINDOWS
 REM ============================================================================
 REM Uso: run-tests-windows.bat [runner_class]
-REM Ejemplo: run-tests-windows.bat com.sara.automation.runners.CasesRunner15
+REM Ejemplo: run-tests-windows.bat com.natura.automation.runners.CasesRunner15
 REM
 REM Este script es un wrapper para facilitar la ejecución en Windows
 REM ============================================================================
@@ -12,7 +12,7 @@ setlocal enabledelayedexpansion
 
 REM Configuración
 set RUNNER_CLASS=%1
-if "%RUNNER_CLASS%"=="" set RUNNER_CLASS=com.sara.automation.runners.CasesRunner15
+if "%RUNNER_CLASS%"=="" set RUNNER_CLASS=com.natura.automation.runners.CasesRunner15
 
 REM Información de sistema
 cls

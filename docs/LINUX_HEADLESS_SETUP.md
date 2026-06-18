@@ -118,7 +118,7 @@ chmod +x run_tests.sh
 ### **Opción 2: Ejecutar tests directamente con Gradle**
 ```bash
 # 1 test (debug)
-./gradlew test --tests "com.sara.automation.runners.CasesRunner01"
+./gradlew test --tests "com.natura.automation.runners.CasesRunner01"
 
 # 2 tests en paralelo
 sed -i 's/^maxParallelForks=.*/maxParallelForks=2/' gradle.properties
@@ -386,7 +386,7 @@ grep "headless" serenity.properties   # ✅ Configuración headless
 # Ejecutar test simple
 chmod +x ./gradlew
 chmod +x ./run_tests.sh
-./gradlew test --tests "com.sara.automation.runners.CasesRunner01"
+./gradlew test --tests "com.natura.automation.runners.CasesRunner01"
 ```
 
 ---

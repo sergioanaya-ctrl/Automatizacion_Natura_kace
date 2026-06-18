@@ -88,7 +88,7 @@ run_single_test() {
     docker run --rm \
         -v $(pwd)/reports:/app/target/reports \
         sara3:latest \
-        bash -c "./gradlew test --tests 'com.sara.automation.runners.CasesRunner$test_formatted'"
+        bash -c "./gradlew test --tests 'com.natura.automation.runners.CasesRunner$test_formatted'"
     
     echo -e "${GREEN}✓ Test completado${NC}"
 }

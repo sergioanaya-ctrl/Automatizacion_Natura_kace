@@ -33,10 +33,10 @@ chmod +x run-tests-linux.sh      # Hace el script ejecutable
 ./run-tests-linux.sh
 
 # O especifica un runner diferente:
-./run-tests-linux.sh "com.sara.automation.runners.CasesRunner15"
+./run-tests-linux.sh "com.natura.automation.runners.CasesRunner15"
 
 # Para todas las pruebas:
-./run-tests-linux.sh "com.sara.automation.runners.*"
+./run-tests-linux.sh "com.natura.automation.runners.*"
 ```
 
 **Ventajas:**
@@ -58,7 +58,7 @@ Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
 XVFB_PID=$!
 
 # Ejecuta los tests
-./gradlew clean test --tests "com.sara.automation.runners.CasesRunner15"
+./gradlew clean test --tests "com.natura.automation.runners.CasesRunner15"
 
 # Limpia
 kill $XVFB_PID

@@ -39,14 +39,14 @@
 # Ejecuta el test con Xvfb:
 # export DISPLAY=:99
 # Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
-# ./gradlew.bat clean test --tests "com.sara.automation.runners.CasesRunner15"
+# ./gradlew.bat clean test --tests "com.natura.automation.runners.CasesRunner15"
 
 # O usa un script wrapper:
 # #!/bin/bash
 # export DISPLAY=:99
 # Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
 # XVFB_PID=$!
-# ./gradlew clean test --tests "com.sara.automation.runners.CasesRunner15"
+# ./gradlew clean test --tests "com.natura.automation.runners.CasesRunner15"
 # kill $XVFB_PID
 
 
@@ -57,7 +57,7 @@
 # La clase ChromeHeadlessConfig.java lo hace automáticamente en Linux.
 
 # Ejecuta simplemente:
-# ./gradlew clean test --tests "com.sara.automation.runners.CasesRunner15"
+# ./gradlew clean test --tests "com.natura.automation.runners.CasesRunner15"
 
 # Ventajas:
 # - No requiere Xvfb
@@ -117,7 +117,7 @@
 # # sleep 2
 # 
 # echo "[TEST] Ejecutando tests en Linux..."
-# ./gradlew clean test --tests "com.sara.automation.runners.CasesRunner15"
+# ./gradlew clean test --tests "com.natura.automation.runners.CasesRunner15"
 # TEST_RESULT=$?
 # 
 # # Mata Xvfb si lo iniciaste

@@ -159,6 +159,7 @@ public class SeleccionarNiveles implements Interaction {
             } else {
                 System.out.println("  [Niveles] Nivel " + nivel + " = " + valor + " (seleccionado; no se pudo confirmar el label)");
             }
+            com.natura.automation.util.ReportePaso.valor("Nivel " + nivel, valor);
             return true;
         } catch (Exception e) {
             System.err.println("  [Niveles] ERROR en Nivel " + nivel + ": " + e.getMessage());

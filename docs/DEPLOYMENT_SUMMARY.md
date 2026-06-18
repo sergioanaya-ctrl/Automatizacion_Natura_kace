@@ -46,7 +46,7 @@ Script ejecutable para Linux que:
 **Uso:**
 ```bash
 chmod +x run-tests-linux.sh
-./run-tests-linux.sh "com.sara.automation.runners.CasesRunner15"
+./run-tests-linux.sh "com.natura.automation.runners.CasesRunner15"
 ```
 
 ---
@@ -58,7 +58,7 @@ Script batch para Windows con la misma funcionalidad que el script Linux.
 
 **Uso:**
 ```cmd
-run-tests-windows.bat com.sara.automation.runners.CasesRunner15
+run-tests-windows.bat com.natura.automation.runners.CasesRunner15
 ```
 
 ---
@@ -116,13 +116,13 @@ Documentación técnica detallada:
 
 ### **Windows (Developer)**
 ```cmd
-run-tests-windows.bat com.sara.automation.runners.CasesRunner15
+run-tests-windows.bat com.natura.automation.runners.CasesRunner15
 ```
 ✅ Interfaz gráfica visible | ✅ Debug visual | ✅ Headless mode transparente
 
 ### **Linux Server (Production)**
 ```bash
-./run-tests-linux.sh com.sara.automation.runners.CasesRunner15
+./run-tests-linux.sh com.natura.automation.runners.CasesRunner15
 ```
 ✅ Sin GUI (headless) | ✅ Bajo consumo recursos | ✅ Ideal para CI/CD
 
@@ -217,7 +217,7 @@ REM ✅ BUILD SUCCESSFUL
 
 ### **Paso 1: Prueba en Windows** (Ya hecho ✅)
 ```cmd
-run-tests-windows.bat "com.sara.automation.runners.CasesRunner15"
+run-tests-windows.bat "com.natura.automation.runners.CasesRunner15"
 ```
 
 ### **Paso 2: Instala Linux** (Cuando esté el servidor)
@@ -239,7 +239,7 @@ chmod +x run-tests-linux.sh
 
 ### **Paso 4: Ejecuta en Linux**
 ```bash
-./run-tests-linux.sh "com.sara.automation.runners.CasesRunner15"
+./run-tests-linux.sh "com.natura.automation.runners.CasesRunner15"
 ```
 
 ### **Paso 5: Verifica resultados**

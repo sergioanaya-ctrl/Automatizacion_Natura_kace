@@ -170,6 +170,7 @@ public class FillCrearClienteForm implements Interaction {
                     // Fallback: fijar value por JS y disparar eventos para que FormIO lo registre.
                     setValueViaJs(driver, el, valor);
                 }
+                registrarValor(nombreCampo(css), valor);
                 return;
             } catch (org.openqa.selenium.StaleElementReferenceException e) {
                 if (intento == 3) throw e;
@@ -238,6 +239,7 @@ public class FillCrearClienteForm implements Interaction {
                     String elegido = driver.findElement(By.cssSelector(
                             ".formio-component-" + campo + " .choices__list--single .choices__item")).getText().trim();
                     System.out.println("  [Choices] " + campo + " = " + elegido + " (OK, intento " + intento + ")");
+                    registrarValor(campo, elegido);
                     return;
                 }
                 System.err.println("  [Choices] " + campo + " no quedó seleccionado (intento " + intento + "), reintentando...");
@@ -416,6 +418,22 @@ public class FillCrearClienteForm implements Interaction {
         }
     }
 
+    // ── Registro de pasos en el reporte (para que los valores queden en step_details) ──
+
+    /**
+     * Inyecta un paso en el reporte de Serenity con el formato "enters '<valor>' into <campo>"
+     * para que el generador de step_details (Excel/CSV) capture el valor en la columna Valor.
+     */
+    private void registrarValor(String campo, String valor) {
+        com.natura.automation.util.ReportePaso.valor(campo, valor);
+    }
+
+    /** Extrae un nombre legible del selector: input[name='data[nombres]'] -> nombres. */
+    private String nombreCampo(String css) {
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("data\\[([^\\]]+)\\]").matcher(css);
+        return m.find() ? m.group(1) : css;
+    }
+
     // ── Helpers de interacción robusta ───────────────────────────────────────
 
     private void scrollToCenter(WebDriver driver, WebElement el) {
@@ -455,6 +473,7 @@ public class FillCrearClienteForm implements Interaction {
             el.sendKeys(valor);
             el.sendKeys(Keys.ESCAPE);
             System.out.println("  [Fecha] " + campo + " = " + valor);
+            registrarValor(campo, valor);
         } catch (Exception e) {
             System.err.println("  [Fecha] ERROR " + campo + ": " + e.getMessage());
         }

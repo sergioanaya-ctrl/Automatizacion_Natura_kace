@@ -87,7 +87,7 @@ chmod +x gradlew run_tests.sh
 ### **Opción 3: Ejecución directa sin menú**
 ```bash
 # 1 test individual
-./gradlew test --tests "com.sara.automation.runners.CasesRunner01"
+./gradlew test --tests "com.natura.automation.runners.CasesRunner01"
 
 # 2 tests en paralelo
 sed -i 's/^maxParallelForks=.*/maxParallelForks=2/' gradle.properties
@@ -153,7 +153,7 @@ Ambos scripts validan y auto-detectan:
 ☐ Script permisos:          chmod +x run_tests.sh setup_linux.sh
 ☐ Compilación OK:           ./gradlew compileTestJava -q
 ☐ Serenity headless:        grep "headless" serenity.properties
-☐ Test simple:              ./gradlew test --tests "com.sara.automation.runners.CasesRunner01"
+☐ Test simple:              ./gradlew test --tests "com.natura.automation.runners.CasesRunner01"
 ```
 
 ---

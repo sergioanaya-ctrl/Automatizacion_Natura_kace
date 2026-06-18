@@ -124,6 +124,7 @@ public class LlenarFormularioNC implements Task {
 
                 if (osSelectTieneValor(driver, campo)) {
                     System.out.println("  [FormularioNC] " + campo + " = " + valor + " (OK, intento " + intento + ")");
+                    com.natura.automation.util.ReportePaso.valor(campo, valor);
                     return;
                 }
                 System.err.println("  [FormularioNC] " + campo + ": no se confirmó '" + valor + "' (intento " + intento + "), reintentando...");
@@ -222,6 +223,7 @@ public class LlenarFormularioNC implements Task {
                         "el.dispatchEvent(new Event('change',{bubbles:true}));", el, valor);
             }
             System.out.println("  [FormularioNC] # NC = " + valor);
+            com.natura.automation.util.ReportePaso.valor("numero_nc", valor);
         } catch (Exception e) {
             System.err.println("  [FormularioNC] ERROR en " + css + ": " + e.getMessage());
         }

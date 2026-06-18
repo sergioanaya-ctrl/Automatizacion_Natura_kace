@@ -52,6 +52,7 @@ public class EjecutarDescripcionCaso implements Task {
                     editor, texto);
         }
         System.out.println("[EjecutarDescripcionCaso] Descripción diligenciada.");
+        com.natura.automation.util.ReportePaso.valor("descripcion_caso", texto);
         driver.switchTo().defaultContent();
     }
 }

@@ -120,7 +120,7 @@ while true; do
                 # Formatear con cero a la izquierda
                 runner_formatted=$(printf "%02d" $runner_num)
                 update_parallel_forks 1
-                run_tests "com.sara.automation.runners.CasesRunner$runner_formatted" ""
+                run_tests "com.natura.automation.runners.CasesRunner$runner_formatted" ""
             else
                 echo -e "${RED}Error: Ingresa un número entre 1 y 50${NC}"
                 read -p "Presiona ENTER para continuar..."

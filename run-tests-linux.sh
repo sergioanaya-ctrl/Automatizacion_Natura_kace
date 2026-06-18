@@ -4,7 +4,7 @@
 # SCRIPT PARA EJECUTAR AUTOMATIZACIÓN SARA3 EN LINUX (HEADLESS)
 # ============================================================================
 # Uso: ./run-tests-linux.sh [runner_class]
-# Ejemplo: ./run-tests-linux.sh "com.sara.automation.runners.CasesRunner15"
+# Ejemplo: ./run-tests-linux.sh "com.natura.automation.runners.CasesRunner15"
 #
 # Este script detecta automáticamente si está en Linux y activa modo headless
 # ============================================================================
@@ -39,7 +39,7 @@ case "$OS_NAME" in
 esac
 
 # Parámetros
-RUNNER_CLASS=${1:-"com.sara.automation.runners.CasesRunner15"}
+RUNNER_CLASS=${1:-"com.natura.automation.runners.CasesRunner15"}
 
 echo -e "${BLUE}[SETUP] Preparando ambiente para ejecución...${NC}"
 echo "[SETUP] Runner: $RUNNER_CLASS"

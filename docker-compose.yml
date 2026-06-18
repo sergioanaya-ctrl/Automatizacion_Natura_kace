@@ -129,7 +129,7 @@ services:
         max-file: "3"
     
     # Ejecutar test individual
-    command: bash -c "./gradlew test --tests 'com.sara.automation.runners.CasesRunner$${TEST_NUM}'"
+    command: bash -c "./gradlew test --tests 'com.natura.automation.runners.CasesRunner$${TEST_NUM}'"
 
 networks:
   default:

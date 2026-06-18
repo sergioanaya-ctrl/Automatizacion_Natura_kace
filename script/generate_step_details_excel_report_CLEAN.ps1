@@ -491,7 +491,7 @@ function Extract-TestSteps {
 
                 # Origen del fallo (archivo:linea): preferir el primer frame del codigo del proyecto
                 if ($step.exception.stackTrace) {
-                    $frame = $step.exception.stackTrace | Where-Object { $_.declaringClass -like "com.sara.automation.*" } | Select-Object -First 1
+                    $frame = $step.exception.stackTrace | Where-Object { $_.declaringClass -like "com.natura.automation.*" } | Select-Object -First 1
                     if (-not $frame) { $frame = $step.exception.stackTrace | Select-Object -First 1 }
                     if ($frame -and $frame.fileName) {
                         $stepErrorSource = "$($frame.fileName):$($frame.lineNumber)"
@@ -522,7 +522,34 @@ function Extract-TestSteps {
             ErrorType = $stepErrorType
             ErrorSource = $stepErrorSource
         }
-        
+
+        # Filas extra por cada valor diligenciado via Serenity.recordReportData()
+        # (contents = "enters '<valor>' into <campo>"). Puebla la columna Valor para los campos
+        # llenados con metodos propios (Choices, os-select, escribir, fecha, niveles, etc.).
+        if ($step.reportData) {
+            foreach ($rd in $step.reportData) {
+                $contenido = [string]$rd.contents
+                if ($contenido -like "*enters*") {
+                    $rdDetails = Extract-StepDetails -Description $contenido
+                    $result += [PSCustomObject]@{
+                        Test = $testName
+                        Batch = $batch
+                        Descripcion = $contenido
+                        Accion = $rdDetails.Accion
+                        Elemento = $rdDetails.Elemento
+                        Valor = $rdDetails.Valor
+                        Tiempo_ms = 0
+                        Tiempo_s = "0,00"
+                        Estado = "SUCCESS"
+                        EsFallo = $false
+                        ErrorMessage = ""
+                        ErrorType = "Sin Error"
+                        ErrorSource = ""
+                    }
+                }
+            }
+        }
+
         if ($step.children -and $step.children.Count -gt 0) {
             $result += Extract-TestSteps -steps $step.children -level ($level + 1) -testName $testName -batch $batch
         }

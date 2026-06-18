@@ -246,7 +246,7 @@ run_test() {
     
     if [ "$run_test_choice" = "s" ] || [ "$run_test_choice" = "S" ]; then
         echo -e "${BLUE}Ejecutando test de prueba...${NC}"
-        if ./gradlew test --tests "com.sara.automation.runners.CasesRunner01" -q; then
+        if ./gradlew test --tests "com.natura.automation.runners.CasesRunner01" -q; then
             echo -e "${GREEN}✓ Test ejecutado exitosamente${NC}"
         else
             echo -e "${RED}✗ Hubo un error en la ejecución del test${NC}"
