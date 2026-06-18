@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -102,21 +103,19 @@ public class FillCrearClienteForm implements Interaction {
         System.out.println("[FillCrearClienteForm] tipo=" + tipoDoc + " | doc=" + codConsultor +
                            " | nombre=" + nombres + " | perfil=" + perfil);
 
-        // ── Orden intencional: PRIMERO Código consultor y Celular ────────────
-        // Llenar estos campos de texto primero le da tiempo al backend a terminar de cargar
-        // ("Obteniendo datos del Cliente") antes de tocar el Choices de Tipo Documento, que
-        // necesita sus opciones cargadas. Así se reducen los fallos por buscar ese elemento muy pronto.
-        escribir(driver, "input[name='data[documento]']",              codConsultor); // Código consultor
-        escribir(driver, "input[name='data[telefono]']",               celular);      // Celular
-
-        // ── Tipo Documento (Choices.js) — ya con tiempo para haber cargado ───
+        // ── Tipo Documento (Choices.js) — PRIMERO ────────────────────────────
+        // Se llena ANTES que Código Consultor a propósito: escribir el código de consultor
+        // dispara el lookup "Obteniendo datos del Cliente" que re-renderiza/bloquea el dropdown
+        // de Tipo Documento. Seleccionándolo primero (con la lista recién cargada) se evita eso.
         long tTipo = System.currentTimeMillis();
         seleccionarChoices(driver, "tipo_documento", tipoDoc);
         System.out.println("[FillCrearClienteForm] selección Tipo Documento tardó " +
                 ((System.currentTimeMillis() - tTipo) / 1000.0) + "s.");
 
-        // ── Resto de campos de texto ─────────────────────────────────────────
-        escribir(driver, "input[name='data[campos_extra1]']",          numIdent);   // Número Identificación
+        // ── Campos de texto ───────────────────────────────────────────────────
+        escribir(driver, "input[name='data[documento]']",              codConsultor); // Código consultor
+        escribir(driver, "input[name='data[telefono]']",               celular);      // Celular
+        escribir(driver, "input[name='data[campos_extra1]']",          numIdent);     // Número Identificación
         escribir(driver, "input[name='data[nombres]']",                nombres);
         escribir(driver, "input[name='data[email]']",                  correo);
 
@@ -184,6 +183,10 @@ public class FillCrearClienteForm implements Interaction {
     private void seleccionarChoices(WebDriver driver, String campo, String valor) {
         if (valor == null || valor.trim().isEmpty()) return;
 
+        By choicesBy = By.cssSelector(".formio-component-" + campo + " .choices");
+        By opcionesBy = By.cssSelector(
+                ".formio-component-" + campo + " .choices__list--dropdown .choices__item--choice");
+
         // Reintentar: si el formulario aún re-renderiza, la selección puede perderse.
         for (int intento = 1; intento <= 3; intento++) {
             ensureIframe(driver);
@@ -193,31 +196,48 @@ public class FillCrearClienteForm implements Interaction {
                                 By.cssSelector(".formio-component-" + campo)));
                 scrollToCenter(driver, comp);
 
-                // 1) Abrir el dropdown (Choices.js): la caja clickable es .choices .selection.dropdown.
-                WebElement opener;
-                try {
-                    opener = comp.findElement(By.cssSelector(".choices .selection.dropdown"));
-                } catch (Exception nf) {
-                    opener = comp.findElement(By.cssSelector(".choices__inner, .choices"));
-                }
-                jsClick(driver, opener);
+                // 1) ABRIR el dropdown garantizando que quede abierto (Choices.js necesita
+                //    eventos de mouse reales; un .click() por JS no siempre lo dispara).
+                abrirChoices(driver, choicesBy);
 
-                // 2) Escribir en el input de búsqueda clonado (visible solo al abrir).
+                // 2) Escribir el valor en el buscador (filtra y resalta la opción) y esperar
+                //    a que la opción esté cargada/visible.
                 WebElement search = new WebDriverWait(driver, Duration.ofSeconds(10))
                         .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                                 ".formio-component-" + campo + " input.choices__input--cloned")));
+                search.clear();
                 search.sendKeys(valor);
 
-                // 3) Esperar a que aparezca la opción filtrada y confirmar con Enter.
-                By opcionFiltrada = By.cssSelector(
-                        ".formio-component-" + campo + " .choices__list--dropdown .choices__item--choice");
-                new WebDriverWait(driver, Duration.ofSeconds(10))
-                        .until(ExpectedConditions.visibilityOfElementLocated(opcionFiltrada));
-                search.sendKeys(Keys.ENTER);
+                List<WebElement> opciones = esperarOpcionesChoices(driver, opcionesBy, 12);
+                if (opciones.isEmpty()) {
+                    System.err.println("  [Choices] " + campo + ": las opciones no cargaron (intento " + intento + "), reintentando...");
+                    continue;
+                }
+                dormir(400); // asentamiento tras cargar
 
-                // 4) Verificar que la selección quedó registrada (texto en el item seleccionado).
-                if (choicesTieneValor(driver, campo, valor)) {
-                    System.out.println("  [Choices] " + campo + " = " + valor + " (OK, intento " + intento + ")");
+                // 3) Seleccionar. Choices.js selecciona de forma confiable con ENTER sobre el
+                //    buscador (la opción resaltada); un .click() por JS no dispara su handler.
+                search.sendKeys(Keys.ENTER);
+                dormir(300);
+
+                // Fallback: si Enter no registró, clic NATIVO sobre la opción coincidente.
+                if (!choicesSeleccionNoVacia(driver, campo)) {
+                    WebElement objetivo = opciones.stream()
+                            .filter(o -> {
+                                String t = o.getText().trim();
+                                return t.equalsIgnoreCase(valor) || t.toLowerCase().contains(valor.toLowerCase());
+                            })
+                            .findFirst().orElse(opciones.get(0));
+                    scrollToCenter(driver, objetivo);
+                    try { objetivo.click(); } catch (Exception e) { dispatchMouseClick(driver, objetivo); }
+                    dormir(300);
+                }
+
+                // 4) Verificar que quedó algo seleccionado (no placeholder).
+                if (choicesSeleccionNoVacia(driver, campo)) {
+                    String elegido = driver.findElement(By.cssSelector(
+                            ".formio-component-" + campo + " .choices__list--single .choices__item")).getText().trim();
+                    System.out.println("  [Choices] " + campo + " = " + elegido + " (OK, intento " + intento + ")");
                     return;
                 }
                 System.err.println("  [Choices] " + campo + " no quedó seleccionado (intento " + intento + "), reintentando...");
@@ -226,6 +246,85 @@ public class FillCrearClienteForm implements Interaction {
             }
         }
         System.err.println("  [Choices] No se pudo seleccionar " + campo + " = " + valor + " tras 3 intentos.");
+    }
+
+    /**
+     * Abre el dropdown de un Choices.js asegurando que quede en estado abierto (clase is-open).
+     * UN solo clic por iteración (dos clics seguidos lo abren y lo vuelven a cerrar). Alterna
+     * el método de clic entre intentos por si uno no dispara el evento que Choices.js escucha.
+     */
+    private void abrirChoices(WebDriver driver, By choicesBy) {
+        for (int i = 0; i < 5; i++) {
+            if (choicesAbierto(driver, choicesBy)) return; // ya abierto
+
+            WebElement choices = driver.findElement(choicesBy);
+            WebElement opener;
+            try {
+                opener = choices.findElement(By.cssSelector(".choices__inner"));
+            } catch (Exception nf) {
+                opener = choices;
+            }
+            scrollToCenter(driver, opener);
+            // Alternar: clic nativo en intentos pares, secuencia de eventos de mouse en impares.
+            if (i % 2 == 0) {
+                try { opener.click(); } catch (Exception e) { jsClick(driver, opener); }
+            } else {
+                dispatchMouseClick(driver, opener);
+            }
+            dormir(350);
+        }
+    }
+
+    private boolean choicesAbierto(WebDriver driver, By choicesBy) {
+        try {
+            String clase = driver.findElement(choicesBy).getAttribute("class");
+            return clase != null && clase.contains("is-open");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /** Dispara la secuencia de eventos de mouse para componentes que solo responden a eventos reales. */
+    private void dispatchMouseClick(WebDriver driver, WebElement el) {
+        try {
+            ((JavascriptExecutor) driver).executeScript(
+                    "var el=arguments[0];" +
+                    "['pointerdown','mousedown','mouseup','click'].forEach(function(t){" +
+                    "  el.dispatchEvent(new MouseEvent(t,{bubbles:true,cancelable:true,view:window}));" +
+                    "});", el);
+        } catch (Exception ignored) {}
+    }
+
+    /**
+     * Espera a que el dropdown del Choices tenga opciones REALES cargadas (no vacío, no "cargando")
+     * y las devuelve. Tope timeoutSeg. Si no cargan, devuelve lista vacía.
+     */
+    private List<WebElement> esperarOpcionesChoices(WebDriver driver, By opcionesBy, int timeoutSeg) {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(timeoutSeg)).until(d ->
+                    d.findElements(opcionesBy).stream()
+                            .anyMatch(o -> opcionReal(o.getText())));
+        } catch (Exception ignored) {}
+        return driver.findElements(opcionesBy).stream()
+                .filter(o -> opcionReal(o.getText()))
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    private boolean opcionReal(String texto) {
+        String t = texto == null ? "" : texto.trim().toLowerCase();
+        return !t.isEmpty() && !t.contains("cargando") && !t.contains("loading");
+    }
+
+    /** True si el Choices tiene una selección real (item single con texto no placeholder). */
+    private boolean choicesSeleccionNoVacia(WebDriver driver, String campo) {
+        try {
+            String sel = driver.findElement(By.cssSelector(
+                    ".formio-component-" + campo + " .choices__list--single .choices__item")).getText().trim();
+            String s = sel.toLowerCase();
+            return !s.isEmpty() && !s.contains("elige") && !s.contains("seleccion");
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /** True si el item seleccionado (single) del Choices contiene el valor esperado. */
@@ -251,12 +350,12 @@ public class FillCrearClienteForm implements Interaction {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(60)).until(d -> {
                 ensureIframe(d);
-                return d.findElements(By.cssSelector("input[name='data[documento]']"))
+                return d.findElements(By.cssSelector(".formio-component-tipo_documento .choices"))
                         .stream().anyMatch(WebElement::isDisplayed);
             });
-            System.out.println("[FillCrearClienteForm] Formulario renderizado (campo Código consultor disponible) — continuando.");
+            System.out.println("[FillCrearClienteForm] Campo Tipo Documento renderizado — continuando.");
         } catch (Exception e) {
-            System.err.println("[FillCrearClienteForm] El formulario no se renderizó en 60s — continuando igual.");
+            System.err.println("[FillCrearClienteForm] Tipo Documento no se renderizó en 60s — continuando igual.");
         }
         ensureIframe(driver);
     }

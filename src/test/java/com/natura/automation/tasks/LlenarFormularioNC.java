@@ -53,9 +53,12 @@ public class LlenarFormularioNC implements Task {
         }
 
         System.out.println("[FormularioNC] Visible — diligenciando campos requeridos.");
-        seleccionarOsSelectAleatorio(driver, "tipo_nc");
+        // Orden intencional: primero los campos rápidos (# NC y Gestión Cierre NCS); Tipo NC
+        // de ÚLTIMO porque sus opciones vienen del backend y tardan más en cargar. Así llega
+        // con tiempo de haber cargado, y además se reintenta hasta confirmar la selección.
         escribirTexto(driver, "input[name='data[numero_nc]']", randomDigitos(6));
         seleccionarOsSelectAleatorio(driver, "gestion_cierre_ncs");
+        seleccionarOsSelectAleatorio(driver, "tipo_nc");
 
         driver.switchTo().defaultContent();
     }
@@ -64,62 +67,71 @@ public class LlenarFormularioNC implements Task {
         return driver.findElements(By.cssSelector(css)).stream().anyMatch(WebElement::isDisplayed);
     }
 
-    /** Abre un os-select por su componente y elige una opción al azar de la lista. */
+    /**
+     * Abre un os-select y elige una opción al azar, REINTENTANDO hasta confirmar la selección.
+     * Necesario para Tipo NC, cuyas opciones vienen del backend y a veces no están listas al primer
+     * intento (el control quedaba en "Elige una opción" y el caso fallaba al guardar).
+     */
     private void seleccionarOsSelectAleatorio(WebDriver driver, String campo) {
-        try {
-            By controlBy = By.cssSelector(".formio-component-" + campo + " .os-dropdown-control");
-            By opcionesBy = By.cssSelector(".formio-component-" + campo + " .os-dropdown-list li");
+        By controlBy = By.cssSelector(".formio-component-" + campo + " .os-dropdown-control");
+        By opcionesBy = By.cssSelector(".formio-component-" + campo + " .os-dropdown-list li");
+        By searchBy = By.cssSelector(".formio-component-" + campo + " .os-dropdown-search");
 
-            By searchBy = By.cssSelector(".formio-component-" + campo + " .os-dropdown-search");
-
-            // Abrir el dropdown (clic nativo, fallback JS).
-            WebElement control = new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(controlBy));
-            scrollToCenter(driver, control);
-            clickReal(driver, control);
-
-            // Esperar a que las opciones REALMENTE carguen (Tipo NC viene del backend y demora).
-            List<WebElement> items = esperarOpcionesCargadas(driver, opcionesBy, 20);
-            if (items.isEmpty()) {
-                System.err.println("  [FormularioNC] " + campo + ": las opciones no cargaron.");
-                return;
-            }
-
-            String valor = items.get(RANDOM.nextInt(items.size())).getText().trim();
-
-            // Filtrar con el buscador para traer la opción al frente (y dar tiempo a renderizar).
+        for (int intento = 1; intento <= 3; intento++) {
             try {
-                WebElement search = new WebDriverWait(driver, Duration.ofSeconds(5))
-                        .until(ExpectedConditions.visibilityOfElementLocated(searchBy));
-                search.clear();
-                search.sendKeys(valor);
-                dormir(500);
-            } catch (Exception ignored) {}
-
-            // Clic NATIVO (evento confiable) sobre la opción; fallbacks: eventos de mouse / Enter.
-            By liBy = By.xpath("//*[contains(@class,'formio-component-" + campo + "')]" +
-                    "//ul[contains(@class,'os-dropdown-list')]/li[normalize-space()=" + xpathLiteral(valor) + "]");
-            try {
-                WebElement li = new WebDriverWait(driver, Duration.ofSeconds(10))
-                        .until(ExpectedConditions.elementToBeClickable(liBy));
-                scrollToCenter(driver, li);
-                try {
-                    li.click();
-                } catch (Exception e) {
-                    dispatchMouseClick(driver, li);
+                // Abrir el dropdown: clic nativo y, además, eventos de mouse (React).
+                WebElement control = new WebDriverWait(driver, Duration.ofSeconds(10))
+                        .until(ExpectedConditions.presenceOfElementLocated(controlBy));
+                scrollToCenter(driver, control);
+                clickReal(driver, control);
+                if (driver.findElements(opcionesBy).isEmpty()) {
+                    dispatchMouseClick(driver, control); // forzar apertura si el clic no la disparó
                 }
-            } catch (Exception e) {
-                try { driver.findElement(searchBy).sendKeys(Keys.ENTER); } catch (Exception ignored) {}
-            }
 
-            if (osSelectTieneValor(driver, campo)) {
-                System.out.println("  [FormularioNC] " + campo + " = " + valor);
-            } else {
-                System.err.println("  [FormularioNC] " + campo + ": no se pudo confirmar la selección de '" + valor + "'.");
+                // Esperar a que las opciones REALMENTE carguen (más tiempo en cada reintento).
+                List<WebElement> items = esperarOpcionesCargadas(driver, opcionesBy, 15 + intento * 5);
+                if (items.isEmpty()) {
+                    System.err.println("  [FormularioNC] " + campo + ": opciones no cargaron (intento " + intento + ").");
+                    continue;
+                }
+
+                String valor = items.get(RANDOM.nextInt(items.size())).getText().trim();
+
+                // Filtrar con el buscador para traer la opción al frente.
+                try {
+                    WebElement search = new WebDriverWait(driver, Duration.ofSeconds(5))
+                            .until(ExpectedConditions.visibilityOfElementLocated(searchBy));
+                    search.clear();
+                    search.sendKeys(valor);
+                    dormir(400);
+                } catch (Exception ignored) {}
+
+                // Clic NATIVO sobre la opción; fallbacks: eventos de mouse / Enter.
+                By liBy = By.xpath("//*[contains(@class,'formio-component-" + campo + "')]" +
+                        "//ul[contains(@class,'os-dropdown-list')]/li[normalize-space()=" + xpathLiteral(valor) + "]");
+                try {
+                    WebElement li = new WebDriverWait(driver, Duration.ofSeconds(10))
+                            .until(ExpectedConditions.elementToBeClickable(liBy));
+                    scrollToCenter(driver, li);
+                    try {
+                        li.click();
+                    } catch (Exception e) {
+                        dispatchMouseClick(driver, li);
+                    }
+                } catch (Exception e) {
+                    try { driver.findElement(searchBy).sendKeys(Keys.ENTER); } catch (Exception ignored) {}
+                }
+
+                if (osSelectTieneValor(driver, campo)) {
+                    System.out.println("  [FormularioNC] " + campo + " = " + valor + " (OK, intento " + intento + ")");
+                    return;
+                }
+                System.err.println("  [FormularioNC] " + campo + ": no se confirmó '" + valor + "' (intento " + intento + "), reintentando...");
+            } catch (Exception e) {
+                System.err.println("  [FormularioNC] ERROR en " + campo + " (intento " + intento + "): " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.err.println("  [FormularioNC] ERROR en " + campo + ": " + e.getMessage());
         }
+        System.err.println("  [FormularioNC] " + campo + ": NO se pudo seleccionar tras 3 intentos — el caso podría fallar al guardar.");
     }
 
     /**
