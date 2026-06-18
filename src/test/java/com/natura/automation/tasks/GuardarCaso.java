@@ -52,7 +52,22 @@ public class GuardarCaso implements Task {
             new WebDriverWait(driver, Duration.ofSeconds(20)).until(d ->
                     "complete".equals(((JavascriptExecutor) d).executeScript("return document.readyState")));
         } catch (Exception ignored) {}
-        dormir(5000);
+
+        // En vez de 5s fijos: esperar a que cierre cualquier spinner de guardado (swal2),
+        // y luego un buffer corto para que el SPA re-renderice los estados.
+        esperarSinSpinner(driver, 15);
+        dormir(1200);
+    }
+
+    /** Espera (rápido) a que NO haya spinner/popup de carga swal2 visible; retorna apenas desaparece. */
+    private void esperarSinSpinner(WebDriver driver, int timeoutSeg) {
+        long fin = System.currentTimeMillis() + timeoutSeg * 1000L;
+        while (System.currentTimeMillis() < fin) {
+            boolean spinner = driver.findElements(By.cssSelector(".swal2-loader, .swal2-popup"))
+                    .stream().anyMatch(WebElement::isDisplayed);
+            if (!spinner) return;
+            dormir(200);
+        }
     }
 
     private void dormir(long ms) {

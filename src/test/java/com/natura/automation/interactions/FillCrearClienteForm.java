@@ -63,13 +63,13 @@ public class FillCrearClienteForm implements Interaction {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
         ensureIframe(driver);
 
-        new WebDriverWait(driver, Duration.ofSeconds(20))
-                .until(ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector("input[name='data[documento]'], input[name='data[nombres]']")));
-
-        // Esperar a que el formulario termine de cargar (overlay "Cargando formulario") y que
-        // el dropdown Tipo Documento tenga sus opciones, para que la selección no se "vuele".
+        // Al pasar a agente el formulario carga, luego aparece un mensaje "Espere..." y re-renderiza.
+        // Esperar a que ese mensaje desaparezca y a que Tipo Documento esté disponible y usable
+        // (sus opciones cargadas) antes de empezar a llenar.
+        long tLoad = System.currentTimeMillis();
         esperarFormularioListo(driver);
+        System.out.println("[FillCrearClienteForm] esperarFormularioListo tardó " +
+                ((System.currentTimeMillis() - tLoad) / 1000.0) + "s.");
 
         // Resolver valores: feature primero, aleatorio si no se proveyó
         String tipoDoc      = get("tipo_documento",           randomDe(TIPOS_DOC));
@@ -103,7 +103,10 @@ public class FillCrearClienteForm implements Interaction {
                            " | nombre=" + nombres + " | perfil=" + perfil);
 
         // ── Tipo Documento (Choices.js) ──────────────────────────────────────
+        long tTipo = System.currentTimeMillis();
         seleccionarChoices(driver, "tipo_documento", tipoDoc);
+        System.out.println("[FillCrearClienteForm] selección Tipo Documento tardó " +
+                ((System.currentTimeMillis() - tTipo) / 1000.0) + "s.");
 
         // ── Campos de texto en orden visual del formulario ───────────────────
         escribir(driver, "input[name='data[documento]']",              codConsultor);
@@ -231,29 +234,82 @@ public class FillCrearClienteForm implements Interaction {
         }
     }
 
-    /** Espera a que desaparezca el overlay/mensaje "Cargando formulario" y que el dropdown esté listo. */
+    /**
+     * Espera a que el campo Tipo Documento esté DISPONIBLE para usarse, sin esperar a que
+     * cierre el modal "Obteniendo datos del Cliente" (que puede tardar ~40s del backend).
+     * Como los clics se hacen por JavaScript (atraviesan el overlay swal2), no hace falta
+     * que el modal desaparezca: basta con que el componente Choices esté renderizado.
+     * Tope de seguridad alto por si el formulario tarda en renderizar.
+     */
     private void esperarFormularioListo(WebDriver driver) {
-        // 1) Que ningún loader común ni texto "Cargando" siga visible.
+        ensureIframe(driver);
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(15)).until(d -> {
-                boolean loaderVisible = d.findElements(By.cssSelector(
-                        ".loading, .loader, .spinner, .formio-loading, .swal2-loader, " +
-                        "[class*='cargando'], [class*='loading']"))
+            new WebDriverWait(driver, Duration.ofSeconds(60)).until(d -> {
+                ensureIframe(d);
+                return d.findElements(By.cssSelector(".formio-component-tipo_documento .choices"))
                         .stream().anyMatch(WebElement::isDisplayed);
-                boolean textoCargando = d.findElements(By.xpath(
-                        "//*[contains(translate(., 'CARGAND', 'cargand'), 'cargand')]"))
-                        .stream().anyMatch(WebElement::isDisplayed);
-                return !loaderVisible && !textoCargando;
             });
-        } catch (Exception ignored) {
-            // Si el selector genérico no aplica, continuar (lo cubre la verificación del Choices).
+            System.out.println("[FillCrearClienteForm] Campo Tipo Documento renderizado — continuando (sin esperar el modal).");
+        } catch (Exception e) {
+            System.err.println("[FillCrearClienteForm] Tipo Documento no se renderizó en 60s — continuando igual.");
         }
-        // 2) Que el dropdown Tipo Documento tenga sus opciones cargadas.
+        ensureIframe(driver);
+    }
+
+    /** Sondea (rápido) hasta timeoutSeg a que NO haya modal de carga; retorna apenas desaparece. */
+    private void esperarFinDeCargando(WebDriver driver, int timeoutSeg) {
+        long inicio = System.currentTimeMillis();
+        long fin = inicio + timeoutSeg * 1000L;
+        boolean huboModal = false;
+        while (System.currentTimeMillis() < fin) {
+            if (!cargandoVisible(driver)) {
+                if (huboModal) {
+                    System.out.println("[FillCrearClienteForm] Modal de carga cerrado en " +
+                            ((System.currentTimeMillis() - inicio) / 1000.0) + "s — continuando.");
+                }
+                return;
+            }
+            huboModal = true;
+            dormir(250);
+        }
+        System.err.println("[FillCrearClienteForm] El modal de carga no cerró tras " + timeoutSeg + "s — continuando igual.");
+    }
+
+    private boolean cargandoVisible(WebDriver driver) {
+        // Documento principal.
+        driver.switchTo().defaultContent();
+        if (textoDeCargaVisible(driver)) return true;
+        // Iframe del formulario.
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(20)).until(
-                    ExpectedConditions.presenceOfElementLocated(By.cssSelector(
-                            ".formio-component-tipo_documento .choices__item--choice")));
+            driver.switchTo().frame(driver.findElement(By.id("form_onescript_iframe")));
+            if (textoDeCargaVisible(driver)) return true;
         } catch (Exception ignored) {}
+        return false;
+    }
+
+    /**
+     * True solo si hay un modal de carga ACTIVO: spinner swal2 visible, o un popup swal2 visible
+     * cuyo texto es de carga. Evita falsos positivos por un .swal2-container residual en el DOM.
+     */
+    private boolean textoDeCargaVisible(WebDriver driver) {
+        boolean spinner = driver.findElements(By.cssSelector(".swal2-loader"))
+                .stream().anyMatch(WebElement::isDisplayed);
+        if (spinner) return true;
+        return driver.findElements(By.cssSelector(".swal2-popup")).stream()
+                .filter(WebElement::isDisplayed)
+                .anyMatch(p -> {
+                    String t = p.getText().toLowerCase();
+                    return t.contains("cargando") || t.contains("obteniendo")
+                            || t.contains("espere") || t.contains("procesando");
+                });
+    }
+
+    private void dormir(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     // ── Helpers de interacción robusta ───────────────────────────────────────

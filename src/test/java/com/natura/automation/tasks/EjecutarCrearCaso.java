@@ -48,11 +48,35 @@ public class EjecutarCrearCaso implements Task {
         }
         System.out.println("[EjecutarCrearCaso] Clic en 'Nuevo Caso' OK");
 
-        driver.switchTo().defaultContent();
+        // Esperar a que el formulario del caso REALMENTE cargue (niveles/estados/descripción),
+        // en vez de una pausa fija de 10s. Al dar clic en "Nuevo Caso" el iframe se RECARGA,
+        // por eso hay que RE-ENGANCHARSE al iframe en cada intento (la referencia anterior queda obsoleta).
+        long inicio = System.currentTimeMillis();
+        By componentesCaso = By.cssSelector(
+                ".classifications-dropdown-wrap, .formio-component-kaceStates, .formio-component-kaceDescription");
+        long fin = inicio + 15_000L;
+        boolean cargado = false;
+        while (System.currentTimeMillis() < fin) {
+            try {
+                driver.switchTo().defaultContent();
+                driver.switchTo().frame(driver.findElement(FORM_IFRAME));
+                if (!driver.findElements(componentesCaso).isEmpty()) {
+                    cargado = true;
+                    break;
+                }
+            } catch (Exception ignored) {
+                // iframe aún recargando: reintentar.
+            }
+            dormir(250);
+        }
+        if (cargado) {
+            System.out.println("[EjecutarCrearCaso] Caso cargado en " +
+                    ((System.currentTimeMillis() - inicio) / 1000.0) + "s.");
+        } else {
+            System.err.println("[EjecutarCrearCaso] El formulario del caso no apareció en 15s — continuando igual.");
+        }
 
-        // Esperar ~10s a que cargue el caso (pausa deliberada solicitada por negocio).
-        System.out.println("[EjecutarCrearCaso] Esperando carga del caso (10s)...");
-        dormir(10_000);
+        driver.switchTo().defaultContent();
     }
 
     private void dormir(long ms) {

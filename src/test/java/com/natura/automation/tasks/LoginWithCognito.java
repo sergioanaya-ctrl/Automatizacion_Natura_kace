@@ -61,28 +61,48 @@ public class LoginWithCognito implements Task {
     }
 
     private void esperarEnAgentPage(Actor actor) {
-        // Esperar a que la URL contenga "/agent" usando WebDriverWait dinámico
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-        try {
-            new WebDriverWait(driver, Duration.ofSeconds(8)).until(
-                d -> d.getCurrentUrl().contains("/agent")
-            );
-            return;
-        } catch (TimeoutException e) {
-            System.out.println("  No se llegó automáticamente a /agent en 8 segundos, forzando navegación...");
+
+        // Cognito redirige a /auth (no a /agent), así que esperar 8s a "/agent" siempre se agotaba.
+        // En su lugar: sondear hasta que la URL llegue sola a /agent O salga del dominio de Cognito
+        // (señal de que el intercambio de código en /auth ya empezó); apenas ocurre, se continúa.
+        long fin = System.currentTimeMillis() + 12_000L;
+        boolean deVueltaEnApp = false;
+        while (System.currentTimeMillis() < fin) {
+            String url = driver.getCurrentUrl();
+            if (url.contains("/agent")) {
+                return; // ya llegó solo
+            }
+            if (!url.contains("amazoncognito.com")) {
+                deVueltaEnApp = true; // de vuelta en la app (/auth) — proceder a forzar /agent
+                break;
+            }
+            dormir(200);
+        }
+        if (!deVueltaEnApp) {
+            System.out.println("  No se detectó el retorno desde Cognito en 12s, forzando navegación igual...");
         }
 
-        // Si no llegó automáticamente a /agent, fuerza la navegación a la URL de Agent.
+        // Buffer breve para que /auth complete el intercambio de código y establezca la sesión
+        // antes de forzar la navegación a /agent.
+        dormir(1500);
         actor.attemptsTo(Open.url(AgentPage.URL));
 
-        // Esperar nuevamente a que la URL contenga "/agent"
+        // Esperar a que la URL contenga "/agent".
         try {
             new WebDriverWait(driver, Duration.ofSeconds(20)).until(
                 d -> d.getCurrentUrl().contains("/agent")
             );
-            return;
         } catch (TimeoutException e) {
             throw new AssertionError("Timeout esperando a llegar a AgentPage. URL actual: " + driver.getCurrentUrl());
+        }
+    }
+
+    private void dormir(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

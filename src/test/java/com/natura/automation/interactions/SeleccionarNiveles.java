@@ -80,17 +80,7 @@ public class SeleccionarNiveles implements Interaction {
             }
         }
 
-        // Pausa para visualizar el resultado de los niveles seleccionados.
-        System.out.println("[Niveles] Niveles completados — esperando 5s para ver el resultado...");
-        dormir(5000);
-    }
-
-    private void dormir(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        System.out.println("[Niveles] Niveles completados.");
     }
 
     /**
