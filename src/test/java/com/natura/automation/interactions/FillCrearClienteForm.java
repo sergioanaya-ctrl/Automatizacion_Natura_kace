@@ -102,17 +102,22 @@ public class FillCrearClienteForm implements Interaction {
         System.out.println("[FillCrearClienteForm] tipo=" + tipoDoc + " | doc=" + codConsultor +
                            " | nombre=" + nombres + " | perfil=" + perfil);
 
-        // ── Tipo Documento (Choices.js) ──────────────────────────────────────
+        // ── Orden intencional: PRIMERO Código consultor y Celular ────────────
+        // Llenar estos campos de texto primero le da tiempo al backend a terminar de cargar
+        // ("Obteniendo datos del Cliente") antes de tocar el Choices de Tipo Documento, que
+        // necesita sus opciones cargadas. Así se reducen los fallos por buscar ese elemento muy pronto.
+        escribir(driver, "input[name='data[documento]']",              codConsultor); // Código consultor
+        escribir(driver, "input[name='data[telefono]']",               celular);      // Celular
+
+        // ── Tipo Documento (Choices.js) — ya con tiempo para haber cargado ───
         long tTipo = System.currentTimeMillis();
         seleccionarChoices(driver, "tipo_documento", tipoDoc);
         System.out.println("[FillCrearClienteForm] selección Tipo Documento tardó " +
                 ((System.currentTimeMillis() - tTipo) / 1000.0) + "s.");
 
-        // ── Campos de texto en orden visual del formulario ───────────────────
-        escribir(driver, "input[name='data[documento]']",              codConsultor);
+        // ── Resto de campos de texto ─────────────────────────────────────────
         escribir(driver, "input[name='data[campos_extra1]']",          numIdent);   // Número Identificación
         escribir(driver, "input[name='data[nombres]']",                nombres);
-        escribir(driver, "input[name='data[telefono]']",               celular);    // Celular
         escribir(driver, "input[name='data[email]']",                  correo);
 
         // ── Fecha Nacimiento (Flatpickr) ─────────────────────────────────────
@@ -246,12 +251,12 @@ public class FillCrearClienteForm implements Interaction {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(60)).until(d -> {
                 ensureIframe(d);
-                return d.findElements(By.cssSelector(".formio-component-tipo_documento .choices"))
+                return d.findElements(By.cssSelector("input[name='data[documento]']"))
                         .stream().anyMatch(WebElement::isDisplayed);
             });
-            System.out.println("[FillCrearClienteForm] Campo Tipo Documento renderizado — continuando (sin esperar el modal).");
+            System.out.println("[FillCrearClienteForm] Formulario renderizado (campo Código consultor disponible) — continuando.");
         } catch (Exception e) {
-            System.err.println("[FillCrearClienteForm] Tipo Documento no se renderizó en 60s — continuando igual.");
+            System.err.println("[FillCrearClienteForm] El formulario no se renderizó en 60s — continuando igual.");
         }
         ensureIframe(driver);
     }
