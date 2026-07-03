@@ -9,6 +9,8 @@ import com.natura.automation.tasks.RecorrerTransicionesEstado;
 import com.natura.automation.tasks.ValidarCasoGuardado;
 import com.natura.automation.tasks.ValidarClienteCreado;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.actors.OnStage;
@@ -20,50 +22,50 @@ import java.util.Map;
 // Login, inicio de navegador y agente los provee LoginDefinitions — no se duplican aquí.
 public class CrearClienteStepDefinitions {
 
-    @Cuando("diligencia el formulario crear cliente con datos aleatorios")
+    @And("diligencia el formulario crear cliente con datos aleatorios")
     public void diligenciaElFormularioCrearClienteConDatosAleatorios() {
         OnStage.theActorInTheSpotlight().attemptsTo(
                 EjecutarCrearCliente.conDatosAleatorios());
     }
 
-    @Cuando("diligencia el formulario crear cliente")
+    @And("diligencia el formulario crear cliente")
     public void diligenciaElFormularioCrearCliente(DataTable dataTable) {
         List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
         OnStage.theActorInTheSpotlight().attemptsTo(
                 EjecutarCrearCliente.conDatos(rows.get(0)));
     }
 
-    @Entonces("se valida que el cliente fue creado correctamente")
+    @And("se valida que el cliente fue creado correctamente")
     public void seValidaQueElClienteFueCreadoCorrectamente() {
         OnStage.theActorInTheSpotlight().attemptsTo(ValidarClienteCreado.ahora());
     }
 
-    @Cuando("crea un nuevo caso")
+    @And("crea un nuevo caso")
     public void creaUnNuevoCaso() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarCrearCaso.nuevo());
     }
 
-    @Cuando("selecciona los niveles de clasificacion")
+    @And("selecciona los niveles de clasificacion")
     public void seleccionaLosNivelesDeClasificacion() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarNiveles.diligenciar());
     }
 
-    @Cuando("diligencia la descripcion del caso")
+    @And("diligencia la descripcion del caso")
     public void diligenciaLaDescripcionDelCaso() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarDescripcionCaso.diligenciar());
     }
 
-    @Cuando("diligencia el formulario NC si aplica")
+    @And("diligencia el formulario NC si aplica")
     public void diligenciaElFormularioNcSiAplica() {
         OnStage.theActorInTheSpotlight().attemptsTo(LlenarFormularioNC.siAplica());
     }
 
-    @Cuando("recorre las transiciones de estado del caso")
+    @And("recorre las transiciones de estado del caso")
     public void recorreLasTransicionesDeEstadoDelCaso() {
         OnStage.theActorInTheSpotlight().attemptsTo(RecorrerTransicionesEstado.hastaFinalizar());
     }
 
-    @Entonces("se valida que el caso fue guardado correctamente")
+    @Then("se valida que el caso fue guardado correctamente")
     public void seValidaQueElCasoFueGuardadoCorrectamente() {
         OnStage.theActorInTheSpotlight().attemptsTo(ValidarCasoGuardado.ahora());
     }

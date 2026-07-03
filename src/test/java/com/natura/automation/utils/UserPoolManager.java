@@ -7,9 +7,11 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Gestor thread-safe para asignar usuarios de forma concurrente
  * Mantiene un pool de usuarios disponibles y los asigna a cada thread de ejecución
- * 
- * ESTRATEGIA: Cada test obtiene un usuario ALEATORIO del pool
- * Esto funciona con cualquier número de runners (2, 4, 8, 50, etc)
+ *
+ * ESTRATEGIA: CICLO BARAJADO (shuffled round-robin). Cada asignación saca el siguiente
+ * usuario de una baraja del pool completo; solo cuando TODOS los usuarios ya se usaron en
+ * el ciclo actual, se vuelve a barajar y reiniciar. Así se garantiza que los 40 usuarios se
+ * usan antes de repetir ninguno, sin importar cuántos runners corran en paralelo.
  */
 public class UserPoolManager {
 
@@ -17,6 +19,9 @@ public class UserPoolManager {
     private static final Map<Long, UserCredentials> threadUsers = new ConcurrentHashMap<>();
     private static final Random random = new Random();
     private static List<UserCredentials> availableUsers;
+    // Cola del ciclo actual: usuarios aún no asignados en esta vuelta. Se repone (y rebaraja)
+    // cada vez que se vacía. Acceso sincronizado porque varios threads la consumen en paralelo.
+    private static final Deque<UserCredentials> cycleQueue = new ArrayDeque<>();
 
     static {
         loadUsers();
@@ -60,26 +65,34 @@ public class UserPoolManager {
         System.out.println("[UserPoolManager] =====================================");
         System.out.println("[UserPoolManager] ✓ INICIALIZACION: Cargados " + availableUsers.size() + " usuarios");
         System.out.println("[UserPoolManager] Pool: pruebas1 → pruebas" + availableUsers.size());
-        System.out.println("[UserPoolManager] Estrategia: SELECCION ALEATORIA");
-        System.out.println("[UserPoolManager] Parallelism: Cada test recibe usuario ALEATORIO");
+        System.out.println("[UserPoolManager] Estrategia: CICLO BARAJADO (todos se usan antes de repetir)");
+        System.out.println("[UserPoolManager] Parallelism: Cada test recibe el siguiente usuario del ciclo");
         System.out.println("[UserPoolManager] =====================================");
     }
 
     /**
-     * Obtiene un usuario ALEATORIO del pool
-     * MEJOR OPCION para pruebas paralelas porque:
-     * - Distribuye carga uniforme entre usuarios
-     * - No depende del número de runners
-     * - Funciona con 2, 4, 8, 50 runners de la misma forma
+     * Obtiene el SIGUIENTE usuario del ciclo barajado (no un índice puramente aleatorio).
+     * Garantiza que TODOS los usuarios del pool se usan antes de que alguno se repita:
+     * - Si el ciclo actual tiene usuarios pendientes, saca el siguiente.
+     * - Si el ciclo se vació (los N usuarios ya fueron asignados), lo rebaraja y reinicia.
+     * Funciona igual con cualquier número de runners en paralelo (2, 4, 8, 50, etc).
      */
-    public static UserCredentials getRandomUser() {
-        int randomIndex = random.nextInt(availableUsers.size());
-        UserCredentials user = availableUsers.get(randomIndex);
-        
-        long threadId = Thread.currentThread().getId();
+    public static synchronized UserCredentials getRandomUser() {
+        if (cycleQueue.isEmpty()) {
+            List<UserCredentials> shuffled = new ArrayList<>(availableUsers);
+            Collections.shuffle(shuffled, random);
+            cycleQueue.addAll(shuffled);
+            System.out.println("[UserPoolManager] 🔄 CICLO REINICIADO: los " + availableUsers.size() +
+                    " usuarios fueron asignados, se rebaraja el pool completo.");
+        }
+
+        UserCredentials user = cycleQueue.poll();
+
         String threadName = Thread.currentThread().getName();
-        System.out.println("[UserPoolManager] ✓ ALEATORIO: Thread " + threadName + " → usuario: " + user.getUsuario() + " [Índice: " + randomIndex + " de " + availableUsers.size() + "]");
-        
+        int restantesEnCiclo = cycleQueue.size();
+        System.out.println("[UserPoolManager] ✓ CICLO: Thread " + threadName + " → usuario: " + user.getUsuario() +
+                " [quedan " + restantesEnCiclo + " de " + availableUsers.size() + " en este ciclo]");
+
         return user;
     }
 

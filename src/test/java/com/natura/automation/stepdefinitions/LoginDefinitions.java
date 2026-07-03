@@ -4,6 +4,7 @@ import com.natura.automation.tasks.GoToAgentPage;
 import com.natura.automation.tasks.LoginWithCognito;
 import com.natura.automation.tasks.OpenCasesPage;
 import com.natura.automation.utils.CredentialsReader;
+import com.natura.automation.utils.UserPoolManager;
 import io.cucumber.java.Before;
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
@@ -33,7 +34,13 @@ public class LoginDefinitions {
 
     @After
     public void finalizarEscenario() {
-        // Limpieza de escenario
+        // Libera el usuario cacheado para este thread. Necesario porque con maxParallelForks
+        // bajo (ej. 2), Gradle reutiliza el MISMO thread ("Test worker") para ejecutar muchos
+        // runners secuencialmente dentro de un mismo fork JVM. Sin liberar, el primer runner
+        // de cada fork cachea su usuario y todos los siguientes de ese fork repetían el mismo
+        // (el ciclo barajado nunca llegaba a asignarles uno nuevo). Al liberar aquí, el próximo
+        // escenario en ese mismo thread vuelve a pedir uno del ciclo.
+        UserPoolManager.releaseCurrentThreadUser();
     }
 
     @Given("el actor tiene un navegador disponible")
