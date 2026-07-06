@@ -5,6 +5,7 @@ import com.natura.automation.tasks.EjecutarCrearCliente;
 import com.natura.automation.tasks.EjecutarDescripcionCaso;
 import com.natura.automation.tasks.EjecutarNiveles;
 import com.natura.automation.tasks.LlenarFormularioNC;
+import com.natura.automation.tasks.LlenarFormularioPlaneamientoComercial;
 import com.natura.automation.tasks.RecorrerTransicionesEstado;
 import com.natura.automation.tasks.ValidarCasoGuardado;
 import com.natura.automation.tasks.ValidarClienteCreado;
@@ -58,6 +59,11 @@ public class CrearClienteStepDefinitions {
     @And("diligencia el formulario NC si aplica")
     public void diligenciaElFormularioNcSiAplica() {
         OnStage.theActorInTheSpotlight().attemptsTo(LlenarFormularioNC.siAplica());
+    }
+
+    @And("diligencia el formulario Planeamiento Comercial si aplica")
+    public void diligenciaElFormularioPlaneamientoComercialSiAplica() {
+        OnStage.theActorInTheSpotlight().attemptsTo(LlenarFormularioPlaneamientoComercial.siAplica());
     }
 
     @And("recorre las transiciones de estado del caso")

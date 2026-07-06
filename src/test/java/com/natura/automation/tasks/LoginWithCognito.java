@@ -2,6 +2,7 @@ package com.natura.automation.tasks;
 
 import com.natura.automation.ui.AgentPage;
 import com.natura.automation.ui.LoginPage;
+import com.natura.automation.util.ModalSesionActiva;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -83,16 +84,27 @@ public class LoginWithCognito implements Task {
             System.out.println("  No se detectó el retorno desde Cognito en 12s, forzando navegación igual...");
         }
 
+        // La cuenta puede quedar con sesión activa de una corrida anterior (el test nunca hace
+        // logout, solo cierra el navegador). La app entonces muestra el modal "Ya tienes una
+        // sesión activa" y bloquea todo hasta que se responda. Si no se maneja, el test se queda
+        // congelado indefinidamente en "Cargando autenticación..." esperando un iframe que nunca
+        // llega. Se cierra aquí eligiendo "Sí, continuar aquí" (cierra la sesión anterior).
+        ModalSesionActiva.manejar(driver, 5);
+
         // Buffer breve para que /auth complete el intercambio de código y establezca la sesión
         // antes de forzar la navegación a /agent.
         dormir(1500);
         actor.attemptsTo(Open.url(AgentPage.URL));
 
+        // Puede reaparecer el modal justo después de navegar a /agent.
+        ModalSesionActiva.manejar(driver, 5);
+
         // Esperar a que la URL contenga "/agent".
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(20)).until(
-                d -> d.getCurrentUrl().contains("/agent")
-            );
+            new WebDriverWait(driver, Duration.ofSeconds(20)).until(d -> {
+                ModalSesionActiva.manejar(d, 0); // reintenta por si aparece durante la espera
+                return d.getCurrentUrl().contains("/agent");
+            });
         } catch (TimeoutException e) {
             throw new AssertionError("Timeout esperando a llegar a AgentPage. URL actual: " + driver.getCurrentUrl());
         }

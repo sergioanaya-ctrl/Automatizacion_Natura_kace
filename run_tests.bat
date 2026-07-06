@@ -62,7 +62,7 @@ echo  7. Ejecutar  1 runner individual (con numero 1-50)
 echo  8. Ver reporte de resultados
 echo  9. Generar reporte SIMPLE (EXCEL/CSV con tiempos)
 echo 10. Generar reporte AVANZADO (EXCEL MULTIPLES HOJAS + HTML)
-echo 11. Limpiar reportes (en otro archivo)
+echo 11. Limpiar reportes
 echo 12. Ejecutar 1 SCENARIO sin paralelo
 echo 13. Generar REPORTE DE RENDIMIENTO (8 archivos con metricas)
 echo 14. Generar REPORTE PASO A PASO (Detalles en Excel)
@@ -287,17 +287,7 @@ pause
 goto menu
 
 :clean_help
-echo.
-echo Para limpiar reportes, ejecuta:
-echo   clean_reports.bat
-echo.
-echo Limpia:
-echo   - Reportes de Serenity
-echo   - Resultados de tests
-echo   - Excel y CSV de timing
-echo   - Logs de ejecucion
-echo.
-pause
+call clean_reports.bat
 goto menu
 
 :run_one_no_parallel

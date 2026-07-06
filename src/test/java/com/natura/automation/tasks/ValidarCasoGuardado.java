@@ -8,10 +8,6 @@ import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
@@ -34,14 +30,44 @@ public class ValidarCasoGuardado implements Task {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
         driver.switchTo().defaultContent();
 
+        // Bajo carga (muchos runners en paralelo) la recarga tras Guardar puede tardar más que
+        // un timeout fijo de 30s (mismo patrón visto en el iframe de Crear Cliente). Se sondea
+        // en bucle con heartbeat cada 15s para distinguir "sigue esperando" de "colgado real",
+        // y se sube el tope a 60s para dar margen al backend bajo concurrencia.
+        long inicio = System.currentTimeMillis();
+        long fin = inicio + 60_000L;
+        long proximoLog = inicio + 15_000L;
+
+        while (System.currentTimeMillis() < fin) {
+            try {
+                WebElement titulo = driver.findElement(TITULO_DETALLE);
+                if (titulo.isDisplayed()) {
+                    System.out.println("[ValidarCasoGuardado] Caso guardado correctamente: " +
+                            titulo.getText().replace("\n", " ").trim() +
+                            " (confirmado en " + ((System.currentTimeMillis() - inicio) / 1000.0) + "s)");
+                    return;
+                }
+            } catch (Exception ignored) {
+                // el título aún no existe en el DOM: reintentar.
+            }
+            long ahora = System.currentTimeMillis();
+            if (ahora >= proximoLog) {
+                System.out.println("[ValidarCasoGuardado] Sigue esperando la confirmación del caso... " +
+                        ((ahora - inicio) / 1000) + "s transcurridos.");
+                proximoLog = ahora + 15_000L;
+            }
+            dormir(300);
+        }
+
+        throw new AssertionError("[ValidarCasoGuardado] No apareció la cabecera 'Detalles del caso numero N' " +
+                "tras guardar (60s). La pantalla no confirmó la creación del caso.");
+    }
+
+    private void dormir(long ms) {
         try {
-            WebElement titulo = new WebDriverWait(driver, Duration.ofSeconds(30))
-                    .until(ExpectedConditions.visibilityOfElementLocated(TITULO_DETALLE));
-            System.out.println("[ValidarCasoGuardado] Caso guardado correctamente: " +
-                    titulo.getText().replace("\n", " ").trim());
-        } catch (Exception e) {
-            throw new AssertionError("[ValidarCasoGuardado] No apareció la cabecera 'Detalles del caso numero N' " +
-                    "tras guardar. La pantalla no confirmó la creación del caso.");
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

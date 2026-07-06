@@ -69,10 +69,15 @@ public class RecorrerTransicionesEstado implements Task {
 
             WebElement elegido = elegirEstado(disponibles, visitados);
             if (elegido == null) {
-                System.err.println("[Estados] Solo quedan estados ya visitados " + visitados +
-                        " — se detiene para evitar el bucle ESCALADO BO <-> ESCALADO NATURA.");
+                // El caso quedó oscilando entre estados ya visitados (ej. ESCALADO BO <-> PRIMER
+                // CONTACTO) sin llegar nunca a un estado que la app confirme como final. Si se
+                // continúa, ValidarCasoGuardado esperaría minutos por una pantalla "Detalles del
+                // caso" que jamás va a aparecer. Se falla aquí mismo, de inmediato, en vez de
+                // arrastrar el problema al siguiente paso con un error que no apunta a la causa.
                 driver.switchTo().defaultContent();
-                return;
+                throw new RuntimeException("[Estados] El caso quedó oscilando entre estados ya visitados " +
+                        visitados + " sin alcanzar un estado final — se detiene la automatización aquí " +
+                        "en vez de esperar una confirmación que no va a llegar.");
             }
 
             String estado = elegido.getText().trim();
@@ -89,8 +94,9 @@ public class RecorrerTransicionesEstado implements Task {
                 return;
             }
         }
-        System.err.println("[Estados] Se alcanzó el tope de " + MAX_TRANSICIONES + " transiciones — revisar el flujo.");
         driver.switchTo().defaultContent();
+        throw new RuntimeException("[Estados] Se alcanzó el tope de " + MAX_TRANSICIONES +
+                " transiciones sin llegar a un estado final — se detiene la automatización aquí.");
     }
 
     /**

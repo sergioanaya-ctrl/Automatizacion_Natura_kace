@@ -1,6 +1,7 @@
 package com.natura.automation.tasks;
 
 import com.natura.automation.ui.AgentPage;
+import com.natura.automation.util.ModalSesionActiva;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -31,6 +32,10 @@ public class GoToAgentPage implements Task {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+        // El modal "Ya tienes una sesión activa" puede reaparecer aquí también (no solo en el
+        // login). Si no se cierra, la página nunca avanza al formulario y el iframe jamás carga.
+        ModalSesionActiva.manejar(driver, 3);
 
         // 1) Esperar document.readyState === 'complete'
         wait.until(d -> "complete".equals(js.executeScript("return document.readyState")));

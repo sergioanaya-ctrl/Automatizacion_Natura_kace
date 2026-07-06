@@ -69,14 +69,22 @@ public class SeleccionarNiveles implements Interaction {
         ensureIframe(driver);
 
         for (int nivel = NIVEL_INICIAL; nivel <= NIVEL_FINAL; nivel++) {
+            // Si el CONTROL del nivel no existe/está deshabilitado, es fin legítimo de la cascada
+            // para esta rama (no todas las ramas llegan a Nivel 6) — no es un fallo, se detiene
+            // el flujo sin marcar error.
             if (!esperarNivelSeleccionable(driver, nivel)) {
                 System.out.println("[Niveles] Nivel " + nivel + " no aplica para esta rama — fin de la cascada.");
                 break;
             }
+            // El control SÍ existe y está habilitado (el nivel aplica), pero si sus opciones
+            // nunca cargan (lento o roto) NO se debe seguir adelante en silencio: sin clasificación
+            // real, no habrá estados disponibles más adelante y el test fallaría minutos después
+            // con un error que no apunta a la causa. Se falla aquí mismo, de inmediato.
             List<String> preferidos = preferidosDe(nivel);
             if (!seleccionarEnNivel(driver, nivel, preferidos)) {
-                System.err.println("[Niveles] Nivel " + nivel + " sin opciones seleccionables — fin.");
-                break;
+                throw new RuntimeException("[Niveles] Nivel " + nivel + " está habilitado pero no se pudo " +
+                        "seleccionar ninguna opción (no cargaron a tiempo o el clic no registró). " +
+                        "Se detiene la automatización aquí en vez de continuar sin clasificación.");
             }
         }
 
@@ -107,8 +115,21 @@ public class SeleccionarNiveles implements Interaction {
     /**
      * Abre el nivel y elige una opción. Si hay valores preferidos presentes, elige entre ellos;
      * si no, elige una opción cualquiera al azar (sin placeholder). Verifica la selección.
+     * Reintenta una vez (reabriendo el control) por si el primer intento fue un parpadeo
+     * transitorio; si tampoco carga en el segundo intento, se da por fallido de verdad.
      */
     private boolean seleccionarEnNivel(WebDriver driver, int nivel, List<String> preferidos) {
+        for (int intento = 1; intento <= 2; intento++) {
+            List<WebElement> items = abrirYObtenerOpciones(driver, nivel, intento);
+            if (items == null) continue; // fallo en este intento, probar de nuevo
+            if (items.isEmpty()) continue;
+            return elegirYConfirmar(driver, nivel, preferidos, items);
+        }
+        return false;
+    }
+
+    /** Abre el control del nivel y devuelve sus opciones cargadas; null si algo falló al abrir. */
+    private List<WebElement> abrirYObtenerOpciones(WebDriver driver, int nivel, int intento) {
         try {
             WebElement control = new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.presenceOfElementLocated(controlHabilitado(nivel)));
@@ -117,13 +138,24 @@ public class SeleccionarNiveles implements Interaction {
 
             By opciones = By.cssSelector(
                     ".classifications-dropdown-list .classifications-dropdown-item:not(.classifications-dropdown-item--placeholder)");
-            new WebDriverWait(driver, Duration.ofSeconds(10))
+            new WebDriverWait(driver, Duration.ofSeconds(20))
                     .until(ExpectedConditions.visibilityOfElementLocated(opciones));
 
             List<WebElement> items = driver.findElements(opciones).stream()
                     .filter(WebElement::isDisplayed)
                     .collect(Collectors.toList());
-            if (items.isEmpty()) return false;
+            if (items.isEmpty()) {
+                System.err.println("  [Niveles] Nivel " + nivel + ": opciones vacías (intento " + intento + ").");
+            }
+            return items;
+        } catch (Exception e) {
+            System.err.println("  [Niveles] Nivel " + nivel + ": no cargaron opciones en 20s (intento " + intento + ").");
+            return null;
+        }
+    }
+
+    private boolean elegirYConfirmar(WebDriver driver, int nivel, List<String> preferidos, List<WebElement> items) {
+        try {
 
             // Excluir opciones que abren formularios extra no soportados (lista negra).
             List<WebElement> base = items.stream()

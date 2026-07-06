@@ -47,14 +47,22 @@ public class GuardarCaso implements Task {
         System.out.println("[GuardarCaso] Clic en 'Guardar' OK — esperando recarga...");
 
         driver.switchTo().defaultContent();
+
+        // Espera fija de 5s ANTES de verificar nada: justo tras el clic, document.readyState
+        // todavía dice "complete" (de la página VIEJA, la recarga aún no arrancó) y el spinner
+        // todavía no aparece, así que las comprobaciones de abajo pasaban en falso positivo de
+        // inmediato, dejando solo ~1.2s de margen real. Bajo carga eso no alcanzaba y se
+        // validaba antes de que el caso realmente se hubiera guardado.
+        dormir(5000);
+
         // Esperar a que la página recargue tras guardar.
         try {
             new WebDriverWait(driver, Duration.ofSeconds(20)).until(d ->
                     "complete".equals(((JavascriptExecutor) d).executeScript("return document.readyState")));
         } catch (Exception ignored) {}
 
-        // En vez de 5s fijos: esperar a que cierre cualquier spinner de guardado (swal2),
-        // y luego un buffer corto para que el SPA re-renderice los estados.
+        // Esperar a que cierre cualquier spinner de guardado (swal2), y un buffer corto para
+        // que el SPA re-renderice los estados.
         esperarSinSpinner(driver, 15);
         dormir(1200);
     }
