@@ -5,7 +5,9 @@ import com.natura.automation.tasks.EjecutarCrearCliente;
 import com.natura.automation.tasks.EjecutarDescripcionCaso;
 import com.natura.automation.tasks.EjecutarNiveles;
 import com.natura.automation.tasks.LlenarFormularioNC;
+import com.natura.automation.tasks.LlenarCamposRequeridosDinamicos;
 import com.natura.automation.tasks.LlenarFormularioPlaneamientoComercial;
+import com.natura.automation.tasks.LlenarFormularioTransportadora;
 import com.natura.automation.tasks.RecorrerTransicionesEstado;
 import com.natura.automation.tasks.ValidarCasoGuardado;
 import com.natura.automation.tasks.ValidarClienteCreado;
@@ -64,6 +66,16 @@ public class CrearClienteStepDefinitions {
     @And("diligencia el formulario Planeamiento Comercial si aplica")
     public void diligenciaElFormularioPlaneamientoComercialSiAplica() {
         OnStage.theActorInTheSpotlight().attemptsTo(LlenarFormularioPlaneamientoComercial.siAplica());
+    }
+
+    @And("diligencia el formulario Datos Transportadora si aplica")
+    public void diligenciaElFormularioDatosTransportadoraSiAplica() {
+        OnStage.theActorInTheSpotlight().attemptsTo(LlenarFormularioTransportadora.siAplica());
+    }
+
+    @And("diligencia los campos requeridos dinamicos si aplican")
+    public void diligenciaLosCamposRequeridosDinamicosSiAplican() {
+        OnStage.theActorInTheSpotlight().attemptsTo(LlenarCamposRequeridosDinamicos.siAplica());
     }
 
     @And("recorre las transiciones de estado del caso")

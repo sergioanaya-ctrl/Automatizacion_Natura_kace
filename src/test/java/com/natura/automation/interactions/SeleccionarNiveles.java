@@ -86,6 +86,13 @@ public class SeleccionarNiveles implements Interaction {
                         "seleccionar ninguna opción (no cargaron a tiempo o el clic no registró). " +
                         "Se detiene la automatización aquí en vez de continuar sin clasificación.");
             }
+
+            // Pausa breve tras confirmar la selección: el control del SIGUIENTE nivel puede tardar
+            // en renderizarse/habilitarse justo después de elegir en este. Sin esta pausa, se pasa
+            // demasiado rápido a comprobar el siguiente nivel y a veces "no aparece" solo porque
+            // aún no había terminado de renderizar (no porque la cascada realmente termine ahí),
+            // dejando el caso sub-clasificado y sin estados disponibles más adelante.
+            dormir(800);
         }
 
         System.out.println("[Niveles] Niveles completados.");
@@ -101,10 +108,16 @@ public class SeleccionarNiveles implements Interaction {
         return Collections.emptyList();
     }
 
-    /** Espera (corto) a que el control del nivel exista y esté habilitado. */
+    /**
+     * Espera a que el control del nivel exista y esté habilitado. Antes esperaba solo 8s, y bajo
+     * carga eso alcanzaba a confundirse con "el nivel no aplica para esta rama" cuando en realidad
+     * el control simplemente tardaba más en renderizarse — dejando el caso sub-clasificado (menos
+     * niveles de los que realmente correspondían) y sin estados disponibles más adelante. Ahora
+     * espera hasta 20s, dando tiempo real antes de concluir que la cascada terminó ahí.
+     */
     private boolean esperarNivelSeleccionable(WebDriver driver, int nivel) {
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(8))
+            new WebDriverWait(driver, Duration.ofSeconds(20))
                     .until(ExpectedConditions.presenceOfElementLocated(controlHabilitado(nivel)));
             return true;
         } catch (Exception e) {
@@ -234,5 +247,13 @@ public class SeleccionarNiveles implements Interaction {
 
     private void jsClick(WebDriver driver, WebElement el) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+    }
+
+    private void dormir(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
