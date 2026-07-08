@@ -27,7 +27,7 @@ public class FillCrearClienteForm implements Interaction {
     private static final Random RANDOM = new Random();
 
     private static final String[] TIPOS_DOC  = {"CC"};
-    private static final String[] PERFILES    = {"CB", "LN", "GV", "GN", "CF", "CBD"};
+    private static final String[] PERFILES    = {"Crédito", "Pre-pago"};
     private static final String[] NIVELES     = {"BRONCE", "PLATA", "ORO", "DIAMANTE", "ESMERALDA"};
     private static final String[] SECTORES    = {"SUR", "NORTE", "CENTRO", "ORIENTE", "OCCIDENTE"};
     private static final String[] CAMINOS     = {"NIVEL 1", "NIVEL 2", "NIVEL 3", "NIVEL 4"};
@@ -136,7 +136,7 @@ public class FillCrearClienteForm implements Interaction {
 
         // ── Campos inferiores ────────────────────────────────────────────────
         escribir(driver, "input[name='data[camino_crecimiento]']",         camino);
-        escribir(driver, "input[name='data[credito_pendiente_usar]']",     String.valueOf(credPend));
+        //escribir(driver, "input[name='data[credito_pendiente_usar]']",     String.valueOf(credPend));
         escribir(driver, "input[name='data[puntos_actuales]']",            String.valueOf(puntos));
         escribir(driver, "input[name='data[puntos_subir_nivel]']",         String.valueOf(puntosSubir));
         escribir(driver, "input[name='data[siguiente_nivel]']",            sigNivel);

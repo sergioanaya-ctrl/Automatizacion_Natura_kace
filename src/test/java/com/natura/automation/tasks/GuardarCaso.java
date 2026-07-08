@@ -20,8 +20,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 public class GuardarCaso implements Task {
 
     private static final By FORM_IFRAME = By.id("form_onescript_iframe");
-    private static final By BOTON_GUARDAR = By.cssSelector("button[name='data[guardarCaso]']");
-
+    private static final By BOTON_GUARDAR = By.xpath("//button[contains(@class, 'kace-floating-submit') and normalize-space()='Guardar']");
     public static Performable ahora() {
         return instrumented(GuardarCaso.class);
     }

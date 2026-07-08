@@ -14,8 +14,7 @@ import com.natura.automation.tasks.ValidarClienteCreado;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.es.Cuando;
-import io.cucumber.java.es.Entonces;
+
 import net.serenitybdd.screenplay.actors.OnStage;
 
 import java.util.List;

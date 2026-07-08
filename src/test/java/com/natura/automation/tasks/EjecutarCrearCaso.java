@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,7 +31,8 @@ public class EjecutarCrearCaso implements Task {
     @Step("Crear un nuevo caso")
     public <T extends Actor> void performAs(T actor) {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-
+// Darle 2 segundos al frontend lento para que procese el guardado del cliente
+            dormir(2000);
         // El botón vive dentro del iframe OneScript.
         driver.switchTo().defaultContent();
         new WebDriverWait(driver, Duration.ofSeconds(20))
@@ -43,8 +45,12 @@ public class EjecutarCrearCaso implements Task {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(BOTON_NUEVO_CASO));
             btn.click();
+            System.out.println("[EjecutarCrearCaso] Clic en 'Nuevo Caso' OK (Método Humano Nativo)");
         } catch (Exception e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+           System.out.println("[EjecutarCrearCaso] Falló el clic normal, intentando con clase Actions...");
+                    // Usamos Actions para simular el mouse físico en lugar de JS inyectado
+                        Actions actions = new Actions(driver);
+                        actions.moveToElement(btn).click().perform();
         }
         System.out.println("[EjecutarCrearCaso] Clic en 'Nuevo Caso' OK");
 
@@ -72,6 +78,22 @@ public class EjecutarCrearCaso implements Task {
         if (cargado) {
             System.out.println("[EjecutarCrearCaso] Caso cargado en " +
                     ((System.currentTimeMillis() - inicio) / 1000.0) + "s.");
+
+            // Esperar a que el control de Nivel 3 esté HABILITADO (los datos de clasificación
+            // llegan por AJAX después de que el contenedor ya está renderizado). Sin esta espera,
+            // SeleccionarNiveles arranca antes de que las opciones existan y falla intermitentemente.
+            By nivel3Habilitado = By.xpath(
+                    "//div[contains(@class,'classifications-dropdown-wrap')]" +
+                    "[.//label[normalize-space()='Nivel 3']]" +
+                    "//div[contains(@class,'classifications-dropdown-control')]" +
+                    "[not(contains(@class,'classifications-dropdown-control--disabled'))]");
+            try {
+                new WebDriverWait(driver, Duration.ofSeconds(30))
+                        .until(ExpectedConditions.presenceOfElementLocated(nivel3Habilitado));
+                System.out.println("[EjecutarCrearCaso] Nivel 3 habilitado y listo.");
+            } catch (Exception e) {
+                System.err.println("[EjecutarCrearCaso] Nivel 3 no se habilitó en 30s — se continúa de todas formas.");
+            }
         } else {
             System.err.println("[EjecutarCrearCaso] El formulario del caso no apareció en 15s — continuando igual.");
         }

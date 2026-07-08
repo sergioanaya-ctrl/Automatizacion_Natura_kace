@@ -29,7 +29,7 @@ if not defined JAVA_HOME (
 )
 echo.
 echo ========================================================
-echo         SARA3 - Descargando dependencias...
+echo         NATURA - Descargando dependencias...
 echo ========================================================
 echo.
 echo (Primera vez: 3-5 minutos. Siguientes: 30 segundos)
@@ -49,7 +49,7 @@ if %errorlevel% neq 0 (
 cls
 echo.
 echo ========================================================
-echo       AUTOMATIZACION SARA3 - EJECUCION DE PRUEBAS
+echo       AUTOMATIZACION NATURA - EJECUCION DE PRUEBAS
 echo ========================================================
 echo.
 echo  1. Ejecutar numero personalizado de runners

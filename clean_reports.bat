@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 cls
 echo.
 echo ========================================================
-echo    LIMPIAR TODOS LOS REPORTES - SARA3
+echo    LIMPIAR TODOS LOS REPORTES - NATURA
 echo ========================================================
 echo.
 echo Este script limpia TODOS los tipos de reportes:

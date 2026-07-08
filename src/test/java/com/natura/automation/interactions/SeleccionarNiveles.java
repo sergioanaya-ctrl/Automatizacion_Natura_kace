@@ -68,11 +68,21 @@ public class SeleccionarNiveles implements Interaction {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
         ensureIframe(driver);
 
+        // Gate obligatorio: Nivel 3 DEBE estar habilitado antes de iniciar la cascada.
+        // EjecutarCrearCaso ya esperó, pero el re-enganche al iframe en ensureIframe puede
+        // coincidir con un re-render del formulario; esta espera lo cubre.
+        System.out.println("[Niveles] Esperando que Nivel 3 esté habilitado...");
+        if (!esperarNivelSeleccionable(driver, NIVEL_INICIAL)) {
+            throw new RuntimeException("[Niveles] Nivel 3 nunca se habilitó tras cambiar al iframe — " +
+                    "no hay clasificaciones disponibles para este caso.");
+        }
+        System.out.println("[Niveles] Nivel 3 habilitado. Iniciando cascada.");
+        dormir(500);
+
         for (int nivel = NIVEL_INICIAL; nivel <= NIVEL_FINAL; nivel++) {
-            // Si el CONTROL del nivel no existe/está deshabilitado, es fin legítimo de la cascada
-            // para esta rama (no todas las ramas llegan a Nivel 6) — no es un fallo, se detiene
-            // el flujo sin marcar error.
-            if (!esperarNivelSeleccionable(driver, nivel)) {
+            // Nivel 3 ya fue confirmado arriba; para N4-N6 esperar habilitación normal
+            // (fin de cascada si el nivel no aplica para la rama elegida).
+            if (nivel > NIVEL_INICIAL && !esperarNivelSeleccionable(driver, nivel)) {
                 System.out.println("[Niveles] Nivel " + nivel + " no aplica para esta rama — fin de la cascada.");
                 break;
             }
@@ -92,7 +102,7 @@ public class SeleccionarNiveles implements Interaction {
             // demasiado rápido a comprobar el siguiente nivel y a veces "no aparece" solo porque
             // aún no había terminado de renderizar (no porque la cascada realmente termine ahí),
             // dejando el caso sub-clasificado y sin estados disponibles más adelante.
-            dormir(800);
+            dormir(1000);
         }
 
         System.out.println("[Niveles] Niveles completados.");
@@ -117,7 +127,7 @@ public class SeleccionarNiveles implements Interaction {
      */
     private boolean esperarNivelSeleccionable(WebDriver driver, int nivel) {
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(20))
+            new WebDriverWait(driver, Duration.ofSeconds(30))
                     .until(ExpectedConditions.presenceOfElementLocated(controlHabilitado(nivel)));
             return true;
         } catch (Exception e) {
@@ -132,11 +142,17 @@ public class SeleccionarNiveles implements Interaction {
      * transitorio; si tampoco carga en el segundo intento, se da por fallido de verdad.
      */
     private boolean seleccionarEnNivel(WebDriver driver, int nivel, List<String> preferidos) {
-        for (int intento = 1; intento <= 2; intento++) {
+        for (int intento = 1; intento <= 3; intento++) {
             List<WebElement> items = abrirYObtenerOpciones(driver, nivel, intento);
             if (items == null) continue; // fallo en este intento, probar de nuevo
             if (items.isEmpty()) continue;
-            return elegirYConfirmar(driver, nivel, preferidos, items);
+            // Si el clic no llega a confirmarse (el "repaso" en elegirYConfirmar falla), NO se
+            // asume éxito: se reintenta el ciclo completo (reabrir el nivel y volver a elegir)
+            // en vez de avanzar al siguiente nivel con una selección que nunca quedó registrada.
+            if (elegirYConfirmar(driver, nivel, preferidos, items)) {
+                return true;
+            }
+            System.err.println("  [Niveles] Nivel " + nivel + ": selección no confirmada (intento " + intento + "), reintentando...");
         }
         return false;
     }
@@ -153,6 +169,12 @@ public class SeleccionarNiveles implements Interaction {
                     ".classifications-dropdown-list .classifications-dropdown-item:not(.classifications-dropdown-item--placeholder)");
             new WebDriverWait(driver, Duration.ofSeconds(20))
                     .until(ExpectedConditions.visibilityOfElementLocated(opciones));
+
+            // Pausa de asentamiento: apenas aparece la primera opción la lista puede seguir
+            // renderizándose (más ítems, o un re-render que reemplaza los WebElement ya
+            // encontrados). Sin esta pausa, a veces se leía/clicaba sobre una lista incompleta
+            // o a punto de re-renderizarse, y el clic no quedaba registrado.
+            dormir(500);
 
             List<WebElement> items = driver.findElements(opciones).stream()
                     .filter(WebElement::isDisplayed)
@@ -197,19 +219,48 @@ public class SeleccionarNiveles implements Interaction {
             WebElement elegido = candidatos.get(RANDOM.nextInt(candidatos.size()));
             String valor = elegido.getText().trim();
             scrollToCenter(driver, elegido);
-            jsClick(driver, elegido);
 
-            if (nivelMuestraValor(driver, nivel, valor)) {
-                System.out.println("  [Niveles] Nivel " + nivel + " = " + valor + " (OK)");
-            } else {
-                System.out.println("  [Niveles] Nivel " + nivel + " = " + valor + " (seleccionado; no se pudo confirmar el label)");
+            // Re-buscar el elemento por texto justo antes de clicar: la lista puede haberse
+            // re-renderizado entre el momento en que obtuvimos las referencias y ahora,
+            // dejando los WebElement guardados stale. jsClick sobre un elemento stale no lanza
+            // excepción pero tampoco registra el clic. Re-buscar garantiza una ref fresca.
+            By itemPorTexto = By.xpath(
+                    ".//div[contains(@class,'classifications-dropdown-list')]" +
+                    "//div[contains(@class,'classifications-dropdown-item')" +
+                    " and not(contains(@class,'classifications-dropdown-item--placeholder'))" +
+                    " and normalize-space()='" + valor.replace("'", "\\'") + "']");
+            try {
+                WebElement fresh = new WebDriverWait(driver, Duration.ofSeconds(5))
+                        .until(ExpectedConditions.visibilityOfElementLocated(itemPorTexto));
+                scrollToCenter(driver, fresh);
+                jsClick(driver, fresh);
+            } catch (Exception ex) {
+                // Si no encontramos por XPath exacto, usar la referencia original
+                jsClick(driver, elegido);
             }
-            com.natura.automation.util.ReportePaso.valor("Nivel " + nivel, valor);
-            return true;
+
+            // Sondear hasta 8s a que el control muestre el valor elegido.
+            if (esperarConfirmacion(driver, nivel, valor, 8)) {
+                System.out.println("  [Niveles] Nivel " + nivel + " = " + valor + " (OK)");
+                com.natura.automation.util.ReportePaso.valor("Nivel " + nivel, valor);
+                return true;
+            }
+            System.err.println("  [Niveles] Nivel " + nivel + ": clic en '" + valor + "' no se reflejó en el control tras 8s.");
+            return false;
         } catch (Exception e) {
             System.err.println("  [Niveles] ERROR en Nivel " + nivel + ": " + e.getMessage());
             return false;
         }
+    }
+
+    /** Sondea hasta timeoutSeg a que el control del nivel muestre el valor elegido. */
+    private boolean esperarConfirmacion(WebDriver driver, int nivel, String valor, int timeoutSeg) {
+        long fin = System.currentTimeMillis() + timeoutSeg * 1000L;
+        while (System.currentTimeMillis() < fin) {
+            if (nivelMuestraValor(driver, nivel, valor)) return true;
+            dormir(300);
+        }
+        return false;
     }
 
     private By controlHabilitado(int nivel) {
