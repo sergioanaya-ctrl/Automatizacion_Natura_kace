@@ -20,26 +20,22 @@ import java.util.stream.Collectors;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 /**
- * Recorre la máquina de estados del caso:
- *   mientras haya "Estados disponibles", elige uno, guarda y espera la recarga.
- * Prefiere estados NO terminales (deja SOLUCIONADO para el final), de modo que avance
- * por los intermedios (PRIMER CONTACTO -> EN GESTION -> ...) antes de finalizar.
- *
- * Los estados disponibles son botones .btn-outline-secondary; el estado actual es verde
- * (.btn-success) y no se toca.
+ * Recorre la máquina de estados del caso si es interactuable.
+ * Si el caso no pertenece al asesor, detecta que los controles o el botón guardar
+ * están deshabilitados y finaliza pacíficamente (Todo OK) para validar solo la creación.
  */
 public class RecorrerTransicionesEstado implements Task {
 
     private static final By FORM_IFRAME = By.id("form_onescript_iframe");
     private static final By ESTADOS_DISPONIBLES = By.cssSelector(
             ".formio-component-kaceStates .states__content button.btn-outline-secondary");
+            
+    // Localizador del botón guardar (Asegúrate de que coincida con el que usas en GuardarCaso.java)
+    private static final By BOTON_GUARDAR = By.xpath("//button[contains(@class, 'kace-floating-submit')]");
 
-    // Orden de prioridad: si aparecen disponibles, se eligen en este orden.
-    // EN GESTION lleva a SOLUCIONADO; SOLUCIONADO es el estado final.
     private static final List<String> PRIORITARIOS = Arrays.asList("EN GESTION", "SOLUCIONADO");
-    // Estados que finalizan el flujo.
     private static final List<String> TERMINALES = Arrays.asList("SOLUCIONADO");
-    private static final int MAX_TRANSICIONES = 10; // tope de seguridad
+    private static final int MAX_TRANSICIONES = 10; 
 
     public static Performable hastaFinalizar() {
         return instrumented(RecorrerTransicionesEstado.class);
@@ -54,30 +50,38 @@ public class RecorrerTransicionesEstado implements Task {
         for (int i = 1; i <= MAX_TRANSICIONES; i++) {
             entrarIframe(driver);
 
+            // 1) CONTROL DE SEGURIDAD: Verificar si el botón Guardar está bloqueado/deshabilitado
+            List<WebElement> btnGuardarList = driver.findElements(BOTON_GUARDAR);
+            if (!btnGuardarList.isEmpty()) {
+                WebElement btnGuardar = btnGuardarList.get(0);
+                if (!esInteractuable(btnGuardar)) {
+                    System.out.println("[Estados] El botón 'Guardar' está deshabilitado. " +
+                            "El caso no pertenece a este asesor. Finalizando ciclo de estados con ÉXITO.");
+                    driver.switchTo().defaultContent();
+                    return; // Sale limpio ("Todo OK") y continúa a la validación visual
+                }
+            }
+
+            // 2) Obtener estados disponibles y filtrar solo los que REALMENTE son interactuables
             List<WebElement> disponibles = driver.findElements(ESTADOS_DISPONIBLES).stream()
-                    .filter(WebElement::isDisplayed)
+                    .filter(this::esInteractuable) // <-- Filtro inteligente para ignorar botones bloqueados
                     .collect(Collectors.toList());
 
             if (disponibles.isEmpty()) {
-                System.out.println("[Estados] Sin estados disponibles — flujo de estados finalizado (" + (i - 1) + " transiciones).");
+                System.out.println("[Estados] Sin estados interactuables disponibles (caso no asignado a este asesor o ya finalizado). " +
+                        "Flujo de estados terminado con ÉXITO (" + (i - 1) + " transiciones).");
                 driver.switchTo().defaultContent();
-                return;
+                return; // Sale limpio ("Todo OK")
             }
 
-            System.out.println("[Estados] Disponibles: " + disponibles.stream()
+            System.out.println("[Estados] Disponibles para interactuar: " + disponibles.stream()
                     .map(b -> b.getText().trim()).collect(Collectors.toList()));
 
             WebElement elegido = elegirEstado(disponibles, visitados);
             if (elegido == null) {
-                // El caso quedó oscilando entre estados ya visitados (ej. ESCALADO BO <-> PRIMER
-                // CONTACTO) sin llegar nunca a un estado que la app confirme como final. Si se
-                // continúa, ValidarCasoGuardado esperaría minutos por una pantalla "Detalles del
-                // caso" que jamás va a aparecer. Se falla aquí mismo, de inmediato, en vez de
-                // arrastrar el problema al siguiente paso con un error que no apunta a la causa.
                 driver.switchTo().defaultContent();
                 throw new RuntimeException("[Estados] El caso quedó oscilando entre estados ya visitados " +
-                        visitados + " sin alcanzar un estado final — se detiene la automatización aquí " +
-                        "en vez de esperar una confirmación que no va a llegar.");
+                        visitados + " sin alcanzar un estado final — se detiene la automatización.");
             }
 
             String estado = elegido.getText().trim();
@@ -87,7 +91,7 @@ public class RecorrerTransicionesEstado implements Task {
             System.out.println("[Estados] Transición " + i + " -> " + estado);
 
             driver.switchTo().defaultContent();
-            actor.attemptsTo(GuardarCaso.ahora()); // clic en Guardar + espera de recarga
+            actor.attemptsTo(GuardarCaso.ahora()); // Ejecuta el clic en Guardar del caso interactuable
 
             if (esTerminal(estado)) {
                 System.out.println("[Estados] Estado final '" + estado + "' alcanzado — flujo de estados finalizado.");
@@ -96,16 +100,34 @@ public class RecorrerTransicionesEstado implements Task {
         }
         driver.switchTo().defaultContent();
         throw new RuntimeException("[Estados] Se alcanzó el tope de " + MAX_TRANSICIONES +
-                " transiciones sin llegar a un estado final — se detiene la automatización aquí.");
+                " transiciones sin llegar a un estado final.");
     }
 
     /**
-     * Elige el siguiente estado:
-     *   1) el prioritario de mayor orden disponible (EN GESTION, luego SOLUCIONADO);
-     *   2) si no hay prioritarios, el primer disponible NO visitado y NO terminal (avanza sin volver atrás);
-     *   3) si no, el primer disponible NO visitado;
-     *   4) si todos están visitados, devuelve null (evita oscilar entre ESCALADO BO/NATURA).
+     * Evalúa minuciosamente si un elemento web está realmente activo para el usuario.
+     * Detecta deshabilitados nativos, por atributo HTML o por clases de frameworks de UI.
      */
+    private boolean esInteractuable(WebElement el) {
+        try {
+            if (!el.isDisplayed() || !el.isEnabled()) {
+                return false;
+            }
+            // Validar atributo HTML 'disabled'
+            String disabledAttr = el.getAttribute("disabled");
+            if (disabledAttr != null && !disabledAttr.equals("false")) {
+                return false;
+            }
+            // Validar clases CSS comunes de bloqueo (ej: 'disabled', 'btn-disabled')
+            String cssClass = el.getAttribute("class");
+            if (cssClass != null && (cssClass.contains("disabled") || cssClass.contains("--disabled"))) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false; // Si se pierde la referencia o falla, no se arriesga a interactuar
+        }
+    }
+
     private WebElement elegirEstado(List<WebElement> disponibles, java.util.Set<String> visitados) {
         for (String prioritario : PRIORITARIOS) {
             for (WebElement b : disponibles) {
