@@ -20,7 +20,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente02
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 02 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -61,7 +61,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente04
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 04 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -102,7 +102,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente06
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 06 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -143,7 +143,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente08
-Scenario: Crear Cliente 41 - Desde Interacción Existente
+Scenario: Crear Cliente 08 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -184,7 +184,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente10
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 10 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -225,7 +225,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente12
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 12 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -266,7 +266,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente14
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 14 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -307,7 +307,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente16
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 16 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -348,7 +348,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente18
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 18 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -389,7 +389,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente20
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 20 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -430,7 +430,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente22
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 22 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -471,7 +471,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente24
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 24 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -512,7 +512,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente26
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 26 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -553,7 +553,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente28
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 28 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -594,7 +594,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente30
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 30 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -635,7 +635,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente32
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 32 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -676,7 +676,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente34
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 34 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -717,7 +717,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente36
- Scenario: Crear Cliente 41 - Desde Interacción Existente
+ Scenario: Crear Cliente 36 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -758,7 +758,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Then se valida que el caso fue guardado correctamente
 
   @cliente38
-Scenario: Crear Cliente 41 - Desde Interacción Existente
+Scenario: Crear Cliente 38 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
@@ -843,7 +843,7 @@ Scenario: Crear Cliente 41 - Desde Interacción Existente
 
     
  @cliente42
-  Scenario: Crear Cliente 41 - Desde Interacción Existente
+  Scenario: Crear Cliente 42 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
