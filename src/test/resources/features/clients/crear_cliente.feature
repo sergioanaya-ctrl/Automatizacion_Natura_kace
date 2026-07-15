@@ -20,16 +20,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente02
-  Scenario: Crear Cliente 02 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -58,16 +61,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente04
-  Scenario: Crear Cliente 04 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -96,13 +102,17 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente06
-  Scenario: Crear Cliente 06 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
@@ -133,16 +143,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente08
-  Scenario: Crear Cliente 08 - Datos Aleatorios
+Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -171,16 +184,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente10
-  Scenario: Crear Cliente 10 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -209,16 +225,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente12
-  Scenario: Crear Cliente 12 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -247,16 +266,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente14
-  Scenario: Crear Cliente 14 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -285,16 +307,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente16
-  Scenario: Crear Cliente 16 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -323,16 +348,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente18
-  Scenario: Crear Cliente 18 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -361,16 +389,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente20
-  Scenario: Crear Cliente 20 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -399,16 +430,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente22
-  Scenario: Crear Cliente 22 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -437,16 +471,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente24
-  Scenario: Crear Cliente 24 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -475,16 +512,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente26
-  Scenario: Crear Cliente 26 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -513,16 +553,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente28
-  Scenario: Crear Cliente 28 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -551,16 +594,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente30
-  Scenario: Crear Cliente 30 - Datos Aleatorios
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -589,16 +635,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente32
-  Scenario: Crear Cliente 32 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -627,16 +676,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente34
-  Scenario: Crear Cliente 34 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -665,16 +717,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente36
-  Scenario: Crear Cliente 36 - Datos Aleatorios
+ Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -703,16 +758,19 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el caso fue guardado correctamente
 
   @cliente38
-  Scenario: Crear Cliente 38 - Datos Aleatorios
+Scenario: Crear Cliente 41 - Desde Interacción Existente
     Given el actor tiene un navegador disponible
     When abre la pagina de casos
     And realiza login con credenciales
     And navega a agent
-    And diligencia el formulario crear cliente con datos aleatorios
-    Then se valida que el cliente fue creado correctamente
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
-      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica

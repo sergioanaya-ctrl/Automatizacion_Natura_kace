@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/clients/crear_cliente.feature",
         glue = "com.natura.automation.stepdefinitions",
-        tags = "@cliente41",
+        tags = "@cliente17",
         snippets = CucumberOptions.SnippetType.UNDERSCORE
 )
 public class ClienteRunner17 {
