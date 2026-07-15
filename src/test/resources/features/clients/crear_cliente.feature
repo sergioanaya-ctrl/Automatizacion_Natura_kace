@@ -10,6 +10,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -28,6 +29,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -46,6 +48,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -64,6 +67,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -82,6 +86,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -118,6 +123,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -136,6 +142,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -154,6 +161,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -172,6 +180,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -190,6 +199,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -208,6 +218,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -226,6 +237,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -244,6 +256,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -262,6 +275,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -280,6 +294,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -298,6 +313,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -316,6 +332,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -334,6 +351,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -352,6 +370,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -370,6 +389,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -388,6 +408,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -406,6 +427,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -424,6 +446,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -442,6 +465,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -460,6 +484,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -478,6 +503,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -496,6 +522,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -514,6 +541,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -532,6 +560,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -550,6 +579,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -568,6 +598,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -586,6 +617,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -604,6 +636,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -622,6 +655,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -640,6 +674,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -659,6 +694,7 @@ Feature: Creacion de Clientes en Natura
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
     And diligencia la descripcion del caso
+    And diligencia los datos de correo
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
     And diligencia el formulario NC si aplica
@@ -676,6 +712,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -694,6 +731,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -712,6 +750,7 @@ Feature: Creacion de Clientes en Natura
     Then se valida que el cliente fue creado correctamente
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+      And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
