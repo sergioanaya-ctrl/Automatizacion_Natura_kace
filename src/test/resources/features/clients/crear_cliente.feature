@@ -742,3 +742,29 @@ Feature: Creacion de Clientes en Natura
     And diligencia los campos requeridos dinamicos si aplican
     And recorre las transiciones de estado del caso
     Then se valida que el caso fue guardado correctamente
+
+
+    
+ @cliente42
+  Scenario: Crear Cliente 41 - Desde Interacción Existente
+    Given el actor tiene un navegador disponible
+    When abre la pagina de casos
+    And realiza login con credenciales
+    And navega a agent
+    And deselecciona el checkbox allWorkspaces
+    And abre el dropdown de selección de workspace
+    And selecciona el workspace "Automatizacion"
+    And visualiza la lista de interacciones del workspace
+    And selecciona la interacción "pruebas java" de la lista
+    And da clic en Gestionar o Crear Caso
+    And crea un nuevo caso
+    And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
+    And diligencia la descripcion del caso
+    And diligencia el formulario Planeamiento Comercial si aplica
+    And diligencia el formulario Datos Transportadora si aplica
+    And diligencia el formulario NC si aplica
+    And diligencia los campos requeridos dinamicos si aplican
+    And recorre las transiciones de estado del caso
+    Then se valida que el caso fue guardado correctamente
+

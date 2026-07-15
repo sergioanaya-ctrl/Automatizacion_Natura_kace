@@ -4,6 +4,7 @@ import com.natura.automation.tasks.EjecutarCrearCaso;
 import com.natura.automation.tasks.EjecutarCrearCliente;
 import com.natura.automation.tasks.EjecutarDescripcionCaso;
 import com.natura.automation.tasks.EjecutarNiveles;
+import com.natura.automation.tasks.DiligenciarDatosCorreo;
 import com.natura.automation.tasks.LlenarFormularioNC;
 import com.natura.automation.tasks.LlenarCamposRequeridosDinamicos;
 import com.natura.automation.tasks.LlenarFormularioPlaneamientoComercial;
@@ -50,6 +51,11 @@ public class CrearClienteStepDefinitions {
     @And("selecciona los niveles de clasificacion")
     public void seleccionaLosNivelesDeClasificacion() {
         OnStage.theActorInTheSpotlight().attemptsTo(EjecutarNiveles.diligenciar());
+    }
+
+    @And("diligencia los datos de correo")
+    public void diligenciaLosDatosDeCorreo() {
+        OnStage.theActorInTheSpotlight().attemptsTo(DiligenciarDatosCorreo.diligenciar());
     }
 
     @And("diligencia la descripcion del caso")
