@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -69,9 +70,13 @@ public class DiligenciarDatosCorreo implements Task {
         scroll(driver, selectElement);
 
         Select select = new Select(selectElement);
-        List<WebElement> opciones = select.getOptions().stream()
-                .filter(option -> !option.getAttribute("value").isBlank())
-                .toList();
+        List<WebElement> opciones = new ArrayList<>();
+        for (WebElement option : select.getOptions()) {
+            String value = option.getAttribute("value");
+            if (value != null && !value.trim().isEmpty()) {
+                opciones.add(option);
+            }
+        }
 
         if (opciones.isEmpty()) {
             throw new AssertionError("No hay plantillas disponibles para seleccionar.");
