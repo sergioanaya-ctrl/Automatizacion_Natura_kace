@@ -162,57 +162,54 @@ function Create-XlsxFileDirect {
         $writer.Close()
         
         # 6. Crear worksheets
+        # IMPORTANTE: se ESCRIBE DIRECTO al StreamWriter fila por fila en vez de acumular un
+        # string con '+=' (que en PowerShell es O(n^2) y, con la hoja "Log Consola" de miles de
+        # filas, hace que la generación parezca "colgada" durante minutos).
         for ($i = 0; $i -lt $sheetData.Count; $i++) {
             $sheet = $sheetData[$i]
             if ($null -eq $sheet -or $sheet.Count -eq 0) { continue }
-            
-            $worksheetXml = @"
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-    <sheetData>
-"@
-            
+
+            $entry = $zipArchive.CreateEntry("xl/worksheets/sheet$($i+1).xml")
+            $writer = New-Object System.IO.StreamWriter($entry.Open())
+            $writer.Write("<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>`n<worksheet xmlns=""http://schemas.openxmlformats.org/spreadsheetml/2006/main"">`n    <sheetData>")
+
             $rowNum = 1
             $firstItem = $sheet | Select-Object -First 1
-            
+
             if ($firstItem) {
                 # Headers
                 $colNum = 1
-                $worksheetXml += "`n        <row r=""$rowNum"">"
+                $writer.Write("`n        <row r=""$rowNum"">")
                 foreach ($prop in $firstItem.PSObject.Properties) {
                     $cellRef = [char]([byte][char]'A' + $colNum - 1) + "$rowNum"
                     if ($colNum -gt 26) {
                         $cellRef = ([char]([byte][char]'A' + [math]::Floor(($colNum-1)/26) - 1)) + ([char]([byte][char]'A' + (($colNum-1) % 26))) + "$rowNum"
                     }
-                    $worksheetXml += "`n            <c r=""$cellRef"" t=""str""><v>$([Security.SecurityElement]::Escape($prop.Name))</v></c>"
+                    $writer.Write("`n            <c r=""$cellRef"" t=""inlineStr""><is><t xml:space=""preserve"">$([Security.SecurityElement]::Escape($prop.Name))</t></is></c>")
                     $colNum++
                 }
-                $worksheetXml += "`n        </row>"
+                $writer.Write("`n        </row>")
                 $rowNum++
-                
+
                 # Data rows
                 foreach ($item in $sheet) {
                     $colNum = 1
-                    $worksheetXml += "`n        <row r=""$rowNum"">"
+                    $writer.Write("`n        <row r=""$rowNum"">")
                     foreach ($prop in $item.PSObject.Properties) {
                         $val = if ($null -eq $prop.Value) { "" } else { [string]$prop.Value }
                         $cellRef = [char]([byte][char]'A' + $colNum - 1) + "$rowNum"
                         if ($colNum -gt 26) {
                             $cellRef = ([char]([byte][char]'A' + [math]::Floor(($colNum-1)/26) - 1)) + ([char]([byte][char]'A' + (($colNum-1) % 26))) + "$rowNum"
                         }
-                        $worksheetXml += "`n            <c r=""$cellRef"" t=""str""><v>$([Security.SecurityElement]::Escape($val))</v></c>"
+                        $writer.Write("`n            <c r=""$cellRef"" t=""inlineStr""><is><t xml:space=""preserve"">$([Security.SecurityElement]::Escape($val))</t></is></c>")
                         $colNum++
                     }
-                    $worksheetXml += "`n        </row>"
+                    $writer.Write("`n        </row>")
                     $rowNum++
                 }
             }
-            
-            $worksheetXml += "`n    </sheetData>`n</worksheet>"
-            
-            $entry = $zipArchive.CreateEntry("xl/worksheets/sheet$($i+1).xml")
-            $writer = New-Object System.IO.StreamWriter($entry.Open())
-            $writer.Write($worksheetXml)
+
+            $writer.Write("`n    </sheetData>`n</worksheet>")
             $writer.Close()
         }
         
@@ -491,7 +488,7 @@ function Extract-TestSteps {
 
                 # Origen del fallo (archivo:linea): preferir el primer frame del codigo del proyecto
                 if ($step.exception.stackTrace) {
-                    $frame = $step.exception.stackTrace | Where-Object { $_.declaringClass -like "com.natura.automation.*" } | Select-Object -First 1
+                    $frame = $step.exception.stackTrace | Where-Object { $_.declaringClass -like "com.sara.automation.*" } | Select-Object -First 1
                     if (-not $frame) { $frame = $step.exception.stackTrace | Select-Object -First 1 }
                     if ($frame -and $frame.fileName) {
                         $stepErrorSource = "$($frame.fileName):$($frame.lineNumber)"
@@ -522,34 +519,7 @@ function Extract-TestSteps {
             ErrorType = $stepErrorType
             ErrorSource = $stepErrorSource
         }
-
-        # Filas extra por cada valor diligenciado via Serenity.recordReportData()
-        # (contents = "enters '<valor>' into <campo>"). Puebla la columna Valor para los campos
-        # llenados con metodos propios (Choices, os-select, escribir, fecha, niveles, etc.).
-        if ($step.reportData) {
-            foreach ($rd in $step.reportData) {
-                $contenido = [string]$rd.contents
-                if ($contenido -like "*enters*") {
-                    $rdDetails = Extract-StepDetails -Description $contenido
-                    $result += [PSCustomObject]@{
-                        Test = $testName
-                        Batch = $batch
-                        Descripcion = $contenido
-                        Accion = $rdDetails.Accion
-                        Elemento = $rdDetails.Elemento
-                        Valor = $rdDetails.Valor
-                        Tiempo_ms = 0
-                        Tiempo_s = "0,00"
-                        Estado = "SUCCESS"
-                        EsFallo = $false
-                        ErrorMessage = ""
-                        ErrorType = "Sin Error"
-                        ErrorSource = ""
-                    }
-                }
-            }
-        }
-
+        
         if ($step.children -and $step.children.Count -gt 0) {
             $result += Extract-TestSteps -steps $step.children -level ($level + 1) -testName $testName -batch $batch
         }
@@ -566,8 +536,38 @@ Write-Host ""
 
 # Cargar JSON de Serenity
 $jsonFiles = Get-ChildItem -Path $serenityReportPath -Filter "*.json" -ErrorAction SilentlyContinue | Where-Object { $_.Name -notmatch "index" }
-$allSteps = @()
+# Listas .NET (Add O(1)) en vez de arrays con '+=' (O(n^2)): con 50 escenarios y miles de
+# pasos/líneas de consola, el '+=' hacía que la generación pareciera "colgada".
+$allSteps = [System.Collections.Generic.List[object]]::new()
 $testStats = @()
+
+# ===== CARGAR LOG DE CONSOLA POR ESCENARIO (system-out del JUnit XML) =====
+# Se construye ANTES del loop para usarlo como propiedad directa de cada test.
+# IMPORTANTE: el log de las tasks queda en el XML del FEATURE (testcase name="Test Usuario NN - ..."),
+# NO en el del runner (system-out vacio). Se extrae con regex sobre texto crudo (no [xml], que
+# fallaba por caracteres de control) y se mapea por NOMBRE DE TEST (= titulo de Serenity).
+$logByTest = @{}
+if (Test-Path $junitPath) {
+    Get-ChildItem -Path $junitPath -Filter "*.xml" -ErrorAction SilentlyContinue | ForEach-Object {
+        try {
+            $raw = Get-Content $_.FullName -Raw -Encoding UTF8 -ErrorAction Stop
+            $mOut = [regex]::Match($raw, '<system-out><!\[CDATA\[(.*?)\]\]></system-out>', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+            if (-not $mOut.Success) { return }
+            $logTxt = $mOut.Groups[1].Value
+            if ([string]::IsNullOrWhiteSpace($logTxt)) { return }  # runner XML: system-out vacio
+            # Sanitizar chars de control invalidos en XML (si no, romperian el xlsx de salida).
+            # NOTA: ya NO truncamos: el log va linea por fila, asi que no aplica el limite de celda.
+            $logTxt = [regex]::Replace($logTxt, '[\x00-\x08\x0B\x0C\x0E-\x1F]', '')
+            foreach ($mc in [regex]::Matches($raw, 'testcase\s+name="([^"]*)"')) {
+                $tcName = $mc.Groups[1].Value -replace '&amp;', '&' -replace '&lt;', '<' -replace '&gt;', '>' -replace '&quot;', '"' -replace '&#39;', "'"
+                if (-not [string]::IsNullOrWhiteSpace($tcName)) { $logByTest[$tcName.Trim()] = $logTxt }
+            }
+        } catch {
+            Write-Host "  [WARN] No se pudo leer system-out de $($_.Name): $_" -ForegroundColor Yellow
+        }
+    }
+    Write-Host "Logs de consola cargados para $($logByTest.Count) escenario(s)" -ForegroundColor Green
+}
 
 foreach ($jsonFile in $jsonFiles) {
     $jsonContent = Get-Content $jsonFile.FullName | ConvertFrom-Json
@@ -584,7 +584,7 @@ foreach ($jsonFile in $jsonFiles) {
     
     if ($jsonContent.testSteps) {
         $steps = Extract-TestSteps -steps $jsonContent.testSteps -testName $testName -batch $batch
-        $allSteps += $steps
+        if ($steps) { $allSteps.AddRange([object[]]@($steps)) }
         
         $slowSteps = $steps | Where-Object { $_.Tiempo_ms -gt 5000 }
         $totalMs = ($steps | Measure-Object -Property Tiempo_ms -Sum).Sum
@@ -602,6 +602,10 @@ foreach ($jsonFile in $jsonFiles) {
             $testErrorType = $firstError.ErrorType
         }
         
+        $logConsola = ""
+        $tnKey = if ($testName) { ([string]$testName).Trim() } else { "" }
+        if ($logByTest.ContainsKey($tnKey)) { $logConsola = $logByTest[$tnKey] }
+
         $testStats += [PSCustomObject]@{
             Test = $testName
             Batch = $batch
@@ -611,6 +615,7 @@ foreach ($jsonFile in $jsonFiles) {
             Estado = $testState
             ErrorType = $testErrorType
             ErrorMessage = $testErrorMsg
+            LogConsola = $logConsola
         }
     }
 }
@@ -618,7 +623,8 @@ foreach ($jsonFile in $jsonFiles) {
 # ===== GENERAR CSV =====
 
 $csvPath = "$outputPath\step_details_$timestamp.csv"
-$csvLines = @('"Test","Batch","Maquina","Usuario","Descripcion","Accion","Elemento","Valor","Tiempo (ms)","Tiempo (s)","Tiempo (min)","Estado","Error Type","Error Message","Origen Error"')
+$csvLines = [System.Collections.Generic.List[object]]::new()
+$csvLines.Add('"Test","Batch","Maquina","Usuario","Descripcion","Accion","Elemento","Valor","Tiempo (ms)","Tiempo (s)","Tiempo (min)","Estado","Error Type","Error Message","Origen Error"')
 
 foreach ($step in $allSteps) {
     $desc = $step.Descripcion -replace '"', '""'
@@ -644,8 +650,8 @@ foreach ($step in $allSteps) {
         "`"$errorMsg`""
         "`"$errorSource`""
     ) -join ","
-    
-    $csvLines += $line
+
+    $csvLines.Add($line)
 }
 
 $csvLines | Out-File -FilePath $csvPath -Encoding UTF8
@@ -702,7 +708,7 @@ if ($errorSummary.Count -eq 0) {
     $errorSummary = @([PSCustomObject]@{ "Error Type" = "Sin Errores"; Cantidad = 0; Porcentaje = 0 })
 }
 
-# Hoja 4: Estadísticas por Test
+# Hoja 4: Estadísticas por Test (sin el log completo: el log va en su propia hoja, linea por fila)
 $testSummary = $testStats | Select-Object @{N="Test"; E={$_.Test}},
                                            @{N="Batch"; E={$_.Batch}},
                                            @{N="Maquina"; E={$machineName}},
@@ -714,10 +720,36 @@ $testSummary = $testStats | Select-Object @{N="Test"; E={$_.Test}},
                                            @{N="Error Type"; E={$_.ErrorType}},
                                            @{N="Error Message"; E={$_.ErrorMessage}}
 
+# Hoja 5: Log Consola (UNA LINEA POR FILA -> filtrable/buscable, facil de revisar).
+# Incluye Maquina/Usuario para que la consolidacion solo tenga que concatenar estas hojas.
+$logLinesSheet = [System.Collections.Generic.List[object]]::new()
+foreach ($ts in $testStats) {
+    if ([string]::IsNullOrEmpty($ts.LogConsola)) { continue }
+    $n = 0
+    foreach ($ln in ($ts.LogConsola -split "`n")) {
+        $n++
+        $lineaLimpia = ($ln -replace "`r", "")
+        # Marca de error para metricas (contar/filtrar lineas de fallo).
+        $esError = if ($lineaLimpia -match '(?i)error|fall(o|a|ó|aron)|fail|exception|no se pudo|timeout|✗|✘') { "SI" } else { "" }
+        $logLinesSheet.Add([PSCustomObject]@{
+            Test    = $ts.Test
+            Batch   = $ts.Batch
+            Maquina = $machineName
+            Usuario = $userName
+            Nro     = $n
+            EsError = $esError
+            Linea   = $lineaLimpia
+        })
+    }
+}
+if (@($logLinesSheet).Count -eq 0) {
+    $logLinesSheet = @([PSCustomObject]@{ Test = ""; Batch = ""; Maquina = $machineName; Usuario = $userName; Nro = 0; EsError = ""; Linea = "(sin log de consola)" })
+}
+
 Write-Host "Generando Excel..." -ForegroundColor Cyan
 $excelSuccess = Create-ExcelFile -filePath $excelPath `
-                                 -sheetData @($stepsSheet, $slowSheet, $errorSummary, $testSummary) `
-                                 -sheetNames @("Todos los Pasos", "Pasos Lentos (>5s)", "Resumen de Errores", "Resumen por Test") `
+                                 -sheetData @($stepsSheet, $slowSheet, $errorSummary, $testSummary, $logLinesSheet) `
+                                 -sheetNames @("Todos los Pasos", "Pasos Lentos (>5s)", "Resumen de Errores", "Resumen por Test", "Log Consola") `
                                  -csvPath $csvPath
 
 if ($excelSuccess) {
@@ -733,7 +765,10 @@ $htmlPath = "$outputPath\step_details_$timestamp.html"
 $successCount = @($allSteps | Where-Object { $_.Estado -eq 'SUCCESS' }).Count
 $errorCount = @($allSteps | Where-Object { $_.EsFallo }).Count
 $slowCount = @($allSteps | Where-Object { $_.Tiempo_ms -gt 5000 }).Count
-$totalTime = ($allSteps | Measure-Object -Property Tiempo_s -Sum).Sum
+# Tiempo_s se muestra con formato es-CO (por ejemplo, "1.225,72"), por lo que
+# es texto. Los cálculos se deben hacer desde Tiempo_ms, que sí es numérico.
+$totalTimeMs = [double](($allSteps | Measure-Object -Property Tiempo_ms -Sum).Sum)
+$totalTime = $totalTimeMs / 1000
 
 $html = @"
 <!DOCTYPE html>
@@ -1003,12 +1038,14 @@ $html = @"
                 <tbody>
 "@
 
+# Filas en una lista y un solo join (evita '+=' por paso = O(n^2) sobre miles de pasos).
+$filasHtml = [System.Collections.Generic.List[object]]::new()
 foreach ($step in $allSteps) {
     $badgeClass = if($step.EsFallo) { 'badge-error' } else { 'badge-success' }
     $errorDisplay = if($step.EsFallo) { $step.ErrorType } else { "-" }
     $rowClass = $step.Estado
-    
-    $html += @"
+
+    $filasHtml.Add(@"
                     <tr class="$rowClass">
                         <td><strong>$(Encode-HtmlSpecialChars $step.Test)</strong></td>
                         <td>$($step.Batch)</td>
@@ -1019,8 +1056,9 @@ foreach ($step in $allSteps) {
                         <td><strong>$($step.Tiempo_ms)</strong></td>
                     </tr>
 
-"@
+"@)
 }
+$html += ($filasHtml -join "")
 
 $html += @"
                 </tbody>
@@ -1101,7 +1139,11 @@ $html += @"
 "@
 
 foreach ($step in ($allSteps | Where-Object { $_.Tiempo_ms -gt 5000 } | Sort-Object -Property Tiempo_ms -Descending)) {
-    $percentageOfTotal = [math]::Round(($step.Tiempo_ms / ($totalTime * 1000) * 100), 1)
+    $percentageOfTotal = if ($totalTimeMs -gt 0) {
+        [math]::Round(($step.Tiempo_ms / $totalTimeMs) * 100, 1)
+    } else {
+        0
+    }
     $html += @"
                     <tr>
                         <td><strong>$(Encode-HtmlSpecialChars $step.Test)</strong></td>

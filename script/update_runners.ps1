@@ -8,9 +8,9 @@ for ($i = 3; $i -le 50; $i++) {
     
     if (Test-Path $file) {
         $content = @"
-package com.natura.automation.runners;
+package com.sara.automation.runners;
 
-import utils.com.natura.automation.RunnerContext;
+import com.sara.automation.utils.RunnerContext;
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         features = "src/test/resources/features/cases/open_cases.feature",
-        glue = "com.natura.automation.stepdefinitions",
+        glue = "com.sara.automation.stepdefinitions",
         tags = "@batch$i",
         snippets = CucumberOptions.SnippetType.UNDERSCORE
 )

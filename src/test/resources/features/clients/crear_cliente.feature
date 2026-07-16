@@ -33,6 +33,7 @@ Feature: Creacion de Clientes en Natura
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -74,6 +75,7 @@ Feature: Creacion de Clientes en Natura
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -115,6 +117,7 @@ Feature: Creacion de Clientes en Natura
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -156,6 +159,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -197,6 +201,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -238,6 +243,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -279,6 +285,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -361,6 +368,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -402,6 +410,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -443,6 +452,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -484,6 +494,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -525,6 +536,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -566,6 +578,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -607,6 +620,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -648,6 +662,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -689,6 +704,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -730,6 +746,7 @@ Scenario: Crear Cliente 08 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -771,6 +788,7 @@ Scenario: Crear Cliente 38 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -832,6 +850,7 @@ Scenario: Crear Cliente 38 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
     And diligencia el formulario Datos Transportadora si aplica
@@ -856,6 +875,7 @@ Scenario: Crear Cliente 38 - Desde Interacción Existente
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
+    And diligencia los datos de correo
     And diligencia los datos de correo
     And diligencia la descripcion del caso
     And diligencia el formulario Planeamiento Comercial si aplica
