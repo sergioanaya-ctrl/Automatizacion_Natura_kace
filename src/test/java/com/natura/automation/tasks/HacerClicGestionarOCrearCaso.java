@@ -31,114 +31,110 @@ public class HacerClicGestionarOCrearCaso implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitLargo = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        for (int intento = 0; intento < 20; intento++) {
-            System.out.println("[HacerClicGestionarOCrearCaso] intento=" + (intento + 1)
-                    + " crearCaso=" + estaVisible(driver, BTN_CREAR_CASO)
-                    + " gestionar=" + estaVisible(driver, BTN_GESTIONAR)
-                    + " liberar=" + estaVisible(driver, BTN_LIBERAR));
+        for (int intento = 1; intento <= 25; intento++) {
+            boolean visibleCrearCaso = estaVisible(driver, BTN_CREAR_CASO);
+            boolean visibleGestionar = estaVisible(driver, BTN_GESTIONAR);
+            boolean visibleLiberar = estaVisible(driver, BTN_LIBERAR);
 
-            if (estaVisible(driver, BTN_CREAR_CASO)) {
-                System.out.println("[HacerClicGestionarOCrearCaso] Crear Caso visible, clic en Crear Caso y luego en Usar cliente seleccionado.");
-                clicarClickable(driver, BTN_CREAR_CASO);
-                clicarClickable(driver, BTN_USAR_CLIENTE_SELECCIONADO);
+            System.out.println(String.format("[HacerClicGestionarOCrearCaso] Intento=%d | CrearCaso=%b | Gestionar=%b | Liberar=%b",
+                    intento, visibleCrearCaso, visibleGestionar, visibleLiberar));
+
+            // 1. Condición de salida principal
+            if (visibleCrearCaso) {
+                completarFlujoCrearCaso(driver);
                 return;
             }
 
+            // 2. Identificar qué acción ejecutar (Gestionar o Liberar)
             Optional<By> accion = accionVisible(driver);
             if (accion.isPresent()) {
-                System.out.println("[HacerClicGestionarOCrearCaso] clic en " + nombreAccion(accion.get()));
-                clickYCambiaEstado(driver, accion.get());
+                By botonActual = accion.get();
+                By botonEsperado = BTN_GESTIONAR.equals(botonActual) ? BTN_LIBERAR : BTN_GESTIONAR;
+
+                System.out.println("[HacerClicGestionarOCrearCaso] Ejecutando clic en: " + nombreAccion(botonActual));
+                
+                // Hace el clic y asegura que la UI reaccione
+                boolean cambioExitoso = hacerClicYAsegurarCambio(driver, botonActual, botonEsperado);
+
                 if (estaVisible(driver, BTN_CREAR_CASO)) {
-                    System.out.println("[HacerClicGestionarOCrearCaso] Crear Caso apareció justo después del clic.");
-                    clicarClickable(driver, BTN_CREAR_CASO);
-                    clicarClickable(driver, BTN_USAR_CLIENTE_SELECCIONADO);
+                    completarFlujoCrearCaso(driver);
                     return;
                 }
+
+                if (!cambioExitoso) {
+                    System.out.println("[HacerClicGestionarOCrearCaso] El estado no cambió tras el clic. Reintentando en la siguiente vuelta...");
+                }
+                
+                dormir(500); // Breve pausa de estabilización de la interfaz
                 continue;
             }
 
-            System.out.println("[HacerClicGestionarOCrearCaso] sin Gestionar/Liberar visible, esperando.");
-            esperarVisible(wait, BTN_GESTIONAR, BTN_LIBERAR, BTN_CREAR_CASO);
+            // 3. Si por alguna razón no se ve ningún botón, esperamos a que alguno aparezca
+            System.out.println("[HacerClicGestionarOCrearCaso] Ningún botón visible, esperando actualización del DOM...");
+            esperarVisible(waitLargo, BTN_GESTIONAR, BTN_LIBERAR, BTN_CREAR_CASO);
         }
 
+        // Validación final tras agotar intentos
         if (estaVisible(driver, BTN_CREAR_CASO)) {
-            System.out.println("[HacerClicGestionarOCrearCaso] Crear Caso visible al final, clic en Crear Caso y luego en Usar cliente seleccionado.");
-            clicarClickable(driver, BTN_CREAR_CASO);
-            clicarClickable(driver, BTN_USAR_CLIENTE_SELECCIONADO);
+            completarFlujoCrearCaso(driver);
             return;
         }
 
-        throw new AssertionError("No apareció el botón Crear Caso tras alternar entre Gestionar y Liberar.");
+        throw new AssertionError("No apareció el botón 'Crear Caso' tras alternar entre Gestionar y Liberar.");
+    }
+
+    private void completarFlujoCrearCaso(WebDriver driver) {
+        System.out.println("[HacerClicGestionarOCrearCaso] 'Crear Caso' visible. Finalizando interacción...");
+        clicarClickable(driver, BTN_CREAR_CASO);
+        clicarClickable(driver, BTN_USAR_CLIENTE_SELECCIONADO);
+    }
+
+    private boolean hacerClicYAsegurarCambio(WebDriver driver, By botonAClicar, By botonEsperado) {
+        clicar(driver, botonAClicar);
+
+        // Espera corta para verificar que el DOM cambió a Liberar/Gestionar O apareció Crear Caso
+        WebDriverWait waitCorto = new WebDriverWait(driver, Duration.ofSeconds(4));
+        try {
+            return waitCorto.until(d -> 
+                estaVisible(d, BTN_CREAR_CASO) || estaVisible(d, botonEsperado)
+            );
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private Optional<By> accionVisible(WebDriver driver) {
-        if (elementoVisible(driver, BTN_GESTIONAR)) {
+        if (estaVisible(driver, BTN_GESTIONAR)) {
             return Optional.of(BTN_GESTIONAR);
         }
-        if (elementoVisible(driver, BTN_LIBERAR)) {
+        if (estaVisible(driver, BTN_LIBERAR)) {
             return Optional.of(BTN_LIBERAR);
         }
         return Optional.empty();
     }
 
     private String nombreAccion(By locator) {
-        if (BTN_GESTIONAR.equals(locator)) {
-            return "Gestionar";
-        }
-        if (BTN_LIBERAR.equals(locator)) {
-            return "Liberar";
-        }
+        if (BTN_GESTIONAR.equals(locator)) return "Gestionar";
+        if (BTN_LIBERAR.equals(locator)) return "Liberar";
         return locator.toString();
     }
 
-    private void clickYCambiaEstado(WebDriver driver, By locator) {
-        clicar(driver, locator);
-        esperarAQueElBotonCambie(driver, locator);
-    }
-
-    private void esperarAQueElBotonCambie(WebDriver driver, By accionActual) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        try {
-            if (accionActual.equals(BTN_GESTIONAR)) {
-                wait.until(ExpectedConditions.or(
-                        ExpectedConditions.visibilityOfElementLocated(BTN_LIBERAR),
-                        ExpectedConditions.visibilityOfElementLocated(BTN_CREAR_CASO)
-                ));
-            } else {
-                wait.until(ExpectedConditions.or(
-                        ExpectedConditions.visibilityOfElementLocated(BTN_GESTIONAR),
-                        ExpectedConditions.visibilityOfElementLocated(BTN_CREAR_CASO)
-                ));
-            }
-            if (estaVisible(driver, BTN_CREAR_CASO)) {
-                System.out.println("[HacerClicGestionarOCrearCaso] Crear Caso ya visible tras " + nombreAccion(accionActual));
-            } else {
-                System.out.println("[HacerClicGestionarOCrearCaso] cambió de " + nombreAccion(accionActual));
-            }
-        } catch (Exception e) {
-            System.out.println("[HacerClicGestionarOCrearCaso] no se detectó cambio tras " + nombreAccion(accionActual));
-        }
-    }
-
     private void clicar(WebDriver driver, By locator) {
-        long fin = System.currentTimeMillis() + 8000L;
-        while (System.currentTimeMillis() < fin) {
+        try {
+            WebElement elemento = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", elemento);
+            elemento.click();
+        } catch (Exception e) {
+            // Fallback con JavaScript si el clic directo de Selenium es bloqueado
             try {
                 WebElement elemento = driver.findElement(locator);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", elemento);
-                try {
-                    elemento.click();
-                } catch (Exception e) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
-                }
-                return;
-            } catch (Exception ignored) {
-                dormir(250);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
+            } catch (Exception ex) {
+                System.out.println("[HacerClicGestionarOCrearCaso] Error al hacer clic en " + locator);
             }
         }
-        throw new AssertionError("No se pudo hacer clic en el elemento: " + locator);
     }
 
     private void clicarClickable(WebDriver driver, By locator) {
@@ -152,21 +148,9 @@ public class HacerClicGestionarOCrearCaso implements Task {
         }
     }
 
-    private boolean elementoVisible(WebDriver driver, By locator) {
-        List<WebElement> elementos = driver.findElements(locator);
-        return elementos.stream().anyMatch(WebElement::isDisplayed);
-    }
-
     private boolean estaVisible(WebDriver driver, By locator) {
-        try {
-            return driver.findElement(locator).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private void esperarProcesamiento() {
-        // Sin pausa fija: el flujo depende de waits explícitos.
+        List<WebElement> elementos = driver.findElements(locator);
+        return !elementos.isEmpty() && elementos.get(0).isDisplayed();
     }
 
     private void dormir(long ms) {
