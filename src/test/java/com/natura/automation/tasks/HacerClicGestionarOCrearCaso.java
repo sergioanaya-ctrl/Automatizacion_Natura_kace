@@ -1,6 +1,5 @@
 package com.natura.automation.tasks;
 
-import com.natura.automation.ui.InteraccionesPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;

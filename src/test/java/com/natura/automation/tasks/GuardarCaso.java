@@ -16,11 +16,15 @@ import java.time.Duration;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-/** Hace clic en "Guardar" el caso y espera a que la página recargue. */
+/** Hace clic en "Guardar" el caso y espera a que la pagina recargue. */
 public class GuardarCaso implements Task {
 
     private static final By FORM_IFRAME = By.id("form_onescript_iframe");
     private static final By BOTON_GUARDAR = By.xpath("//button[contains(@class, 'kace-floating-submit') and normalize-space()='Guardar']");
+    private static final By SWAL_POPUP = By.cssSelector(".swal2-popup");
+    private static final By SWAL_CONFIRM = By.cssSelector(".swal2-confirm");
+    private static final By SWAL_LOADER = By.cssSelector(".swal2-loader");
+
     public static Performable ahora() {
         return instrumented(GuardarCaso.class);
     }
@@ -43,38 +47,129 @@ public class GuardarCaso implements Task {
         } catch (Exception e) {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         }
-        System.out.println("[GuardarCaso] Clic en 'Guardar' OK — esperando recarga...");
+        System.out.println("[GuardarCaso] Clic en 'Guardar' OK - esperando recarga...");
 
         driver.switchTo().defaultContent();
 
-        // Espera fija de 5s ANTES de verificar nada: justo tras el clic, document.readyState
-        // todavía dice "complete" (de la página VIEJA, la recarga aún no arrancó) y el spinner
-        // todavía no aparece, así que las comprobaciones de abajo pasaban en falso positivo de
-        // inmediato, dejando solo ~1.2s de margen real. Bajo carga eso no alcanzaba y se
-        // validaba antes de que el caso realmente se hubiera guardado.
+        // Espera fija antes de verificar: justo tras el clic la pagina anterior puede seguir
+        // reportando readyState=complete y el spinner todavia puede no aparecer.
         dormir(5000);
 
-        // Esperar a que la página recargue tras guardar.
         try {
             new WebDriverWait(driver, Duration.ofSeconds(20)).until(d ->
                     "complete".equals(((JavascriptExecutor) d).executeScript("return document.readyState")));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
-        // Esperar a que cierre cualquier spinner de guardado (swal2), y un buffer corto para
-        // que el SPA re-renderice los estados.
-        esperarSinSpinner(driver, 15);
+        esperarSinSpinnerOAceptarConfirmacion(driver, 15);
         dormir(1200);
     }
 
-    /** Espera (rápido) a que NO haya spinner/popup de carga swal2 visible; retorna apenas desaparece. */
-    private void esperarSinSpinner(WebDriver driver, int timeoutSeg) {
+    /** Espera a que termine swal2; si hay popup de confirmacion, lo acepta. */
+    private void esperarSinSpinnerOAceptarConfirmacion(WebDriver driver, int timeoutSeg) {
         long fin = System.currentTimeMillis() + timeoutSeg * 1000L;
+        long sinSwalDesde = 0L;
+
         while (System.currentTimeMillis() < fin) {
-            boolean spinner = driver.findElements(By.cssSelector(".swal2-loader, .swal2-popup"))
-                    .stream().anyMatch(WebElement::isDisplayed);
-            if (!spinner) return;
+            if (aceptarConfirmacionSweetAlert(driver)) {
+                sinSwalDesde = 0L;
+                dormir(700);
+                continue;
+            }
+
+            boolean haySwal = haySweetAlertVisible(driver);
+            if (!haySwal) {
+                if (sinSwalDesde == 0L) {
+                    sinSwalDesde = System.currentTimeMillis();
+                }
+                if (System.currentTimeMillis() - sinSwalDesde >= 1200L) {
+                    driver.switchTo().defaultContent();
+                    return;
+                }
+            } else {
+                sinSwalDesde = 0L;
+            }
+
             dormir(200);
         }
+        driver.switchTo().defaultContent();
+    }
+
+    private boolean aceptarConfirmacionSweetAlert(WebDriver driver) {
+        driver.switchTo().defaultContent();
+        if (aceptarConfirmacionEnContextoActual(driver)) return true;
+
+        int totalFrames = driver.findElements(By.tagName("iframe")).size();
+        for (int i = 0; i < totalFrames; i++) {
+            try {
+                driver.switchTo().defaultContent();
+                WebElement frame = driver.findElements(By.tagName("iframe")).get(i);
+                driver.switchTo().frame(frame);
+                if (aceptarConfirmacionEnContextoActual(driver)) return true;
+            } catch (Exception ignored) {
+                // El iframe pudo desaparecer durante la recarga; continuar con el siguiente.
+            }
+        }
+
+        driver.switchTo().defaultContent();
+        return false;
+    }
+
+    private boolean aceptarConfirmacionEnContextoActual(WebDriver driver) {
+        WebElement popup = driver.findElements(SWAL_POPUP)
+                .stream()
+                .filter(WebElement::isDisplayed)
+                .findFirst()
+                .orElse(null);
+        if (popup == null) return false;
+
+        WebElement confirmacion = driver.findElements(SWAL_CONFIRM)
+                .stream()
+                .filter(WebElement::isDisplayed)
+                .findFirst()
+                .orElse(null);
+        if (confirmacion == null) return false;
+
+        String textoPopup = popup.getText().replace("\n", " ").trim();
+        try {
+            confirmacion.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", confirmacion);
+        }
+        System.out.println("[GuardarCaso] SweetAlert confirmado tras guardar: " + textoPopup);
+        return true;
+    }
+
+    private boolean haySweetAlertVisible(WebDriver driver) {
+        driver.switchTo().defaultContent();
+        if (haySweetAlertVisibleEnContextoActual(driver)) return true;
+
+        int totalFrames = driver.findElements(By.tagName("iframe")).size();
+        for (int i = 0; i < totalFrames; i++) {
+            try {
+                driver.switchTo().defaultContent();
+                WebElement frame = driver.findElements(By.tagName("iframe")).get(i);
+                driver.switchTo().frame(frame);
+                if (haySweetAlertVisibleEnContextoActual(driver)) return true;
+            } catch (Exception ignored) {
+                // El iframe pudo desaparecer durante la recarga; continuar con el siguiente.
+            }
+        }
+
+        driver.switchTo().defaultContent();
+        return false;
+    }
+
+    private boolean haySweetAlertVisibleEnContextoActual(WebDriver driver) {
+        boolean popup = driver.findElements(SWAL_POPUP)
+                    .stream()
+                    .filter(WebElement::isDisplayed)
+                    .findFirst()
+                    .isPresent();
+        boolean loader = driver.findElements(SWAL_LOADER)
+                .stream()
+                .anyMatch(WebElement::isDisplayed);
+        return popup || loader;
     }
 
     private void dormir(long ms) {

@@ -49,8 +49,8 @@ public class DiligenciarDatosCorreo implements Task {
         scroll(driver, nuevaRespuesta);
         nuevaRespuesta.click();
 
-        escribir(driver, wait, INPUT_DE, "sergio.anaya@konecta.com");
-        escribir(driver, wait, INPUT_PARA, "sanayaromero62@gmail.com");
+        //escribir(driver, wait, INPUT_DE, "sergio.anaya@konecta.com");
+        escribir(driver, wait, INPUT_PARA, "sergio.anaya@konecta.com");
         escribir(driver, wait, INPUT_ASUNTO, "Respuesta caso " + randomNumero());
         seleccionarPlantillaAleatoria(driver, wait);
 
