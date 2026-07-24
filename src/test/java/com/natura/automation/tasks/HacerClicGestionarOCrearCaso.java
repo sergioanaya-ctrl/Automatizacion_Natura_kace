@@ -43,7 +43,7 @@ public class HacerClicGestionarOCrearCaso implements Task {
 
             // 1. Condición de salida principal
             if (visibleCrearCaso) {
-                completarFlujoCrearCaso(driver);
+                completarFlujoCrearCaso(actor, driver);
                 return;
             }
 
@@ -59,7 +59,7 @@ public class HacerClicGestionarOCrearCaso implements Task {
                 boolean cambioExitoso = hacerClicYAsegurarCambio(driver, botonActual, botonEsperado);
 
                 if (estaVisible(driver, BTN_CREAR_CASO)) {
-                    completarFlujoCrearCaso(driver);
+                    completarFlujoCrearCaso(actor, driver);
                     return;
                 }
 
@@ -78,26 +78,63 @@ public class HacerClicGestionarOCrearCaso implements Task {
 
         // Validación final tras agotar intentos
         if (estaVisible(driver, BTN_CREAR_CASO)) {
-            completarFlujoCrearCaso(driver);
+            completarFlujoCrearCaso(actor, driver);
             return;
         }
 
         throw new AssertionError("No apareció el botón 'Crear Caso' tras alternar entre Gestionar y Liberar.");
     }
 
-    private void completarFlujoCrearCaso(WebDriver driver) {
+    private <T extends Actor> void completarFlujoCrearCaso(T actor, WebDriver driver) {
         System.out.println("[HacerClicGestionarOCrearCaso] 'Crear Caso' visible. Finalizando interacción...");
         clicarClickable(driver, BTN_CREAR_CASO);
-        clicarClickable(driver, BTN_USAR_CLIENTE_SELECCIONADO);
+
+        // Si la interacción ya tiene un cliente asociado, aparece el modal "Usar cliente
+        // seleccionado". Si NO hay cliente creado para esta interacción, el modal nunca
+        // aparece y hay que crear el cliente por el flujo normal antes de continuar.
+        WebDriverWait waitModalCliente = new WebDriverWait(driver, Duration.ofSeconds(6));
+        boolean modalClienteVisible;
+        try {
+            modalClienteVisible = waitModalCliente.until(d -> estaVisible(d, BTN_USAR_CLIENTE_SELECCIONADO));
+        } catch (Exception e) {
+            modalClienteVisible = false;
+        }
+
+        if (modalClienteVisible) {
+            System.out.println("[HacerClicGestionarOCrearCaso] Cliente ya existente detectado. Usando 'Usar cliente seleccionado'.");
+            clicarClickable(driver, BTN_USAR_CLIENTE_SELECCIONADO);
+        } else {
+            System.out.println("[HacerClicGestionarOCrearCaso] No hay cliente creado para esta interacción. Creando cliente con datos aleatorios...");
+            actor.attemptsTo(EjecutarCrearCliente.conDatosAleatorios());
+            // El swal2 de éxito de creación queda abierto y tapa el botón "Nuevo Caso" que
+            // busca el siguiente step (EjecutarCrearCaso); hay que confirmarlo aquí igual
+            // que en el flujo normal (escenario "Datos Aleatorios").
+            actor.attemptsTo(ValidarClienteCreado.ahora());
+        }
     }
 
     private boolean hacerClicYAsegurarCambio(WebDriver driver, By botonAClicar, By botonEsperado) {
-        clicar(driver, botonAClicar);
+        // Esperar a que el botón esté REALMENTE clickeable antes de disparar el clic.
+        // Sin esta espera, un clic sobre un botón todavía en animación/detrás de overlay
+        // no surte efecto, y el waitCorto de abajo agota su timeout completo sin motivo
+        // (efecto observado: demoras largas entre alternar Gestionar/Liberar).
+        try {
+            WebElement boton = new WebDriverWait(driver, Duration.ofSeconds(3))
+                    .until(ExpectedConditions.elementToBeClickable(botonAClicar));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", boton);
+            try {
+                boton.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", boton);
+            }
+        } catch (Exception e) {
+            // El botón dejó de estar presente justo antes del clic (ya cambió de estado): seguir.
+        }
 
         // Espera corta para verificar que el DOM cambió a Liberar/Gestionar O apareció Crear Caso
-        WebDriverWait waitCorto = new WebDriverWait(driver, Duration.ofSeconds(4));
+        WebDriverWait waitCorto = new WebDriverWait(driver, Duration.ofSeconds(2));
         try {
-            return waitCorto.until(d -> 
+            return waitCorto.until(d ->
                 estaVisible(d, BTN_CREAR_CASO) || estaVisible(d, botonEsperado)
             );
         } catch (Exception e) {
@@ -119,22 +156,6 @@ public class HacerClicGestionarOCrearCaso implements Task {
         if (BTN_GESTIONAR.equals(locator)) return "Gestionar";
         if (BTN_LIBERAR.equals(locator)) return "Liberar";
         return locator.toString();
-    }
-
-    private void clicar(WebDriver driver, By locator) {
-        try {
-            WebElement elemento = driver.findElement(locator);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", elemento);
-            elemento.click();
-        } catch (Exception e) {
-            // Fallback con JavaScript si el clic directo de Selenium es bloqueado
-            try {
-                WebElement elemento = driver.findElement(locator);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", elemento);
-            } catch (Exception ex) {
-                System.out.println("[HacerClicGestionarOCrearCaso] Error al hacer clic en " + locator);
-            }
-        }
     }
 
     private void clicarClickable(WebDriver driver, By locator) {

@@ -82,7 +82,7 @@ public class FillCrearClienteForm implements Interaction {
         String fechaNac     = get("fecha_nacimiento",         generarFecha());
         String dirEntrega   = get("direccion_entrega",        generarDireccion());
         String gerencia     = get("gerencia",                 "GER" + randomDigitos(3));
-        String correoGer    = get("correo_gerente",           "gerente" + randomDigitos(3) + "@natura.com");
+        String correoGer    = get("correo_gerente",           "gerente" + randomDigitos(3) + "@pruebascarga.com");
         String sector       = get("sector",                   randomDe(SECTORES));
         long   limTotal     = parseLong(get("limite_credito_total",      String.valueOf((2 + RANDOM.nextInt(9)) * 1_000_000L)));
         long   limUsado     = parseLong(get("limite_credito_utilizado",  String.valueOf(RANDOM.nextInt((int)(limTotal / 1_000_000L)) * 1_000_000L)));
@@ -532,7 +532,7 @@ public class FillCrearClienteForm implements Interaction {
                 .replaceAll("[áàä]", "a").replaceAll("[éèë]", "e")
                 .replaceAll("[íìï]", "i").replaceAll("[óòö]", "o")
                 .replaceAll("[úùü]", "u").replaceAll("[^a-z]", ".");
-        return base + randomDigitos(3) + "@natura.com";
+        return base + randomDigitos(3) + "@pruebasautomatizacion.com";
     }
 
     private String generarFecha() {

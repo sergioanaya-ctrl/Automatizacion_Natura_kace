@@ -27,9 +27,9 @@ Feature: Creacion de Clientes en Natura
     And navega a agent
     And deselecciona el checkbox allWorkspaces
     And abre el dropdown de selección de workspace
-    And selecciona el workspace "Automatizacion"
+    And selecciona el workspace "COL CTU CORREOS"
     And visualiza la lista de interacciones del workspace
-    And selecciona la interacción "pruebas java" de la lista
+    And selecciona la interacción "qa1026" de la lista
     And da clic en Gestionar o Crear Caso
     And crea un nuevo caso
     And selecciona los niveles de clasificacion
